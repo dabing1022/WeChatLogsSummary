@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Refly AI 交流群日报 - 2025-04-10</title>
     <style>
         /* 严格定义的CSS样式，确保风格一致性 */
@@ -31,7 +32,8 @@
             color: var(--text-primary);
             line-height: 1.6;
             font-size: 16px;
-            width: 1200px;
+            max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
             padding: 20px;
         }
@@ -466,14 +468,17 @@
         /* 词云 - 云朵样式 */
         .cloud-container {
             position: relative;
+            width: 100%;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px 0;
         }
          
         .cloud-wordcloud {
             position: relative;
-            width: 600px;
-            height: 400px;
+            width: 100%;
+            padding-top: 66.67%;
+            height: 0;
             margin: 0 auto;
             background-color: var(--bg-tertiary);
             border-radius: 50%;
@@ -536,6 +541,226 @@
             margin-top: 15px;
             font-style: italic;
         }
+
+        /* --- 响应式设计 --- */
+
+        /* 平板电脑 (例如 <= 992px) */
+        @media (max-width: 992px) {
+            body {
+                padding: 15px;
+                font-size: 15px;
+            }
+            h1 { font-size: 32px; }
+            h2 { font-size: 26px; }
+            h3 { font-size: 20px; }
+            h4 { font-size: 17px; }
+
+            section {
+                padding: 20px;
+            }
+
+            /* 调整词云大小 */
+            .cloud-wordcloud {
+                 padding-top: 66.67%; /* 保持宽高比 */
+                 height: 0;
+                 width: 100%; /* 确保宽度是100% */
+                 box-shadow: 
+                    30px 30px 0 -4px var(--bg-tertiary),
+                    60px 8px 0 -8px var(--bg-tertiary),
+                    90px 25px 0 -4px var(--bg-tertiary),
+                    -30px 40px 0 -6px var(--bg-tertiary),
+                    -55px 15px 0 -8px var(--bg-tertiary);
+            }
+             /* 需要调整词语位置和大小以适应新的容器尺寸 */
+            .cloud-word {
+                 /* 可能需要动态调整或使用相对单位 */
+                 /* 示例: font-size: calc(12px + 1vw); */
+                 /* 绝对定位可能需要在 JS 中重新计算 */
+            }
+            .cloud-legend {
+                 margin-top: 40px; /* 减少间距 */
+                 gap: 20px;
+            }
+            .legend-label { font-size: 14px; }
+            
+            /* 调整教程卡片元信息间距 */
+             .tutorial-meta span {
+                 margin-right: 10px;
+            }
+        }
+
+        /* 手机 (例如 <= 768px) */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 14px;
+            }
+            header { padding: 20px 0; margin-bottom: 20px;}
+            h1 { font-size: 28px; }
+            h2 { font-size: 22px; margin-bottom: 15px; padding-bottom: 8px; }
+            h3 { font-size: 18px; margin: 12px 0 8px 0; }
+            h4 { font-size: 16px; }
+
+            section {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .meta-info {
+                flex-direction: column; /* 垂直堆叠 */
+                gap: 10px;
+                align-items: center;
+            }
+            .meta-info span { padding: 4px 12px; font-size: 13px;}
+
+            /* 卡片容器调整为单列 */
+            .topics-container, .tutorials-container, .messages-container, 
+            .dialogues-container, .qa-container, .participants-container,
+            .heatmap-container {
+                gap: 15px;
+            }
+            
+            /* 卡片内边距 */
+            .topic-card, .tutorial-card, .message-card, 
+            .dialogue-card, .qa-card, .participant-item, .night-owl-item {
+                padding: 15px;
+            }
+            
+            /* 调整教程/消息元信息布局 */
+            .tutorial-meta span,
+            .message-meta span {
+                display: block; /* 每个信息项占一行 */
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            .tutorial-meta span:last-child,
+            .message-meta span:last-child { margin-bottom: 0; }
+
+            /* 调整问答元信息 */
+            .question-meta span, .answer-meta span {
+                 margin-right: 5px; /* 减少间距 */
+                 display: inline-block; /* 确保在一行，如果空间允许 */
+                 margin-bottom: 3px;
+            }
+            
+            /* 调整对话内容 */
+            .dialogue-content { padding: 10px; }
+            .dialogue-content .message-meta { font-size: 13px; }
+            
+            /* 调整话唠榜排名样式 */
+            .participant-rank {
+                 float: none; /* 取消浮动 */
+                 margin-right: 0;
+                 margin-bottom: 10px; /* 增加下方间距 */
+                 text-align: center; /* 居中显示 */
+                 display: block; /* 确保占满宽度 */
+                 font-size: 24px;
+                 width: auto; /* 取消固定宽度 */
+            }
+            .participant-info {
+                overflow: hidden; 
+                text-align: center; /* 居中内容 */
+            }
+            .participant-characteristics, .participant-words {
+                 justify-content: center; /* 居中标签 */
+            }
+
+            /* 调整熬夜冠军布局 */
+             .night-owl-item {
+                flex-direction: column; /* 垂直堆叠 */
+                text-align: center;
+            }
+            .owl-crown {
+                margin-right: 0;
+                margin-bottom: 15px; /* 在图标和文字间添加间距 */
+                font-size: 36px;
+            }
+             .owl-info {
+                width: 100%; /* 确保信息部分占满宽度 */
+            }
+            .owl-note { font-size: 12px; }
+            .owl-last-message { font-size: 13px; text-align: left; padding: 6px;} /* 左对齐引用的消息 */
+
+            /* 词云调整 */
+            .cloud-wordcloud {
+                border-radius: 40%; /* 稍微不那么圆 */
+                 box-shadow: 
+                    20px 20px 0 -3px var(--bg-tertiary),
+                    40px 5px 0 -6px var(--bg-tertiary),
+                    60px 15px 0 -3px var(--bg-tertiary),
+                    -20px 30px 0 -4px var(--bg-tertiary),
+                    -40px 10px 0 -6px var(--bg-tertiary);
+            }
+             /* 简化词云词语显示 - 隐藏较小的词或减小字体 */
+             .cloud-word {
+                /* 示例: 字体可能需要大幅减小或部分隐藏 */
+                /* font-size: calc(8px + 1vw); */
+             }
+            
+            .cloud-legend {
+                 flex-direction: column; /* 垂直堆叠图例 */
+                 align-items: center;
+                 gap: 10px;
+                 margin-top: 30px;
+            }
+             .legend-item { gap: 8px;}
+             .legend-color { width: 15px; height: 15px; }
+             .legend-label { font-size: 13px; }
+
+            /* 底部调整 */
+            footer {
+                padding: 15px 0;
+                margin-top: 30px;
+                font-size: 12px;
+            }
+        }
+
+        /* 超小屏幕 (例如 <= 480px) - 可选，进一步微调 */
+        @media (max-width: 480px) {
+            h1 { font-size: 24px; }
+            h2 { font-size: 20px; }
+            h3 { font-size: 17px; }
+            h4 { font-size: 15px; }
+            
+            body {
+                font-size: 13px; /* 进一步减小基础字号 */
+            }
+            
+            .meta-info span { padding: 3px 10px; font-size: 12px;}
+
+             /* 进一步减小卡片内边距 */
+            .topic-card, .tutorial-card, .message-card, 
+            .dialogue-card, .qa-card, .participant-item, .night-owl-item, .heat-item {
+                padding: 12px;
+            }
+            
+            /* 标签/关键词字体 */
+            .keyword, .tag, .characteristic, .word {
+                font-size: 11px; /* 调整字体大小 */
+                padding: 2px 6px; /* 调整内边距 */
+            }
+            
+             /* 词云字体可能需要进一步缩小 */
+             .cloud-word {
+                 /* font-size: calc(6px + 1vw); 示例 */
+             }
+             .legend-label { font-size: 12px; }
+             
+             /* 调整对话高亮 */
+             .dialogue-highlight { padding: 4px 8px; font-size: 13px;}
+             
+             /* 调整熬夜冠军字体 */
+             .owl-name { font-size: 16px; }
+             .owl-time, .owl-messages, .owl-last-message, .owl-note { font-size: 12px; }
+             
+             /* 调整话唠榜字体 */
+              .participant-name { font-size: 16px; }
+              .participant-count { font-size: 13px; }
+              
+              /* 热度图字体 */
+               .heat-topic, .heat-percentage, .heat-count { font-size: 13px; }
+        }
+
     </style>
 </head>
 <body>
@@ -589,7 +814,7 @@
             <div class="topic-card">
                 <h3>AI 时代下的教育与育儿焦虑</h3>
                 <div class="topic-category">社会生活</div>
-                <p class="topic-summary">群内就教育问题展开了深入讨论，特别是如何应对青春期孩子的挑战（如厌学、沉迷社交媒体小红书）。家长们分享了各自的经验、焦虑和应对策略，包括与孩子做朋友、换位思考、探索兴趣、甚至考虑海外教育（日本、欧洲）或创业。讨论也涉及了国内教育的“卷”现象、AI 在教育中的应用（PBL课程）、以及对现有教育体制的反思。</p>
+                <p class="topic-summary">群内就教育问题展开了深入讨论，特别是如何应对青春期孩子的挑战（如厌学、沉迷社交媒体小红书）。家长们分享了各自的经验、焦虑和应对策略，包括与孩子做朋友、换位思考、探索兴趣、甚至考虑海外教育（日本、欧洲）或创业。讨论也涉及了国内教育的"卷"现象、AI 在教育中的应用（PBL课程）、以及对现有教育体制的反思。</p>
                 <div class="topic-keywords">
                     <span class="keyword">教育</span>
                     <span class="keyword">孩子</span>
@@ -821,7 +1046,7 @@
                         <p class="message-content">是这样的，鸡娃不如鸡自己，自己能量要足够多，才能带动孩子</p>
                     </div>
                 </div>
-                <div class="dialogue-highlight">“卷孩子 不如卷自己， 自己都做不好 凭什么压迫孩子”</div>
+                <div class="dialogue-highlight">"卷孩子 不如卷自己， 自己都做不好 凭什么压迫孩子"</div>
                 <div class="dialogue-topic">相关话题：教育焦虑与亲子关系</div>
             </div>
         </div>
