@@ -1,0 +1,1269 @@
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 00:24:10
+![图片](http://localhost:5030/image/fcb15542415c6aeb88db83ddef9b90a6)
+
+北京-小菜与老鸟(wxid_7ku6nt7l513s21) 2025-04-11 05:40:35
+> 武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 00:24:10
+> ![图片](http://localhost:5030/image/7ac391a25d9b94ed5a737d172e96531b)
+所以是啥东西
+
+北京-ai产品经理(logointo) 2025-04-11 05:42:15
+![图片](http://localhost:5030/image/255987878b4b0661d532efce4af48813)
+
+北京-ai产品经理(logointo) 2025-04-11 05:42:19
+垃圾功能
+
+RAM(wxid_jdm48rjg7ivm11) 2025-04-11 08:29:10
+这是什么垃圾功能
+
+系统消息 2025-04-11 08:30:09
+"指尖泛出的繁华 Refly"邀请"沉默"加入了群聊
+
+系统消息 2025-04-11 08:30:09
+"沉默"与群里其他人都不是朋友关系，请注意隐私安全
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:06:45
+refly的第三种打开方式
+
+
+会是  全新升级的  ai md文档吗[让我看看]
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:13:42
+期待[旺柴]
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 09:13:54
+ai md 是指啥
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:16:31
+AI  markdown 笔记？可能是这样
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:17:16
+就是把文档完善功能，比如支持块功能[让我看看]
+
+然后针对最近比较火的AI编程工具写md文档思路
+
+搞一波
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 09:18:21
+IDE 吧
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:18:25
+我觉得喜欢md的群体不小
+
+
+把这个功能搞一搞，然后第三个直接打开方式加一个
+
+
+直接打开全屏文档
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:18:50
+应该挺耐撕的
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 09:19:15
+我觉得用 mcp 让 cursor、trae 等 IDE 能够读取画布内容比较务实。
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 09:19:50
+直接在 refly 编辑，文档不知道得新加上多少功能。
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 09:21:32
+目前最具有参考性的还是谷歌的 canvas 画布，可以划线提问修改，最主要的是可以无缝衔接旁边的聊天栏和版本返回。
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:21:48
+雀实，考虑到功能的维护难度，有些难搞
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:22:19
+> 沉默(wxid_gs0brd8974cf12) 2025-04-11 09:21:32
+> 目前最具有参考性的还是谷歌的 canvas 画布，可以划线提问修改，最主要的是可以无缝衔接旁边的聊天栏和版本返回。
+有没有vcr
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:22:39
+听起来蛮酷
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:23:29
+后面等支持mcp我试着做一个
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 09:23:58
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:22:19
+> > [引用]
+> 有没有vcr
+不懂
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:24:01
+其实我打算做那种 ide编辑然后 push到refly上面
+
+北京-ai产品经理(logointo) 2025-04-11 09:24:15
+[强][强][强]
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 09:24:22
+我用 IDE 也是拿来写作的。
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:24:28
+> 沉默(wxid_gs0brd8974cf12) 2025-04-11 09:23:58
+> > [引用]
+> 不懂
+就是演示视频
+
+北京-ai产品经理(logointo) 2025-04-11 09:24:35
+现在这个其实尝试用那个他的那个API上的接口干这个
+
+北京-ai产品经理(logointo) 2025-04-11 09:24:44
+就是把他的那个toekn拷贝出来
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:24:58
+主要是refly大改有点不好搞hhh 等本地实现
+
+北京-ai产品经理(logointo) 2025-04-11 09:25:01
+我把目前我OB里面的白板的内容输入进去
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 09:25:01
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:24:28
+> > [引用]
+> 就是演示视频
+你直接去 gemini 官网就能用了，还要演示视频？
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:25:33
+> 沉默(wxid_gs0brd8974cf12) 2025-04-11 09:25:01
+> > [引用]
+> 你直接去 gemini 官网就能用了，还要演示视频？
+注册不了，帐号[捂脸]
+
+北京-ai产品经理(logointo) 2025-04-11 09:25:35
+> 北京-ai产品经理(logointo) 2025-04-11 09:24:44
+> 就是把他的那个toekn拷贝出来
+再直接调用后台api
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:26:37
+我想问问，整理资料，用什么比较好，无目的性的，比如公众号文章，B站视频，refly画布或链接等等...主要希望简单方便，然后事后容易检索
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:26:57
+用什么？
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 09:27:00
+【【真TM好用】免费的AI创作利器Canvas，不花钱直接享受高级AI创作体验，从文档编辑到网站游戏开发的全能AI助手-哔哩哔哩】 https://b23.tv/PJ745Sy
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:27:01
+什么意思
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:27:02
+同问
+
+系统消息 2025-04-11 09:27:04
+
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:27:12
+收集吗
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:27:13
+肯定希望多端支持了
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:27:18
+对，收集
+
+系统消息 2025-04-11 09:27:22
+
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:27:30
+> 沉默(wxid_gs0brd8974cf12) 2025-04-11 09:27:01
+> 【【真TM好用】免费的AI创作利器Canvas，不花钱直接享受高级AI创作体验，从文档编辑到网站游戏开发的全能AI助手-哔哩哔哩】 https://b23.tv/PJ745Sy
+比/:heart
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 09:28:00
+> 北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:26:37
+> 我想问问，整理资料，用什么比较好，无目的性的，比如公众号文章，B站视频，refly画布或链接等等...主要希望简单方便，然后事后容易检索
+你这要求适合用思源、obsidian 之类的笔记软件。
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 09:28:09
+或者 flomo
+
+北京-ai产品经理(logointo) 2025-04-11 09:28:27
+> 北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:26:37
+> 我想问问，整理资料，用什么比较好，无目的性的，比如公众号文章，B站视频，refly画布或链接等等...主要希望简单方便，然后事后容易检索
+目前用的多的 就是飞书[Facepalm]
+
+北京-ai产品经理(logointo) 2025-04-11 09:28:34
+整理到ob
+
+北京-ai产品经理(logointo) 2025-04-11 09:29:04
+如果纯网页 on现在也有一个插件 web clip
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:29:07
+> 沉默(wxid_gs0brd8974cf12) 2025-04-11 09:28:09
+> 或者 flomo
+感觉也不太检索
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:29:11
+> 北京-ai产品经理(logointo) 2025-04-11 09:28:27
+> > 北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:26:37
+> > 我想问问，整理资料，用什么比较好，无目的性的，比如公众号文章，B站视频，refly画布或链接等等...主要希望简单方便，然后事后容易检索
+> 目前用的多的 就是飞书[Facepalm]
+我也考虑飞书了...但是填表有点烦
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:29:17
+我现在是这样做的 找个refly的文档 将所有 平台的收藏连接跳转 收集在一起 相当于做个起始页面 然后 点击跳转 然后每个平台的收藏夹相当于一个盒子 然后收集 一个星期清空整理一次到ob/notion
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:29:45
+这也太麻烦了
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:30:02
+不麻烦啊 每次看完归档就行
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:30:13
+> 沉默(wxid_gs0brd8974cf12) 2025-04-11 09:28:00
+> > 北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:26:37
+> > 我想问问，整理资料，用什么比较好，无目的性的，比如公众号文章，B站视频，refly画布或链接等等...主要希望简单方便，然后事后容易检索
+> 你这要求适合用思源、obsidian 之类的笔记软件。
+思源我搜下，感谢
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:30:15
+就是随处收藏 一次清空
+
+北京-ai产品经理(logointo) 2025-04-11 09:30:19
+> 北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:29:11
+> > [引用]
+> 我也考虑飞书了...但是填表有点烦
+不用啊
+
+北京-ai产品经理(logointo) 2025-04-11 09:30:24
+就是飞书消息
+
+北京-ai产品经理(logointo) 2025-04-11 09:30:26
+![图片](http://localhost:5030/image/78b779adf38a13037d7a1bf5b7fcab62)
+
+北京-ai产品经理(logointo) 2025-04-11 09:30:46
+加个机器人 把能内容转存为markdown 
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:30:53
+这不是微信的文件传输助手么
+
+北京-ai产品经理(logointo) 2025-04-11 09:31:00
+放在和ob同目录下
+
+北京-ai产品经理(logointo) 2025-04-11 09:31:08
+> 北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:30:53
+> 这不是微信的文件传输助手么
+这个同步不出来
+
+北京-ai产品经理(logointo) 2025-04-11 09:31:18
+但是飞书能接机器人把消息拉出来
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:31:23
+细说一下...ob同目录是指
+
+北京-ai产品经理(logointo) 2025-04-11 09:31:36
+> 北京-ai产品经理(logointo) 2025-04-11 09:31:00
+> 放在和ob同目录下
+就是obsidian下面
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:31:40
+我感觉这个好耶，符合我需求
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:31:55
+我研究研究，非常感谢
+
+北京-ai产品经理(logointo) 2025-04-11 09:32:13
+![图片](http://localhost:5030/image/73634a619f1fd34b02ed465800123c7f)
+
+北京-ai产品经理(logointo) 2025-04-11 09:32:31
+日常使用频次最高[捂脸]
+
+北京-ai产品经理(logointo) 2025-04-11 09:32:45
+搭配输入法的剪切板
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:32:46
+@北京-产品-Yoan 其实还有个方法 你用notion 然后分享可以自动到一个数据库中
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:33:03
+手机 电脑都可以
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:33:07
+飞书表格  适合归类
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:33:10
+感觉
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 09:33:45
+收集后，然后通过字段自动归类
+
+北京-ai产品经理(logointo) 2025-04-11 09:33:54
+而且就算不不同步 ob
+
+北京-ai产品经理(logointo) 2025-04-11 09:33:57
+![图片](http://localhost:5030/image/864260c8d95113b5ac735b2b325c6c29)
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:34:05
+> 武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:32:46
+> @北京-产品-Yoan 其实还有个方法 你用notion 然后分享可以自动到一个数据库中
+之前用的notion，数据一多，用的好卡
+
+北京-ai产品经理(logointo) 2025-04-11 09:34:10
+简单的也能搜 就是复杂不了
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:34:11
+还老得魔法
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:34:53
+简单检索够了
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:35:09
+> 北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 09:34:05
+> > [引用]
+> 之前用的notion，数据一多，用的好卡
+国内是这样[捂脸]
+
+北京-ai产品经理(logointo) 2025-04-11 09:35:09
+还可以多客户端登录[捂脸] 比微信强太多
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:35:36
+> 北京-ai产品经理(logointo) 2025-04-11 09:30:26
+> ![图片](http://localhost:5030/image/b4f344923c088a903c40b47ad8b062fb)
+写个教程发推特[旺柴]
+
+北京-ai产品经理(logointo) 2025-04-11 09:35:43
+[捂脸][捂脸][捂脸]
+
+北京-ai产品经理(logointo) 2025-04-11 09:35:51
+你别用我截图，，，
+
+北京-ai产品经理(logointo) 2025-04-11 09:36:00
+上面有水印[捂脸]
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:36:02
+没 我说老哥可以写
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:36:04
+[旺柴]
+
+北京-ai产品经理(logointo) 2025-04-11 09:36:08
+[捂脸][捂脸][捂脸]
+
+北京-ai产品经理(logointo) 2025-04-11 09:36:14
+你来吧
+
+北京-ai产品经理(logointo) 2025-04-11 09:36:50
+而且在同步的时候 
+
+雲丶彼岸(wxid_2207792079012) 2025-04-11 09:37:18
+RELFY会加入思源笔记的功能吗？
+
+北京-ai产品经理(logointo) 2025-04-11 09:37:21
+还可以用模型能力 自动给文档打上标签 写到yalm的meta上
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 09:37:55
+现在refly还是块能力 笔记可能还不好搞
+
+北京-ai产品经理(logointo) 2025-04-11 09:37:59
+> 雲丶彼岸(wxid_2207792079012) 2025-04-11 09:37:18
+> RELFY会加入思源笔记的功能吗？
+啥意思 思源插件
+
+北京-小菜与老鸟(wxid_7ku6nt7l513s21) 2025-04-11 09:40:50
+[视频号|今天我跟AI的对话、讨论越来越多，很多有价值的内容都应该以笔记的形式保存下来。这是我选择Basic Memory搭建【AI笔记库】的出发点。
+
+#AI #MCP #Obsidian #Cursor](http://wxapp.tc.qq.com/251/20302/stodownload?encfilekey=Cvvj5Ix3eewK0tHtibORqcsqchXNh0Gf3sJcaYqC2rQAd0XXo9YHePiaDNbBgibwZqZCjdkzUiahyGDsyf7ygWzMLkZdz7PXXG5juYy7nU8On9CLXgDEicFCe4ics9Es67Gml3&bizid=1023&dotrans=0&hy=SH&idx=1&m=&uzid=7a1fc&token=cztXnd9GyrFYuwxKKE7IBnicVhfZnKib2hnkVv4NccrGUBJ8Tzib1PuNvX58bVY8hWMeiaUFdHHbQetjiaWndkojlVlWJyZsvibUu9KVMoyJWe0VMyh6Pia2z006ww4B90KibUUc5D4pRPst2vlGE62RzicWlkYyTyOlE9Kt1ffdiceDfumdY&basedata=CAESBnhXVDE1MRoGeFdUMTExGgZ4V1QxMTIaBnhXVDExMxoGeFdUMTU2GgZ4V1QxNTcaBnhXVDE1MRoGeFdUMTU4IhgKCgoGeFdUMTEyEAEKCgoGeFdUMTU3EAEqBQiYHRAA&sign=0bUeYHoZ4_nSrJzjQ9-D9x38pLM8nrhI0dWgNlnd6k_QvVMiHH7_LxN8dlpSpGcXMsOyc2joAmqBRb2FkUv5eQ&extg=8eb900&svrbypass=AAuL%2FQsFAAABAAAAAABATNNE7kMAniWhC3P4ZxAAAADnaHZTnGbFfAj9RgZXfw6VeOsBxjjR06AnZqToAlktI3p8q9VVaoO94F8dbaYhu4573puplbaR%2BSQ%3D&svrnonce=1744335627)
+
+北京-小菜与老鸟(wxid_7ku6nt7l513s21) 2025-04-11 09:41:04
+mcp ob
+
+北京-小菜与老鸟(wxid_7ku6nt7l513s21) 2025-04-11 09:41:13
+可以尝试下
+
+系统消息 2025-04-11 10:03:41
+
+
+系统消息 2025-04-11 10:03:49
+
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 10:04:05
+我用 IDE 写作最大的问题，其实是修正文档的时候会有很多重复的 promt。要是可以做成固定的预制 promt 卡片就好了
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:17:35
+  我笔记喜欢这个写作形式
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:17:36
+![图片](http://localhost:5030/image/42326af28e1cd1552acfab5de03c6751)
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:17:47
+软件的
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 10:19:39
+好复杂阿，我有时间再弄
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 10:19:48
+不过要能那样用确实舒服
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:21:18
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:17:36
+> ![图片](http://localhost:5030/image/fcb9d29e4452db98e6275487a5bee3c0)
+这种配合 refly画布
+
+
+感觉就太棒了
+
+北京-ai产品经理(logointo) 2025-04-11 10:21:39
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:21:18
+> > [引用]
+> 这种配合 refly画布
+> 感觉就太棒了
++1
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:23:12
+他们俩 结合上 就太王炸了[流泪]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:23:47
+https://lattics.com/zh-CN
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:23:51
+官网地址
+
+RAM(wxid_jdm48rjg7ivm11) 2025-04-11 10:37:39
+希望refly的卡片复用提上日程
+
+雲丶彼岸(wxid_2207792079012) 2025-04-11 10:48:29
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:21:18
+> > [引用]
+> 这种配合 refly画布
+> 感觉就太棒了
+加一
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 10:51:56
+看起来好像挺不错
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 10:52:10
+知识卡片也能用了
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:56:22
+> 武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 10:52:10
+> 知识卡片也能用了
+可以看官网介绍，然后实际体验下，真的棒[让我看看]
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 10:56:47
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:56:22
+> > [引用]
+> 可以看官网介绍，然后实际体验下，真的棒[让我看看]
+只能说refly赶紧学习[旺柴]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:57:59
+建议抄过来，适配refly
+
+系统消息 2025-04-11 10:58:06
+
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:58:13
+变成第三种直接打开方式[让我看看]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:59:17
+@上海 - Refly  - Tom 
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 10:59:22
+[奸笑]
+
+雲丶彼岸(wxid_2207792079012) 2025-04-11 11:00:38
+发展成全能型创作工具！
+
+vincent(wxid_6673856735712) 2025-04-11 11:27:25
+大佬们Dia的邀请有吗？
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 12:28:57
+其实我觉得 refly 还是得先适配一下多端
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 12:29:07
+最好有独立的客户端
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 12:29:33
+> 沉默(wxid_gs0brd8974cf12) 2025-04-11 12:28:57
+> 其实我觉得 refly 还是得先适配一下多端
+现在是网页版应该不吃吧
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 12:29:52
+未来会出客户端
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 12:47:32
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 12:29:33
+> > [引用]
+> 现在是网页版应该不吃吧
+多端适配不行，手机就不说了。平板的触控式没适配的。
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 12:48:58
+多端干不同的事情 比如手机端就是当闪念笔记 然后语音速记等 电脑就是工作流 平板 展示或者啥的
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 12:59:15
+> 武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 12:48:58
+> 多端干不同的事情 比如手机端就是当闪念笔记 然后语音速记等 电脑就是工作流 平板 展示或者啥的
+单纯就 refly 来说，多端可以有不同的功能和优势。但是需要适配。
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 12:59:28
+平板适合手绘
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 13:11:12
+https://x.com/voicenotesai/status/1910227953360699670?t=8oKHNm5oBGYcMri3mAk_Vw&s=19
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 13:11:34
+分享个语记类型的软件
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 13:11:53
+还挺方便
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 13:12:09
+我感觉refly可以加个音频功能
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 13:12:11
+[旺柴]
+
+北京-小菜与老鸟(我) 2025-04-11 13:35:56
+昨日日报总结：https://refly.ai/share/code/cod-ie21ndbb3rw28m1fm9ll0gf0
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 13:38:07
+老哥辛苦[强]
+
+南乔River@ShowMeAI(wxid_vgq23re1cfta22) 2025-04-11 13:38:52
+[动画表情]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 13:39:46
+![图片](http://localhost:5030/image/7699327f643f5f699c33494fc6085b23)
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 13:40:40
+确实焦虑[捂脸]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 13:40:53
+![图片](http://localhost:5030/image/0678b925afb3e90eb4e881815754d80f)
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 13:41:14
+![图片](http://localhost:5030/image/70d340d0dcdd5c8dbf3aadfe3b4bd2cb)
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 13:41:20
+这个好强，识别出来了
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 13:41:39
+是这样
+
+北京-小菜与老鸟(我) 2025-04-11 13:41:55
+Gemini2.5 Pro驱动 😂
+
+北京-小菜与老鸟(我) 2025-04-11 13:42:34
+![图片](http://localhost:5030/image/27313a8e3de4f7e1039d9908329ed01c)
+
+阿渊(wxid_usrn1gc2ocb911) 2025-04-11 13:48:30
+> wxid_7ku6nt7l513s21 2025-04-11 13:35:56
+> 昨日日报总结：https://refly.ai/share/code/cod-ie21ndbb3rw28m1fm9ll0gf0
+导出群聊记录接入的？
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 13:49:00
+是的
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 13:49:17
+嗯，感觉refly海外版审核都挺严...一些敏感内容都过滤了
+
+紫苏子(wxid_1a6chlz9nkjn22) 2025-04-11 13:59:23
+> wxid_7ku6nt7l513s21 2025-04-11 13:35:56
+> 昨日日报总结：https://refly.ai/share/code/cod-ie21ndbb3rw28m1fm9ll0gf0
+生成群聊日报的提示词是？
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 14:02:01
+我这里画布出问题了，两个不同项目的画布重叠在一起了
+"data": {
+        "canvasId": "c-pndc6ex1am9hkcj6p8wjnyc3",
+        "title": "读书分享H5-宝可梦视觉艺术史",
+        "minimapUrl": "https://api.refly.ai/v1/misc/static/1183696f-5494-4017-875e-d7f371b08621",
+        "minimapStorageKey": "static/1183696f-5494-4017-875e-d7f371b08621",
+        "createdAt": "2025-03-14T05:50:50.843Z",
+        "updatedAt": "2025-04-11T05:58:02.762Z"
+    }
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 14:02:05
+![图片](http://localhost:5030/image/aef8ea83af662ee36ac31877c927aef0)
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 14:02:09
+@上海 - Refly  - Tom 
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 14:02:33
+刷新也没用，不知怎么回事...今天打开就这样了
+
+北京-小菜与老鸟(我) 2025-04-11 14:02:57
+> wxid_1a6chlz9nkjn22 2025-04-11 13:59:23
+> > [引用]
+> 生成群聊日报的提示词是？
+公众号 卡兹克的一个文章  你可以搜搜看
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 14:05:17
+清缓存和关了浏览器再开也一样...俩画布重叠
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 14:18:14
+> 北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 14:05:17
+> 清缓存和关了浏览器再开也一样...俩画布重叠
+这个我们看下
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 14:18:17
+![图片](http://localhost:5030/image/c25986bfd9efa2f724ed0c5950713b99)
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 14:18:34
+哈哈，@北京-小菜与老鸟 用户有响应式展示需求[让我看看]
+
+北京-小菜与老鸟(我) 2025-04-11 14:20:00
+[Lol] 好 优化下提示词
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:20:43
+来了一波输出
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:27:36
+留言@上海 - Refly  - Tom 
+lattics感觉怎么样
+
+不考虑下吗，配和refly一定超酷[让我看看]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:29:18
+甚至能弥补他ai功能的缺失
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 14:31:16
+学一下[让我看看]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:31:31
+[动画表情]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:31:39
+https://lattics.com/zh-CN
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:31:58
+官网，快深度体验下[让我看看]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:32:44
+搞下来感觉可以直接做成，第三个打开方式[色]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:34:21
+[动画表情]
+
+社恐患者杨老师(pzc163) 2025-04-11 14:34:33
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:31:39
+> https://lattics.com/zh-CN
+这个不开源吧
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:34:46
+下载完软件后，里边还有一个用例展示
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:34:51
+> 社恐患者杨老师(pzc163) 2025-04-11 14:34:33
+> > [引用]
+> 这个不开源吧
+不开源
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:35:09
+但是我感觉他这个设计思路
+真的很舒服
+
+阿渊(wxid_usrn1gc2ocb911) 2025-04-11 14:35:37
+> wxid_lvo2ovo1aaie22 2025-04-11 14:31:39
+> https://lattics.com/zh-CN
+感觉好高级
+
+社恐患者杨老师(pzc163) 2025-04-11 14:35:58
+前端漂亮
+
+社恐患者杨老师(pzc163) 2025-04-11 14:36:05
+是不是花拳绣腿还要体验看看
+
+阿渊(wxid_usrn1gc2ocb911) 2025-04-11 14:36:19
+> pzc163 2025-04-11 14:36:05
+> 是不是花拳绣腿还要体验看看
++1
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:36:27
+> 社恐患者杨老师(pzc163) 2025-04-11 14:36:05
+> 是不是花拳绣腿还要体验看看
+可以看看他那个用例
+
+社恐患者杨老师(pzc163) 2025-04-11 14:36:31
+![图片](http://localhost:5030/image/0d33cf9ad89587f35a657ddcb6bb743e)
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:36:38
+下载完之后
+
+社恐患者杨老师(pzc163) 2025-04-11 14:36:39
+给我一个付费的理由？》？
+
+阿渊(wxid_usrn1gc2ocb911) 2025-04-11 14:36:45
+我用过很多笔记本，实在不想试
+
+阿渊(wxid_usrn1gc2ocb911) 2025-04-11 14:37:14
+5年？脑补：跑路的节奏
+
+社恐患者杨老师(pzc163) 2025-04-11 14:37:15
+之前用过语雀，飞书和notion
+
+北京-ai产品经理(logointo) 2025-04-11 14:37:17
+> 上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 14:31:16
+> 学一下[LetMeSee]
+[ThumbsUp][ThumbsUp][ThumbsUp]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:37:18
+> 社恐患者杨老师(pzc163) 2025-04-11 14:36:39
+> 给我一个付费的理由？》？
+没有理由[微笑]
+
+社恐患者杨老师(pzc163) 2025-04-11 14:37:59
+![图片](http://localhost:5030/image/85c09035d176eb474e2751637bb14263)
+
+社恐患者杨老师(pzc163) 2025-04-11 14:38:12
+> 社恐患者杨老师(pzc163) 2025-04-11 14:37:57
+> ![图片](http://localhost:5030/image/255f865583b55eba06ccf9acff85a2a3)
+这产品评价，一看就不是AI生成的
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:39:58
+快看下，用例[让我看看]
+
+北京-小菜与老鸟(wxid_7ku6nt7l513s21) 2025-04-11 14:42:18
+> 上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 14:18:34
+> 哈哈，@北京-小菜与老鸟 用户有响应式展示需求[让我看看]
+https://refly.ai/share/code/cod-ie21ndbb3rw28m1fm9ll0gf0 响应式来了
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:42:52
+[让我看看]
+
+社恐患者杨老师(pzc163) 2025-04-11 14:44:00
+？
+
+社恐患者杨老师(pzc163) 2025-04-11 14:44:00
+![图片](http://localhost:5030/image/bebdaabb945e2e41808a72554357b497)
+
+社恐患者杨老师(pzc163) 2025-04-11 14:44:03
+就这？？
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:44:31
+怎么了
+
+北京-ai产品经理(logointo) 2025-04-11 14:44:34
+你看看他产出画布的逻辑  
+
+北京-ai产品经理(logointo) 2025-04-11 14:44:43
+非常类似的 marginnote
+
+北京-ai产品经理(logointo) 2025-04-11 14:44:53
+划线 就是节点
+
+阿渊(wxid_usrn1gc2ocb911) 2025-04-11 14:45:57
+> wxid_7ku6nt7l513s21 2025-04-11 14:42:18
+> > [引用]
+> https://refly.ai/share/code/cod-ie21ndbb3rw28m1fm9ll0gf0 响应式来了
+有意思
+
+社恐患者杨老师(pzc163) 2025-04-11 14:46:30
+这个和飞书有啥本质区别
+
+北京-小菜与老鸟(我) 2025-04-11 14:47:32
+笔记软件眼花缭乱[Facepalm]
+
+北京-ai产品经理(logointo) 2025-04-11 14:47:53
+![图片](http://localhost:5030/image/2c2afe15d18da4c76917bd67335472c7)
+
+北京-ai产品经理(logointo) 2025-04-11 14:47:57
+主要是这个效果
+
+北京-ai产品经理(logointo) 2025-04-11 14:48:33
+嗯 不过 我可能弄混了.. .
+
+北京-ai产品经理(logointo) 2025-04-11 14:48:37
+理解成是这个了 
+https://myflexnote.com/
+
+北京-ai产品经理(logointo) 2025-04-11 14:48:55
+![图片](http://localhost:5030/image/b7ac07df54fe5b49b19ff1427506b46c)
+
+北京-ai产品经理(logointo) 2025-04-11 14:48:59
+[捂脸][捂脸][捂脸]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:49:38
+狠狠的反馈
+
+社恐患者杨老师(pzc163) 2025-04-11 14:50:04
+> 社恐患者杨老师(pzc163) 2025-04-11 14:44:00
+> ![图片](http://localhost:5030/image/097038cbe15eb4a43d7ee73db1789a09)
+这不就是笔记么
+
+北京-ai产品经理(logointo) 2025-04-11 14:50:04
+> 北京-ai产品经理(logointo) 2025-04-11 14:48:54
+> ![图片](http://localhost:5030/image/6cfd89f2be3e0e0027e42705c6246537)
+一开始使用人relfy 是有这个预期的 哈哈
+
+北京-小菜与老鸟(我) 2025-04-11 14:50:28
+> logointo 2025-04-11 14:50:04
+> > [引用]
+> 一开始使用人relfy 是有这个预期的 哈哈
+哈哈 Roadmap 中有
+
+社恐患者杨老师(pzc163) 2025-04-11 14:50:33
+飞书免费，要我付费的理由是啥
+
+社恐患者杨老师(pzc163) 2025-04-11 14:51:28
+@上海 - Refly  - Tom Tom flowith你怎么看？算是refly的竞对吗？
+
+Nimo(zhangwenzhao891227) 2025-04-11 14:52:17
+Gemini 2.5 pro 模型存在output中先生成的内容消失的问题，这个bug群友们反馈过了吗？
+
+Nimo(zhangwenzhao891227) 2025-04-11 14:52:18
+![图片](http://localhost:5030/image/d10470b8f7274bc21a668cc83489461f)
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:52:44
+> 社恐患者杨老师(pzc163) 2025-04-11 14:50:04
+> > [引用]
+> 这不就是笔记么
+看下 了解lattics 介绍
+
+把他设计适配到refly文档，就太妙了，不是吗
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 14:54:09
+> Nimo(zhangwenzhao891227) 2025-04-11 14:52:17
+> Gemini 2.5 pro 模型存在output中先生成的内容消失的问题，这个bug群友们反馈过了吗？
+有的，但看具体什么问题吧，我经常是html，前段丢失，导致识别不成html
+
+紫苏子(wxid_1a6chlz9nkjn22) 2025-04-11 14:54:18
+> 北京-ai产品经理(logointo) 2025-04-11 14:44:43
+> 非常类似的 marginnote
+当年的思路清奇的app[旺柴]
+
+北京-ai产品经理(logointo) 2025-04-11 14:54:51
+> 紫苏子(wxid_1a6chlz9nkjn22) 2025-04-11 14:54:18
+> > 北京-ai产品经理(logointo) 2025-04-11 14:44:43
+> > 非常类似的 marginnote
+> 当年的思路清奇的app[旺柴]
+也用过 是不是 哈哈
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:55:18
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 14:52:44
+> > [引用]
+> 看下 了解lattics 介绍
+> 把他设计适配到refly文档，就太妙了，不是吗
+完全就可以做为，第三种打开方式
+
+紫苏子(wxid_1a6chlz9nkjn22) 2025-04-11 14:55:30
+还是refly是最爱，符合人脑操控感[调皮]
+
+Nimo(zhangwenzhao891227) 2025-04-11 14:56:40
+> 北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 14:54:09
+> > [引用]
+> 有的，但看具体什么问题吧，我经常是html，前段丢失，导致识别不成html
+我遇到的不只是html的问题，正常text前段也会消失。
+
+北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 14:57:31
+那感觉是输出token超了？
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 15:02:19
+等refly 慢慢放开限制
+然后狠狠的用[让我看看]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 15:03:51
+> 社恐患者杨老师(pzc163) 2025-04-11 14:51:28
+> @上海 - Refly  - Tom Tom flowith你怎么看？算是refly的竞对吗？
+个人感觉不是
+
+Nimo(zhangwenzhao891227) 2025-04-11 15:12:09
+> 北京-产品-Yoan(wxid_vrdmpsn7i3lw21) 2025-04-11 14:57:31
+> 那感觉是输出token超了？
+不应该，Gemini 2.5的输出Token量非常大
+
+Nimo(zhangwenzhao891227) 2025-04-11 15:13:17
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 15:02:19
+> 等refly 慢慢放开限制
+> 然后狠狠的用[让我看看]
+放开啥限制？
+
+北京-小菜与老鸟(我) 2025-04-11 15:16:53
+> wxid_vrdmpsn7i3lw21 2025-04-11 14:54:09
+> > [引用]
+> 有的，但看具体什么问题吧，我经常是html，前段丢失，导致识别不成html
+我碰到的是整个 html 代码写着写着 一闪给闪没了 还能预览
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 15:20:04
+> Nimo(zhangwenzhao891227) 2025-04-11 14:56:40
+> > [引用]
+> 我遇到的不只是html的问题，正常text前段也会消失。
+这个是 bug 我们看下
+
+Nimo(zhangwenzhao891227) 2025-04-11 15:21:50
+> 北京-小菜与老鸟(wxid_7ku6nt7l513s21) 2025-04-11 15:16:53
+> > [引用]
+> 我碰到的是整个 html 代码写着写着 一闪给闪没了 还能预览
+这个情况如果复制出来是完整的，那还好，属于是前几天说过的代码标识符导致的渲染问题。
+
+RAM(wxid_jdm48rjg7ivm11) 2025-04-11 15:53:31
+refly既然目前是海外版，是不是就不用再加一层限制了，用模型本身的限制就好
+
+RAM(wxid_jdm48rjg7ivm11) 2025-04-11 15:53:41
+或者在分享层加个审查
+
+RAM(wxid_jdm48rjg7ivm11) 2025-04-11 15:57:54
+要不觉得自己的内容被审查一样，别最后和flowus一样[捂脸]
+
+北京-小菜与老鸟(我) 2025-04-11 16:00:03
+> wxid_jdm48rjg7ivm11 2025-04-11 15:53:31
+> refly既然目前是海外版，是不是就不用再加一层限制了，用模型本身的限制就好
+目前 refly 是加了限制么
+
+RAM(wxid_jdm48rjg7ivm11) 2025-04-11 16:03:40
+不知道啊，昨天一个老哥说限制大模型输出了
+
+RAM(wxid_jdm48rjg7ivm11) 2025-04-11 16:04:29
+咱有分享功能的话，确实需要谨慎，我个人认为这层审查加到分享环节比较好，虽然非本地部署，但海外用户对隐私还是比较看重的
+
+iMax(wxid_5cejb8yniayu22) 2025-04-11 16:10:42
+> RAM(wxid_jdm48rjg7ivm11) 2025-04-11 16:04:29
+> 咱有分享功能的话，确实需要谨慎，我个人认为这层审查加到分享环节比较好，虽然非本地部署，但海外用户对隐私还是比较看重的
+这一点确实的 
+
+iMax(wxid_5cejb8yniayu22) 2025-04-11 16:10:57
+有一个做WINDOWS 全局鼠标手势的 
+
+iMax(wxid_5cejb8yniayu22) 2025-04-11 16:11:44
+开源项目的作者 就是因为做了有分享功能的玩意儿 群友用来分享种子 顺藤摸瓜 摸到了他 然后毕竟要办案的嘛 坦白从宽 牢底坐穿 抗拒从严回家过年 
+
+iMax(wxid_5cejb8yniayu22) 2025-04-11 16:11:51
+Mouseinc
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 16:15:53
+这可太刑了
+
+iMax(wxid_5cejb8yniayu22) 2025-04-11 16:17:39
+不是作者刑 但作者做了这功能就 刑
+
+iMax(wxid_5cejb8yniayu22) 2025-04-11 16:17:45
+百度那个不也是这么个情况嘛 
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:46:53
+今天尝试了一个很牛逼的ppt工作流
+
+社恐患者杨老师(pzc163) 2025-04-11 17:47:06
+怎么个牛逼？
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:47:06
+[阴险]把公司伙伴都惊艳到了
+
+岁月长(fenghaoyv) 2025-04-11 17:47:08
+[旺柴]提示词分享一下
+
+北京-ai产品经理(logointo) 2025-04-11 17:47:16
+期待分享
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:47:26
+哈哈的等我下周跑下
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:47:47
+本来想尝试知识库问答图片的
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:47:52
+结果发现不支持
+
+北京-ai产品经理(logointo) 2025-04-11 17:47:57
+直接上多模态么
+
+北京-ai产品经理(logointo) 2025-04-11 17:48:01
+这么离谱的 
+
+北京-ai产品经理(logointo) 2025-04-11 17:48:12
+目前支持多模态的知识库可不多见啊
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:48:21
+@上海 - Refly  - Tom 急求知识库支持图片
+
+北京-ai产品经理(logointo) 2025-04-11 17:48:31
+哈哈哈 可以的
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:48:35
+批量上传和知识库引用
+
+社恐患者杨老师(pzc163) 2025-04-11 17:48:39
+支持图片这个不需要多模态
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:48:49
+否则我只能一张张复制确实恼火
+
+北京-ai产品经理(logointo) 2025-04-11 17:49:05
+> 社恐患者杨老师(pzc163) 2025-04-11 17:48:39
+> 支持图片这个不需要多模态
+我理解的应该是可以直接检索到图片里面的内容? 
+
+北京-ai产品经理(logointo) 2025-04-11 17:49:11
+或是图片的描述什么的
+
+社恐患者杨老师(pzc163) 2025-04-11 17:49:22
+图片用URL保存到s3
+
+北京-ai产品经理(logointo) 2025-04-11 17:49:30
+不是仅仅展示
+
+社恐患者杨老师(pzc163) 2025-04-11 17:49:31
+然后返回URL地址
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:49:57
+虽然也能多选直接引用到ai问答,但单页上生成每次都要重新选也麻烦
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 17:51:21
+在知识库左侧支持图片上传只作为上下文调取感觉可行，包括 AI 回答、备忘录这些小的文字卡片
+
+紫苏子(wxid_1a6chlz9nkjn22) 2025-04-11 17:51:29
+> 成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:46:53
+> 今天尝试了一个很牛逼的ppt工作流
+coze的还是dify的工作流？
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:51:47
+> 上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 17:51:21
+> 在知识库左侧支持图片上传只作为上下文调取感觉可行，包括 AI 回答、备忘录这些小的文字卡片
+是的
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:52:01
+> 紫苏子(wxid_1a6chlz9nkjn22) 2025-04-11 17:51:29
+> > [引用]
+> coze的还是dify的工作流？
+不是不是就是refly
+
+紫苏子(wxid_1a6chlz9nkjn22) 2025-04-11 17:53:42
+等你分享[愉快]
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:54:08
+[呲牙]这会就是图片流程有问题
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:54:56
+@上海 - Refly  - Tom 今天我测下来我不太知道，如果我只是在知识库里的画布，直接正常用没有勾选打开知识库问答的开关的问问ai会不会调用知识库库其实词呢？
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 17:55:57
+> 成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:54:56
+> @上海 - Refly  - Tom 今天我测下来我不太知道，如果我只是在知识库里的画布，直接正常用没有勾选打开知识库问答的开关的问问ai会不会调用知识库库其实词呢？
+这个昨天海立也提了，应该需要支持就是选了知识库直接使用提示词，打开开关才走知识库搜索
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 17:56:14
+目前还不会，没有打开开关就不会使用
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:56:38
+了解，那今天测出来的效果质量也挺高的
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 17:58:21
+[强]
+
+北京-小菜与老鸟(wxid_7ku6nt7l513s21) 2025-04-11 18:12:57
+> 成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 17:56:38
+> 了解，那今天测出来的效果质量也挺高的
+期待分享
+
+成都-horst-BI顾问-Eacc(wxid_0j0n93zbj2w522) 2025-04-11 18:17:27
+另外就是一个感觉是bug：基本三次持续对话，就会报错
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 18:20:03
+refly 之路
+
+任重而道远
+
+北京-小菜与老鸟(wxid_7ku6nt7l513s21) 2025-04-11 18:22:21
+tom：加人！
+
+北京-小菜与老鸟(wxid_7ku6nt7l513s21) 2025-04-11 18:22:26
+[偷笑]
+
+北京-ai产品经理(logointo) 2025-04-11 18:22:39
+ 用google的deepsearch 写个东西 它是真给干活啊
+
+北京-ai产品经理(logointo) 2025-04-11 18:22:42
+![图片](http://localhost:5030/image/4aab946592d081587ea6331b7a3b32c6)
+
+北京-ai产品经理(logointo) 2025-04-11 18:26:30
+[视频号|产品最强大的护城河，便是品位加上最忠实的核心用户。产品本身自然吸引到的是同品位的用户群体
+
+欢迎收看来自一位大一学生制作的关于flowith的介绍视频
+
+from @eirperuier 
+
+@flowith_ai #flowith #ai](http://wxapp.tc.qq.com/251/20302/stodownload?encfilekey=Cvvj5Ix3eewK0tHtibORqcsqchXNh0Gf3YiaX8QrZIfDdVAL3eH3EMLYTJ7IgSdMm7047n9fAjQZAClFGTUeib1zdIVeYjWlTHuQpoMYxAhaqPicl2dFFKbgDAUgTM77DTib7&hy=SZ&idx=1&m=&uzid=7a1a2&token=cztXnd9GyrEJYUqvYakwTdn2Hc4EEDibNsZXc8e8l28qXcfL1Q4fCvB1bCyLQf9iaHk0j5vtjzN95hU2Prxt5W0fbtkfEvZNlpdxztpvy2T3nmWVUkWPmztnRibnCJQJ4ZicKRyshOLMz0DugeRibJ82mtRzArztPGudjSvzv0Kh5icJ0&ctsc=38&extg=10bb900&svrbypass=AAuL%2FQsFAAABAAAAAAAvDqKJavx7tbOx3uv4ZxAAAADnaHZTnGbFfAj9RgZXfw6VbEdlkPjBoovaG26kpEEum%2BMOp9p%2FLaf1YNyEAqvOBmS%2BQo7q1ZUFfr4%3D&svrnonce=1744366558)
+
+北京-ai产品经理(logointo) 2025-04-11 18:26:30
+学习下这个效果
+
+北京-ai产品经理(logointo) 2025-04-11 18:26:51
+感觉挺不错的
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 18:27:37
+> 北京-ai产品经理(logointo) 2025-04-11 18:26:30
+> [视频号|产品最强大的护城河，便是品位加上最忠实的核心用户。产品本身自然吸引到的是同品位的用户群体
+> 欢迎收看来自一位大一学生制作的关于flowith的介绍视频
+> from @eirperuier 
+> @flowith_ai #flowith #ai](http://wxapp.tc.qq.com/251/20302/stodownload?encfilekey=Cvvj5Ix3eewK0tHtibORqcsqchXNh0Gf3YiaX8QrZIfDdVAL3eH3EMLYTJ7IgSdMm7047n9fAjQZAClFGTUeib1zdIVeYjWlTHuQpoMYxAhaqPicl2dFFKbgDAUgTM77DTib7&hy=SZ&idx=1&m=&uzid=7a1a2&token=cztXnd9GyrEJYUqvYakwTdn2Hc4EEDibNsZXc8e8l28qXcfL1Q4fCvB1bCyLQf9iaHk0j5vtjzN95hU2Prxt5W0fbtkfEvZNlpdxztpvy2T3nmWVUkWPmztnRibnCJQJ4ZicKRyshOLMz0DugeRibJ82mtRzArztPGudjSvzv0Kh5icJ0&ctsc=38&extg=10bb900&svrbypass=AAuL%2FQsFAAABAAAAAAAvDqKJavx7tbOx3uv4ZxAAAADnaHZTnGbFfAj9RgZXfw6VbEdlkPjBoovaG26kpEEum%2BMOp9p%2FLaf1YNyEAqvOBmS%2BQo7q1ZUFfr4%3D&svrnonce=1744366558)
+听拐子说是，大一学生做的
+
+北京-ai产品经理(logointo) 2025-04-11 18:30:16
+refly也可以的
+
+紫苏子(wxid_1a6chlz9nkjn22) 2025-04-11 18:34:11
+快闪promo视频风格
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 18:45:33
+视频中动态变化的素材都是怎么做到的
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 18:46:09
+> 北京-ai产品经理(logointo) 2025-04-11 18:26:30
+> 学习下这个效果
+我就是从 flowith 转到这里的。
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 18:46:15
+flowith 可难用了
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 18:46:37
+虽是画布但是远没有 refly 来的自由。
+
+紫苏子(wxid_1a6chlz9nkjn22) 2025-04-11 18:47:17
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 18:45:33
+> 视频中动态变化的素材都是怎么做到的
+有些是调用类似的AE模板，有些手动制作咯，再剪辑在一起。
+
+阿渊(wxid_usrn1gc2ocb911) 2025-04-11 18:47:46
+> 沉默(wxid_gs0brd8974cf12) 2025-04-11 18:46:09
+> > [引用]
+> 我就是从 flowith 转到这里的。
+居然有这个
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 18:47:56
+而且它本质上是可以分叉的对话流。节点是不能拖动的，节点性质也是不能改的，重新生成是不能先修改再生成的。
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 18:49:34
+> 紫苏子(wxid_1a6chlz9nkjn22) 2025-04-11 18:47:17
+> > [引用]
+> 有些是调用类似的AE模板，有些手动制作咯，再剪辑在一起。
+唉 ae，ae 好累放弃了Ծ‸Ծ
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 18:50:05
+说实话一般的演示需求用 PPT 和 keynote 完全够用。
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 18:52:14
+> 沉默(wxid_gs0brd8974cf12) 2025-04-11 18:47:56
+> 而且它本质上是可以分叉的对话流。节点是不能拖动的，节点性质也是不能改的，重新生成是不能先修改再生成的。
+采用画布的展示，但限制了固定结构，不够自由
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 18:54:05
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 18:52:14
+> > [引用]
+> 采用画布的展示，但限制了固定结构，不够自由
+这个是小事，误触会触发新的分支。这个很难绷，而且触发新分支后会断调旧分支的对话•ᴗ•💧
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 18:54:26
+那这个就是bug了吧
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 18:55:05
+不是，他好像就是这么设置的。双击空白处会触发新分支
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 18:55:23
+然后旧的就不能调用了？
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 18:55:25
+反正我觉得实在是太难用了，白瞎一个月会员。
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 18:55:35
+我感觉这就妥妥的是bug
+
+沉默(wxid_gs0brd8974cf12) 2025-04-11 18:55:42
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 18:55:23
+> 然后旧的就不能调用了？
+我当时是
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 20:59:38
+是的，生活本就不公
+你无法控制别人手里的牌。你越盯着别人看，就越会错过这场游戏的真谛。
+人生不是与他人的对抗，而是与他们的共舞。
+总会有人牌比你更好——重点不在于你摸到什么牌，而在于你如何出牌。
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:02:15
+当你执着于那些永远无法改变的事实时，比较就成了酷刑。这种比较聚焦于他人生命中不可改变的属性
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:26:49
+话说   flowith  有多模型比较模式
+
+还有oracle
+
+
+他的无线AI功能访问是怎么支持的
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:26:57
+应该很费token吧
+
+雲丶彼岸(wxid_2207792079012) 2025-04-11 21:27:28
+这个文档中的目录不能点击转到对应点吗？
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:27:44
+不能的，但我也希望有这个功能
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 21:28:00
+> 沉默(wxid_gs0brd8974cf12) 2025-04-11 18:47:56
+> 而且它本质上是可以分叉的对话流。节点是不能拖动的，节点性质也是不能改的，重新生成是不能先修改再生成的。
+这不就是可视化了一下分支嘛
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:35:42
+![视频](http://localhost:5030/video/e3e4264d501d0564f213e7f435e99dd5)
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:35:58
+连线无法删除了
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 21:36:27
+@Time will tell 因为豆包
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 21:36:30
+[旺柴]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:38:17
+[流泪]没有用
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 21:38:49
+就是豆包那个悬浮条问题
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:39:09
+已经退了
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:39:16
+还是删不掉
+
+武汉-木子不是木子狸(wxid_lzbkhrepgs4x22) 2025-04-11 21:39:29
+[捂脸]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:39:59
+[流泪]
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 21:40:54
+我可以删
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 21:40:57
+[旺柴]
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 21:41:02
+退了刷新下吧
+
+上海 - Refly  - Tom(wxid_g3g1rof449fk12) 2025-04-11 21:41:08
+估计劫持了一些事件
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:41:12
+嗯嗯
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:42:05
+白吊打
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:42:09
+没有用
+
+Nimo(zhangwenzhao891227) 2025-04-11 21:45:14
+> Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:42:05
+> 白吊打
+哪里的方言[旺柴]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:45:44
+山东话
+
+Nimo(zhangwenzhao891227) 2025-04-11 21:46:14
+老乡
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:46:41
+不是山东的，只是觉得方言有意思[让我看看]
+
+Nimo(zhangwenzhao891227) 2025-04-11 21:50:03
+[破涕为笑]
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:50:46
+就知道两句
+一个是白吊搭，一个是潮巴
+
+Nimo(zhangwenzhao891227) 2025-04-11 21:53:56
+你已经掌握核心科技了
+
+Time will tell(wxid_lvo2ovo1aaie22) 2025-04-11 21:54:17
+[让我看看]
+
+
+
