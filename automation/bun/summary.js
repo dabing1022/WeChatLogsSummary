@@ -32,11 +32,14 @@ async function getUserInput() {
   const modelChoice = await select({
     message: chalk.yellow('请选择使用的语言模型:'),
     choices: [
-      { name: 'openrouter/optimus-alpha', value: 'openrouter/optimus-alpha' },
       {
-        name: 'google/gemini-2.5-pro-exp-03-25:free',
-        value: 'google/gemini-2.5-pro-exp-03-25:free',
+        name: 'deepseek/deepseek-chat-v3-0324:free',
+        value: 'deepseek/deepseek-chat-v3-0324:free',
       },
+      {
+        name: 'google/gemini-2.5-pro-exp-03-25',
+        value: 'google/gemini-2.5-pro-exp-03-25',
+      }
     ],
   });
 
