@@ -1,63 +1,29 @@
 import { $ } from 'bun';
 import { format, subDays } from 'date-fns';
-import { select } from '@inquirer/prompts';
+
 import chalk from 'chalk';
 import ora from 'ora';
 import boxen from 'boxen';
+import { startChatlogServer, stopChatlogServer } from './server.js';
 
 // --- 配置常量 ---
-const CHATLOG_EXEC_PATH = '/Users/childhoodandy/Documents/Chatlogv0.0.9/chatlog';
+const CHATLOG_EXEC_PATH = './chatlog';
+const SERVER_ADDR = Bun.env.SERVER_ADDR || '127.0.0.1:5030';
+const SERVER_DATA_DIR = Bun.env.SERVER_DATA_DIR;
+const SERVER_WORK_DIR = Bun.env.SERVER_WORK_DIR;
+const WECHAT_PLATFORM = Bun.env.WECHAT_PLATFORM || 'darwin';
+const WECHAT_VERSION = Bun.env.WECHAT_VERSION || '4';
 const OPENROUTER_API_KEY = Bun.env.OPENROUTER_API_KEY;
+  const OPENROUTER_MODEL_ID = Bun.env.OPENROUTER_MODEL_ID; // Added model ID from env
+  const WECHAT_GROUPS = Bun.env.WECHAT_GROUPS; // Added chat group from env
 const SYSTEM_PROMPT_PATH = '../../Prompts/p1.md';
-const CHATLOG_API_BASE_URL = 'http://localhost:5030/api/v1/chatlog';
+const CHATLOG_API_BASE_URL = `http://${SERVER_ADDR}/api/v1/chatlog`;
 const CHATLOG_LIMIT = 10000;
 const CHATLOG_OFFSET = 0;
 
 // --- 辅助函数 ---
 
-/**
- * 获取用户输入：群聊、模型、是否解密
- */
-async function getUserInput() {
-  console.log(chalk.cyan(boxen('开始配置总结任务', { padding: 1, margin: 1, borderStyle: 'round' })));
 
-  const chatGroupChoice = await select({
-    message: chalk.yellow('请选择要总结的群聊:'),
-    choices: [
-      { name: 'Refly 核心用户群', value: 'Refly 核心用户群' },
-      { name: 'chatlog讨论组', value: 'chatlog讨论组' },
-    ],
-  });
-
-  const modelChoice = await select({
-    message: chalk.yellow('请选择使用的语言模型:'),
-    choices: [
-      {
-        name: 'deepseek/deepseek-chat-v3-0324:free',
-        value: 'deepseek/deepseek-chat-v3-0324:free',
-      },
-      {
-        name: 'google/gemini-2.5-pro-exp-03-25',
-        value: 'google/gemini-2.5-pro-exp-03-25',
-      }
-    ],
-  });
-
-  const needDecrypt = await select({
-    message: chalk.yellow('是否需要执行数据库解密? (如果昨天或今天已解密过，选否)'),
-    choices: [
-      { name: '是，需要解密', value: true },
-      { name: '否，已解密', value: false },
-    ],
-  });
-
-  console.log('\n' + chalk.green('配置完成:'));
-  console.log(`${chalk.blue('  群聊:')} ${chatGroupChoice}`);
-  console.log(`${chalk.blue('  模型:')} ${modelChoice}`);
-  console.log(`${chalk.blue('  解密:')} ${needDecrypt ? chalk.red('是') : chalk.green('否')}`);
-
-  return { chatGroupChoice, modelChoice, needDecrypt };
-}
 
 /**
  * 执行 chatlog 解密命令
@@ -86,6 +52,7 @@ async function runDecryption(execPath) {
     process.exit(1);
   }
 }
+
 
 /**
  * 从 API 获取聊天记录
@@ -304,29 +271,65 @@ async function saveSummary(filePath, content) {
 
 // --- 主函数 ---
 async function main() {
-  // 检查 API Key
-  if (!OPENROUTER_API_KEY) {
-    console.error(chalk.red(boxen('错误：未找到 OPENROUTER_API_KEY 环境变量。请在 .env 文件中设置。', { padding: 1, margin: 1, borderStyle: 'double', borderColor: 'red' })));
+  console.log(chalk.bold.magenta(boxen('微信聊天记录总结自动化脚本', { padding: 1, margin: 1, borderStyle: 'double', borderColor: 'magenta' })));
+
+  // 检查环境变量
+  const requiredEnv = ['OPENROUTER_API_KEY', 'OPENROUTER_MODEL_ID', 'WECHAT_GROUPS', 'SERVER_DATA_DIR', 'SERVER_WORK_DIR'];
+  const missingEnv = requiredEnv.filter(key => !Bun.env[key]);
+  if (missingEnv.length > 0) {
+    console.error(chalk.red(boxen(`错误：缺少必要的环境变量: ${missingEnv.join(', ')}。\n请在 .env 文件中设置。`, { padding: 1, margin: 1, borderStyle: 'double', borderColor: 'red' })));
     process.exit(1);
   }
-
-  // 1. 获取用户输入
-  const { chatGroupChoice, modelChoice, needDecrypt } = await getUserInput();
-
-  // 2. 执行解密 (如果需要)
-  if (needDecrypt) {
-    await runDecryption(CHATLOG_EXEC_PATH);
-  } else {
-    console.log(chalk.gray('\n-> 跳过解密步骤。'));
+  if (!await Bun.file(CHATLOG_EXEC_PATH).exists()) {
+     console.error(chalk.red(boxen(`错误：Chatlog 可执行文件未找到: ${CHATLOG_EXEC_PATH}`, { padding: 1, margin: 1, borderStyle: 'double', borderColor: 'red' })));
+     process.exit(1);
   }
 
-  // 3. 获取聊天记录
-  const chatlogContent = await fetchChatLogs(chatGroupChoice);
 
-  // 4. 读取 System Prompt
+  // --- 准备阶段 ---
+  console.log(chalk.cyan('\n--- 准备阶段 ---'));
+
+  // // 1. 执行解密 (始终执行)
+  // await runDecryption(CHATLOG_EXEC_PATH);
+
+  // // 2. 停止可能正在运行的旧服务器实例
+  // await stopChatlogServer(SERVER_ADDR);
+
+  // // 3. 启动新的服务器实例
+  // await startChatlogServer(
+  //     CHATLOG_EXEC_PATH,
+  //     SERVER_ADDR,
+  //     SERVER_DATA_DIR,
+  //     SERVER_WORK_DIR,
+  //     WECHAT_PLATFORM,
+  //     WECHAT_VERSION
+  //   );
+
+  // --- 总结阶段 ---
+   console.log(chalk.cyan('\n--- 总结阶段 ---'));
+
+   // 4. 配置信息从环境变量读取
+   const chatGroupChoice = WECHAT_GROUPS;
+   const modelChoice = OPENROUTER_MODEL_ID;
+   console.log(chalk.green('使用环境变量配置:'));
+   console.log(`${chalk.blue('  群聊:')} ${chatGroupChoice}`);
+   console.log(`${chalk.blue('  模型:')} ${modelChoice}`);
+
+
+  // 5. 获取聊天记录
+  const chatlogContent = await fetchChatLogs(chatGroupChoice);
+  if (!chatlogContent || chatlogContent.trim() === '') {
+      console.warn(chalk.yellow(boxen(`警告：获取到的 ${chatGroupChoice} 聊天记录为空或获取失败。无法进行总结。`, { padding: 1, margin: 1, borderStyle: 'round', borderColor: 'yellow' })));
+      // 可以选择停止服务器并退出
+      // await stopChatlogServer();
+      process.exit(0); // 正常退出，因为没有错误，只是没有数据
+  }
+
+
+  // 6. 读取 System Prompt
   const systemPrompt = await readSystemPrompt(SYSTEM_PROMPT_PATH);
 
-  // 5. 调用 API 获取总结
+  // 7. 调用 API 获取总结
   const rawSummary = await streamOpenRouterSummary(
     OPENROUTER_API_KEY,
     modelChoice,
@@ -334,10 +337,17 @@ async function main() {
     chatlogContent
   );
 
-  // 6. 处理总结文本
+   if (!rawSummary || rawSummary.trim() === '') {
+      console.warn(chalk.yellow(boxen(`警告：语言模型返回的总结为空。`, { padding: 1, margin: 1, borderStyle: 'round', borderColor: 'yellow' })));
+       // 可以选择停止服务器并退出
+      // await stopChatlogServer();
+      process.exit(0);
+  }
+
+  // 8. 处理总结文本
   const processedSummary = processSummary(rawSummary);
 
-  // 7. 保存总结到文件
+  // 9. 保存总结到文件
   const yesterday = subDays(new Date(), 1);
   const formattedDate = format(yesterday, 'yyyy-MM-dd');
   const outputFileName = `${chatGroupChoice.replace(
@@ -346,11 +356,19 @@ async function main() {
   )}_${formattedDate}.html`;
   await saveSummary(outputFileName, processedSummary);
 
+  // --- 清理阶段 ---
+  // console.log(chalk.cyan('\n--- 清理阶段 ---'));
+  // 可以在这里选择是否停止服务器
+  // await stopChatlogServer();
+
   console.log('\n' + chalk.green.bold(boxen('🎉 任务成功完成! 🎉', { padding: 1, margin: 1, borderStyle: 'double', borderColor: 'green' })));
 }
 
 // --- 运行主函数 ---
 main().catch(error => {
   console.error(chalk.red('\n脚本执行过程中发生未捕获的严重错误:'), error);
-  process.exit(1);
+  // 尝试在退出前停止服务器，以防万一
+  stopChatlogServer(SERVER_ADDR).finally(() => {
+      process.exit(1);
+  });
 });

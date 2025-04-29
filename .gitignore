@@ -28,4 +28,8 @@ var/
 
 # IDE
 .idea/
-.vscode/ 
+.vscode/
+output/
+
+# chatlog executable
+chatlog
