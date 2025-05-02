@@ -70,8 +70,6 @@ chatlog server
 
 建议用 chatlog 终端交互操作就可以。
 
-![](https://cdn.jsdelivr.net/gh/dabing1022/IMAGES_2025/2025/05/20250503012035223.png)
-
 4. 脚本将自动执行以下步骤：
    - 获取指定群聊的聊天记录
    - 调用OpenRouter API生成日报
