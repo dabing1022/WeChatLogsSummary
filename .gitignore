@@ -33,3 +33,11 @@ output/
 
 # chatlog executable
 chatlog
+
+# Bun
+node_modules/
+bun.lockb
+.bun/
+
+# Generated output files
+*.html
