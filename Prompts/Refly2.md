@@ -21,41 +21,60 @@
 
 ### 聊天内容结构
 - 群聊总结
+    - 群聊名称: Refly AI 群聊日报
     - 群聊内容
     - 消息数量
     - 活跃人员数量
     - 热点话题数量
     - 统计时间范围（从首条消息到末条消息）
+    - 导出日报图片按钮（点击后，导出日报图片）
+
 - 收听播客（使用给定的播客链接，使用<audio>标签嵌入音频）, 该模块紧随群聊总结只后。如果用户未提供播客链接，将不显示播客模块
 - 今日热点
-    - 关键词
-    - 消息数量
-    - 关键词提及次数
-    - 我则显示微信名
+    - 话题名称
+    - 话题分类标签
+    - 50-100字的简要总结
+    - 相关关键词（2-5个）
+    - 提及次数统计
 - 小剧场
     - 以对话形式重现群聊中的趣味对话
     - 包含经典语录和梗王等奖项
 - 我要提 issue（类型：bug, deployment, documentation, enhancement, help wanted, question, wontfix，分析聊天记录，提取出相关的issue）
-- 核心概念关系图
-    - 将核心内容生成思维导图
+    - 问题类型标签
+    - 问题简述
+    - 提出人和时间
+- MindMap
+    - 将核心内容生成思维导图，思维导图模块单独一个卡片，占据整个页面宽度
+    - 思维导图模块右上角有全屏按钮，点击后全屏，再次点击关闭全屏
     - 使用 jsmind 搞定思维导图
         - <script src="https://cdn.jsdelivr.net/npm/jsmind@latest/js/jsmind.min.js"></script>
         - <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsmind@latest/style/jsmind.css">
-- 精彩引用
-    - 我则显示微信名
-- 重要链接与资源 (部分整理)
-    - 链接支持点击跳转
-- 活跃之星 (部分提及较多者)
-    - 发言次数
-    - 人员前+@
-    - 按发言次数倒序排序
-    - 我则显示微信名
+- 重要消息汇总
+    - 消息时间和发送者
+    - 消息类型（通知/事件/公告/其他）
+    - 优先级（高/中/低）
+    - 消息内容
+    - 完整通知内容（可选）
+- 重要链接与资源 (链接支持点击跳转)
+    - 资源类型（教程/新闻/资源）
+    - 标题
+    - 分享者和时间
+    - 内容简介
+    - 要点列表（2-5个）
+    - 原文链接
+    - 分类标签
+- 话唠榜（不可显示 wxid）
+    - 排名Top5
+    - 昵称
+    - 消息数量
+    - 用户特点标签（2-3个）
+    - 常用词（2-3个）
 - 词云
+- 昨日群聊日报和今日群聊日报的二维码
+    - 日报为昨日日报，提取群聊前日日报链接，生成前日二维码，带上日期
+    - 用户输入如果给定了昨日日报链接，则使用用户输入的链接生成昨日二维码，带上日期
 
-如未能识别消息格式或未找到有效记录，将显示提示信息并尝试按最佳猜测处理
-
-## 输出要求
-必须使用固定的HTML模板和CSS样式，仅更新内容部分，确保每次生成的页面风格完全一致
+严格按照以上顺序生成，不要遗漏任何模块。合理分配空间，不要有大面积 Bento Grid 空白。
 
 ### 角色
 你是极具审美的前端设计大师，请为我生成一个基于 **Bento Grid** 设计风格的单页HTML网站，内嵌CSS、JS。这个页面将被截图分享，需要特别优化视觉效果和分享体验
@@ -174,4 +193,314 @@
 28. 简约功能型风格 (Minimal Functional)：清晰卡片式布局、柔和色彩点缀、直观图标系统、精简文本展示、充足留白空间
 29. 德国表现主义风格 (German Expressionism)：强烈明暗对比、扭曲形态、情感表达
 
-如果我没有指定风格，请默认使用未来科技的 Bento Grid 风格设计
+如果我没有指定风格，请默认使用「极简主义风格」的 Bento Grid 风格设计
+
+
+# 模板重要说明
+
+## head部分（包含下面部分）
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refly AI 群聊日报</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script> <!-- 词云 -->
+<script src="https://cdn.jsdelivr.net/npm/jsmind@latest/js/jsmind.min.js"></script> <!-- 脑图 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> <!-- 截图 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> <!-- 二维码生成 -->
+
+<link rel="stylesheet" href="https://unpkg.com/jsmind@0.7.0/style/jsmind.css"> <!-- 脑图样式 -->
+<script src="https://unpkg.com/jsmind@0.7.0/es6/jsmind.js"></script>
+```
+
+## MindMap
+
+```html
+<div class="card mindmap-card" id="mindmap_container_wrapper">
+    <div class="card-icon-bg"><i class="fas fa-project-diagram"></i></div>
+    <button class="mindmap-fullscreen-btn" onclick="toggleMindmapFullscreen()">
+        <i class="fas fa-expand"></i> 全屏
+    </button>
+            <div class="content-wrapper" style="height:100%;">
+                <h2 class="card-title">核心内容关系图</h2>
+                <div id="mindmap"></div>
+            </div>
+        </div>
+```
+
+## Word Cloud
+
+```html
+<div class="card wordcloud-card card-alt-bg">
+    <div class="card-icon-bg"><i class="fas fa-cloud"></i></div>
+    <div class="content-wrapper" style="height: 100%; display: flex; flex-direction: column;">
+        <h2 class="card-title">今日词云</h2>
+        <div style="flex-grow: 1; width: 100%; height: calc(100% - 40px);">
+            <canvas id="wordcloud_canvas"></canvas>
+        </div>
+    </div>
+</div>
+
+```
+
+## 全屏脑图容器
+
+```html
+<div class="mindmap-fullscreen-container" id="mindmap_fullscreen_container">
+    <button class="mindmap-fullscreen-btn" onclick="toggleMindmapFullscreen()">
+        <i class="fas fa-compress"></i> 退出全屏
+    </button>
+    <h2 class="fullscreen-title">核心内容关系图</h2>
+    <div id="mindmap_fullscreen"></div>
+</div>
+``` 
+
+## 关键脚本
+
+脑图和词云数据均为演示 Demo，以实际的群聊数据为准。
+
+```javascript
+    <script>
+        // 按照参考写法修改的脑图初始化函数
+        function initJsMind(){
+            var mind = {
+                meta:{
+                    name: "群聊核心内容关系图",
+                    author: "群聊日报生成器",
+                    version: "1.0"
+                },
+                format: "node_array",
+                data:[
+                    {id:"root", isroot:true, topic:"群聊精华：2025-06-02", "background-color":"var(--primary-accent-color)", "foreground-color":"#fff"},
+
+                    {id:"ai_tools", parentid:"root", topic:"AI工具与平台", "background-color":"#1E40AF", "foreground-color":"var(--text-color)"},
+                    {id:"ai_oaiopen", parentid:"ai_tools", topic:"ai.oaiopen.cn (API集成, Flux1.1)"},
+                    {id:"ai_segmind", parentid:"ai_tools", topic:"Segmind (图像工作流, API发布)"},
+                    {id:"ai_refly", parentid:"ai_tools", topic:"Refly (客户端讨论, Bug修复)"},
+                    {id:"ai_other", parentid:"ai_tools", topic:"其他AI工具 (Fellou, 百度知识库)"},
+
+                    {id:"hardware", parentid:"root", topic:"硬件DIY与行情", "background-color":"#1E40AF", "foreground-color":"var(--text-color)"},
+                    {id:"hw_mac", parentid:"hardware", topic:"Mac Mini M4 (拼多多2749元)"},
+                    {id:"hw_cooling", parentid:"hardware", topic:"PC散热 (猫头鹰, 硅脂, 贴膜梗)"},
+                    {id:"hw_diy", parentid:"hardware", topic:"Peng父子DIY (拆机, 淘二手)"},
+                    {id:"hw_3d", parentid:"hardware", topic:"3D打印 (巧克力, FDM讨论)"},
+
+                    {id:"refly_focus", parentid:"root", topic:"Refly产品专题", "background-color":"#1E40AF", "foreground-color":"var(--text-color)"},
+                    {id:"refly_bug", parentid:"refly_focus", topic:"Google登录Bug (节后修复)"},
+                    {id:"refly_feature", parentid:"refly_focus", topic:"AI节点提示词显示建议"},
+                    {id:"refly_sync", parentid:"refly_focus", topic:"本地与云端数据同步"},
+                    {id:"refly_plan", parentid:"refly_focus", topic:"套餐模式讨论"},
+
+                    {id:"industry", parentid:"root", topic:"行业动态与生活", "background-color":"#1E40AF", "foreground-color":"var(--text-color)"},
+                    {id:"policy", parentid:"industry", topic:"人才政策 (上海杨浦UP主补贴)"},
+                    {id:"platform", parentid:"industry", topic:"平台更新 (百度网盘, 淘宝88VIP)"},
+                    {id:"parenting", parentid:"industry", topic:"育儿科技 (Peng儿子学编程)"}
+                ]
+            };
+            
+            var options = {
+                container : 'mindmap',
+                editable : false,
+                theme : null, // Use null theme to rely on custom CSS
+                view: {
+                    engine: 'svg', 
+                    hmargin: 60,
+                    vmargin: 30,
+                    line_width: 1.5,
+                    line_color: 'var(--primary-accent-color)'
+                },
+                layout: {
+                    hspace: 50, // horizontal space between nodes
+                    vspace: 25, // vertical space between nodes
+                    pspace: 13  // space between node and subnode connection line
+                },
+                shortcut: { enable: false }
+            };
+            
+            var jm = new jsMind(options);
+            jm.show(mind);
+            
+            // 保存jm实例供全屏切换使用
+            window.jmInstance = jm;
+            window.mindData = mind;
+        }
+
+        // 按照参考写法的初始化逻辑
+        if (typeof jsMind !== 'undefined') {
+            initJsMind();
+        } else {
+            window.addEventListener('load', initJsMind);
+        }
+
+        // 全屏切换功能
+        let isFullscreen = false;
+        let fullscreenJm = null;
+
+        function toggleMindmapFullscreen() {
+            const fullscreenContainer = document.getElementById('mindmap_fullscreen_container');
+            
+            if (!isFullscreen) {
+                // 进入全屏
+                fullscreenContainer.classList.add('active');
+                isFullscreen = true;
+                
+                // 在全屏容器中创建新的脑图
+                setTimeout(() => {
+                    initFullscreenMindmap();
+                }, 100);
+                
+                // 禁止页面滚动
+                document.body.style.overflow = 'hidden';
+                
+            } else {
+                // 退出全屏
+                fullscreenContainer.classList.remove('active');
+                isFullscreen = false;
+                
+                // 清理全屏脑图
+                if (fullscreenJm) {
+                    const fullscreenMindmapDiv = document.getElementById('mindmap_fullscreen');
+                    fullscreenMindmapDiv.innerHTML = '';
+                    fullscreenJm = null;
+                }
+                
+                // 恢复页面滚动
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function initFullscreenMindmap() {
+            if (!window.mindData) return;
+            
+            try {
+                const fullscreenContainer = document.getElementById('mindmap_fullscreen');
+                
+                // 确保容器存在且可见
+                if (!fullscreenContainer) {
+                    console.error('Full screen container not found');
+                    return;
+                }
+                
+                const options = {
+                    container: 'mindmap_fullscreen',
+                    editable: false,
+                    theme: null,
+                    view: {
+                        engine: 'svg', 
+                        hmargin: 100,
+                        vmargin: 60,
+                        line_width: 2,
+                        line_color: 'var(--primary-accent-color)'
+                    },
+                    layout: {
+                        hspace: 80,
+                        vspace: 40, 
+                        pspace: 20
+                    },
+                    shortcut: { enable: false }
+                };
+                
+                fullscreenJm = new jsMind(options);
+                fullscreenJm.show(window.mindData);
+                
+                console.log('Fullscreen mindmap initialized successfully');
+                
+                // 延迟调整大小以确保正确渲染
+                setTimeout(() => {
+                    if (fullscreenJm) {
+                        fullscreenJm.resize();
+                    }
+                }, 200);
+                
+            } catch (error) {
+                console.error('Fullscreen mindmap initialization failed:', error);
+            }
+        }
+
+        // ESC键退出全屏
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isFullscreen) {
+                toggleMindmapFullscreen();
+            }
+        });
+
+        // 词云数据
+        const wordCloudList = [
+            ["Refly", 65], ["AI", 58], ["电脑", 45], ["Mac", 40], ["儿子", 38],
+            ["问题", 35], ["散热", 32], ["分享", 30], ["提示词", 28], ["工作流", 27],
+            ["感觉", 26], ["知道", 25], ["平台", 24], ["API", 23], ["本地", 22],
+            ["云端", 21], ["价格", 20], ["节点", 19], ["登录", 18], ["PDD", 17],
+            ["Bug", 16], ["[捂脸]", 50], ["好像", 24], ["体验", 15], ["工具", 14]
+        ];
+
+        function initWordCloud() {
+            try {
+                const canvas = document.getElementById('wordcloud_canvas');
+                const container = canvas.parentElement;
+                
+                function resizeAndDrawWordCloud() {
+                    const rect = container.getBoundingClientRect();
+                    canvas.width = rect.width;
+                    canvas.height = rect.height;
+                    
+                    if (canvas.width > 0 && canvas.height > 0) {
+                        WordCloud(canvas, {
+                            list: wordCloudList,
+                            gridSize: Math.max(8, Math.round(16 * canvas.width / 1024)),
+                            weightFactor: function (size) {
+                                return Math.pow(size, 1.1) * canvas.width / 500;
+                            },
+                            fontFamily: 'Orbitron, Roboto, sans-serif',
+                            color: function (word, weight) {
+                                const colors = ['#00E5FF', '#FF00E6', '#76FF03', '#FFFFFF'];
+                                return colors[Math.floor(Math.random() * colors.length)];
+                            },
+                            backgroundColor: 'transparent',
+                            rotateRatio: 0.3,
+                            minSize: 8,
+                            drawOutOfBound: false,
+                            shrinkToFit: true
+                        });
+                    }
+                }
+                
+                setTimeout(resizeAndDrawWordCloud, 100);
+                
+                let resizeTimeout;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(resizeAndDrawWordCloud, 300);
+                });
+                
+            } catch (error) {
+                console.error('词云初始化失败:', error);
+            }
+        }
+
+        // 初始化词云
+        $(document).ready(function() {
+            setTimeout(initWordCloud, 500);
+        });
+
+        // 窗口大小变化时重新调整思维导图
+        window.addEventListener('resize', function() {
+            if (window.jmInstance && !isFullscreen) {
+                clearTimeout(window.resizeTimer);
+                window.resizeTimer = setTimeout(function() {
+                    window.jmInstance.resize();
+                }, 300);
+            }
+            
+            // 如果在全屏模式，也调整全屏脑图
+            if (fullscreenJm && isFullscreen) {
+                clearTimeout(window.fullscreenResizeTimer);
+                window.fullscreenResizeTimer = setTimeout(function() {
+                    fullscreenJm.resize();
+                }, 300);
+            }
+        });
+
+    </script>
+```
