@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refly AI 群聊日报</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script>
+    
+    <!-- 使用稳定的JSMind CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsmind@0.7.0/style/jsmind.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsmind@0.7.0/es6/jsmind.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #0D0C1D; /* Deep space blue/purple */
+            --card-bg-color: #1A1B2A; /* Slightly lighter than bg for cards */
+            --card-bg-color-alt: #25283D; /* Alternative card bg for variety */
+            --primary-accent-color: #00E5FF; /* Neon Cyan */
+            --secondary-accent-color: #FF00E6; /* Neon Magenta */
+            --tertiary-accent-color: #76FF03; /* Neon Green */
+            --text-color: #E0E0E0; /* Light gray for body text */
+            --heading-color: #FFFFFF; /* White for headings */
+            --subtle-text-color: #A0A0A0; /* For less important text */
+
+            --font-family-headings: 'Orbitron', sans-serif;
+            --font-family-body: 'Roboto', 'SF Pro Display', 'Segoe UI', sans-serif;
+
+            --main-title-size: 2.5rem; /* 40px */
+            --sub-title-size: 2rem; /* 32px */
+            --card-title-size: 1.5rem; /* 24px */
+            --body-text-size: 1rem; /* 16px */
+            --label-text-size: 0.875rem; /* 14px */
+
+            --card-padding: 1.5rem; /* 24px */
+            --grid-gap: 1.25rem; /* 20px */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family-body);
+            font-size: var(--body-text-size);
+            line-height: 1.6;
+            margin: 0;
+            padding: var(--grid-gap);
+            display: flex;
+            justify-content: center;
+        }
+
+        .report-container {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            gap: var(--grid-gap);
+            grid-template-columns: repeat(12, 1fr); /* 12-column grid */
+            grid-auto-rows: minmax(150px, auto);
+        }
+
+        .card {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            padding: var(--card-padding);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.1), 0 0 30px rgba(255, 0, 230, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.2), 0 0 40px rgba(255, 0, 230, 0.1);
+        }
+        
+        .card-alt-bg {
+            background-color: var(--card-bg-color-alt);
+        }
+
+        .card-icon-bg {
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-size: 6rem;
+            color: rgba(255, 255, 255, 0.05);
+            z-index: 0;
+            transform: rotate(-15deg);
+        }
+        
+        .card .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-title {
+            font-family: var(--font-family-headings);
+            color: var(--heading-color);
+            font-size: var(--card-title-size);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid var(--primary-accent-color);
+            padding-left: 0.75rem;
+        }
+        
+        .main-card .card-title {
+            font-size: var(--sub-title-size);
+             border-left: none;
+            padding-left: 0;
+        }
+        
+        .main-card-supertitle {
+            font-family: var(--font-family-headings);
+            color: var(--primary-accent-color);
+            font-size: var(--main-title-size);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            line-height: 1.1;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        ul li::before {
+            content: "\f105"; /* fa-chevron-right */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--primary-accent-color);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .tag {
+            background-color: rgba(255, 0, 230, 0.2);
+            color: var(--secondary-accent-color);
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            font-size: var(--label-text-size);
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            border: 1px solid var(--secondary-accent-color);
+        }
+        
+        .tag-alt {
+             background-color: rgba(118, 255, 3, 0.2);
+            color: var(--tertiary-accent-color);
+            border: 1px solid var(--tertiary-accent-color);
+        }
+        
+        .tag-priority-high { background-color: #FF4D4F; color: white; border-color: #FF4D4F; }
+        .tag-priority-medium { background-color: #FAAD14; color: white; border-color: #FAAD14; }
+        .tag-priority-low { background-color: #52C41A; color: white; border-color: #52C41A; }
+
+        a {
+            color: var(--primary-accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-accent-color);
+            text-decoration: underline;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 1rem;
+            filter: invert(1) hue-rotate(180deg) contrast(0.8) brightness(1.2); /* Futuristic style for audio player */
+        }
+
+        /* Bento Grid Layout */
+        .main-card { grid-column: 1 / -1; min-height: 250px; background: linear-gradient(135deg, var(--card-bg-color) 0%, var(--card-bg-color-alt) 100%); }
+        .podcast-card { grid-column: 1 / -1; }
+        .hotspot-1 { grid-column: span 12; } /* Default span */
+        .hotspot-2 { grid-column: span 12; }
+        .hotspot-3 { grid-column: span 12; }
+        .mini-theater { grid-column: span 12; }
+        .issue-tracker { grid-column: span 12; }
+        .mindmap-card { grid-column: 1 / -1; min-height: 450px; }
+        .important-msgs { grid-column: span 12; }
+        .links-resources { grid-column: span 12; }
+        .talkers-榜 { grid-column: span 12; }
+        .wordcloud-card { grid-column: span 12; min-height: 300px; }
+
+        #mindmap {
+            width: 100%;
+            height: 350px;
+            border: 1px solid var(--primary-accent-color);
+            border-radius: 8px;
+            background-color: var(--bg-color);
+            position: relative;
+        }
+        
+        .mindmap-fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 100;
+            font-size: var(--label-text-size);
+            transition: all 0.3s ease;
+        }
+        
+        .mindmap-fullscreen-btn:hover {
+            background-color: var(--secondary-accent-color);
+        }
+
+        /* 全屏模式样式 */
+        .mindmap-fullscreen-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+        }
+        
+        .mindmap-fullscreen-container.active {
+            display: flex;
+        }
+        
+        .mindmap-fullscreen-container .mindmap-fullscreen-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+        }
+
+        .mindmap-fullscreen-container .fullscreen-title {
+            color: var(--heading-color);
+            font-family: var(--font-family-headings);
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 20px 0 10px 0;
+            margin: 0;
+            border-bottom: 1px solid var(--primary-accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .mindmap-fullscreen-container #mindmap_fullscreen {
+            flex: 1;
+            width: calc(100% - 40px);
+            height: calc(100vh - 120px);
+            margin: 0 20px 20px 20px;
+            border: 1px solid var(--primary-accent-color);
+            border-radius: 8px;
+            background-color: var(--bg-color);
+        }
+
+        /* 自定义JSMind样式 */
+        .jsmind-inner {
+            background-color: transparent !important;
+        }
+        
+        jmnode {
+            font-family: var(--font-family-body) !important;
+            font-size: 13px !important;
+            border-radius: 6px !important;
+            padding: 8px 12px !important;
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) { /* md breakpoint */
+            .hotspot-1 { grid-column: span 6; }
+            .hotspot-2 { grid-column: span 6; }
+            .hotspot-3 { grid-column: span 12; } /* Or span 4 if there are 3 in a row */
+            .mini-theater { grid-column: span 7; }
+            .issue-tracker { grid-column: span 5; }
+            .important-msgs { grid-column: span 12; }
+            .links-resources { grid-column: span 12; }
+            .talkers-榜 { grid-column: span 7; }
+            .wordcloud-card { grid-column: span 5; }
+        }
+
+        @media (min-width: 1000px) { /* lg breakpoint for 3 columns */
+            .hotspot-1 { grid-column: span 4; }
+            .hotspot-2 { grid-column: span 4; }
+            .hotspot-3 { grid-column: span 4; }
+            .mini-theater { grid-column: span 6; }
+            .issue-tracker { grid-column: span 6; }
+            .important-msgs { grid-column: span 6; }
+            .links-resources { grid-column: span 6; }
+            .talkers-榜 { grid-column: span 7; }
+            .wordcloud-card { grid-column: span 5; }
+        }
+        
+        /* Wordcloud specific styling */
+        #wordcloud_canvas {
+            width: 100%;
+            height: 100%;
+        }
+        .talker-item { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed rgba(0, 229, 255, 0.2); }
+        .talker-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .talker-rank { font-size: 1.8rem; color: var(--primary-accent-color); font-weight: bold; margin-right: 0.5rem; }
+        .talker-name { font-size: 1.2rem; color: var(--heading-color); font-weight: bold; }
+        .talker-details { font-size: var(--label-text-size); color: var(--subtle-text-color); }
+
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <!-- 1. Group Chat Summary -->
+        <div class="card main-card">
+            <div class="card-icon-bg"><i class="fas fa-satellite-dish"></i></div>
+            <div class="content-wrapper">
+                <div class="main-card-supertitle">Refly AI</div>
+                <h1 class="card-title">群聊日报 - 2025-06-02</h1>
+                <p class="text-lg mb-2">本日群聊精彩纷呈，从AI工具的深度探讨到硬件DIY的乐趣分享，再到行业动态的敏锐洞察，信息量满满！</p>
+                <ul>
+                    <li>消息总数: 215 条</li>
+                    <li>活跃成员: 23 人</li>
+                    <li>热点话题: 5+ 个</li>
+                    <li>统计时段: 00:25:53 - 23:59:41</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2. Listen to Podcast -->
+        <div class="card podcast-card card-alt-bg">
+            <div class="card-icon-bg"><i class="fas fa-headphones-simple"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">本期播客回放</h2>
+                <p>回顾今日群聊精华，或收听特邀嘉宾分享。</p>
+                <audio controls src="https://media.xyzcdn.net/6828289ec3c821dab74dd3e7/ljLdz2lN34YZ5zrvI17T7gAJw2Ez.m4a">
+                    您的浏览器不支持 audio 标签。
+                </audio>
+            </div>
+        </div>
+
+        <!-- 3. Today's Hotspots -->
+        <div class="card hotspot-1">
+            <div class="card-icon-bg"><i class="fas fa-fire"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">热点：AI工具与平台探索</h2>
+                <div class="mb-2">
+                    <span class="tag">AI</span><span class="tag">软件</span><span class="tag">工作流</span>
+                </div>
+                <p class="text-sm">群友积极分享并讨论了多个AI工具和平台，如ai.oaiopen.cn的API集成、Segmind的图像工作流画板，以及Flux1.1的绘图能力。大家对这些工具的成本效益、功能特性和推广模式进行了热烈探讨，特别是Segmind的NSFW支持和工作流发布API功能引起了关注。</p>
+                <ul>
+                    <li>相关关键词: ai.oaiopen, Segmind, Flux, API, ComfyUI</li>
+                    <li>提及次数: 约 25+</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card hotspot-2 card-alt-bg">
+            <div class="card-icon-bg"><i class="fas fa-microchip"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">热点：Refly产品动态与反馈</h2>
+                 <div class="mb-2">
+                    <span class="tag">Refly</span><span class="tag">产品反馈</span><span class="tag">客户端</span>
+                </div>
+                <p class="text-sm">围绕Refly客户端的讨论也十分活跃。用户反馈了Google账号登录问题，并得到了节后修复的承诺。此外，关于Refly AI节点显示提示词的建议、本地部署与云端数据同步的讨论，以及未来可能的套餐模式，都体现了群友对Refly产品的高度关注和积极参与。</p>
+                <ul>
+                    <li>相关关键词: Refly客户端, Bug, 登录, 节点显示, 数据同步</li>
+                    <li>提及次数: 约 30+</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card hotspot-3">
+            <div class="card-icon-bg"><i class="fas fa-tools"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">热点：硬件DIY与市场行情</h2>
+                 <div class="mb-2">
+                    <span class="tag">硬件</span><span class="tag">DIY</span><span class="tag">性价比</span>
+                </div>
+                <p class="text-sm">Mac Mini M4在拼多多的惊爆价（2749元）引发热议，不少群友表示被"背刺"。Peng父子档动手解决电脑散热问题，从拆机、研究散热方案到淘换二手配件，生动展示了DIY精神。此外，还讨论了3D打印巧克力、猫头鹰风扇等硬件相关话题。</p>
+                <ul>
+                    <li>相关关键词: Mac Mini M4, 拼多多, 散热, DIY, 3D打印, 猫头鹰</li>
+                    <li>提及次数: 约 40+</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. Mini Theater -->
+        <div class="card mini-theater card-alt-bg">
+             <div class="card-icon-bg"><i class="fas fa-masks-theater"></i></div>
+             <div class="content-wrapper">
+                <h2 class="card-title">小剧场：今日份欢乐源泉</h2>
+                <div class="mb-3">
+                    <h3 class="font-semibold text-lg text-gray-300">《散热疑云》</h3>
+                    <p class="text-sm"><strong class="text-cyan-400">且听:</strong> 我CPU跑起来直接干到100°！<br>
+                    <strong class="text-pink-400">上海-Refly-Marc:</strong> 双塔风冷不至于吧，是不是太久没换硅脂了...我甚至怀疑你散热器底部的封膜没撕！<br>
+                    <strong class="text-green-400">iMax:</strong> 散热器贴膜没撕！[动画表情] 笑屎，想一块去了。<br>
+                    <strong class="text-cyan-400">且听:</strong> 这事我真干过[捂脸]</p>
+                </div>
+                <div class="mb-3">
+                    <h3 class="font-semibold text-lg text-gray-300">《垃圾佬的智慧》</h3>
+                    <p class="text-sm"><strong class="text-cyan-400">Peng:</strong> (儿子电脑散热器坏了) 带儿子门口10块钱买了一个。<br>
+                    <strong class="text-pink-400">武汉-木子不是木子狸:</strong> 门口还有电脑城？有点爽。<br>
+                    <strong class="text-cyan-400">Peng:</strong> 门口有收破烂的。50块买了个小机箱带5个风扇。<br>
+                    <strong class="text-green-400">Time will tell:</strong> 此刻图吧垃圾佬具像化了，还怪好看的嘞。</p>
+                </div>
+                <p><strong class="text-yellow-400">经典语录:</strong> "散热器贴膜没撕！" - by iMax & 上海-Refly-Marc</p>
+                <p><strong class="text-yellow-400">梗王:</strong> Peng (父子DIY修电脑，门口收破烂淘宝)</p>
+            </div>
+        </div>
+
+        <!-- 5. I Want to File an Issue -->
+        <div class="card issue-tracker">
+            <div class="card-icon-bg"><i class="fas fa-bug-slash"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">我要提 Issue</h2>
+                <div class="mb-3">
+                    <span class="tag tag-alt">bug</span>
+                    <p class="font-semibold">Refly客户端Google账号无法登录</p>
+                    <p class="text-xs text-gray-400">提出人: 大白🌊🌊🌊 (00:53) | 认领人: Peng (00:54) - 承诺节后修复</p>
+                </div>
+                <div class="mb-3">
+                    <span class="tag tag-alt">enhancement</span>
+                    <p class="font-semibold">Refly AI节点希望能显示更多提示词内容</p>
+                    <p class="text-xs text-gray-400">提出人: 喵爸联萌 (01:14)</p>
+                </div>
+                <div class="mb-3">
+                    <span class="tag tag-alt">question</span>
+                    <p class="font-semibold">Refly客户端数据同步及套餐模式咨询</p>
+                    <p class="text-xs text-gray-400">提出人: Time will tell & 武汉-木子不是木子狸 (08:03 - 08:16)</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 6. MindMap -->
+        <div class="card mindmap-card" id="mindmap_container_wrapper">
+            <div class="card-icon-bg"><i class="fas fa-project-diagram"></i></div>
+            <button class="mindmap-fullscreen-btn" onclick="toggleMindmapFullscreen()">
+                <i class="fas fa-expand"></i> 全屏
+            </button>
+            <div class="content-wrapper" style="height:100%;">
+                <h2 class="card-title">核心内容关系图</h2>
+                <div id="mindmap"></div>
+            </div>
+        </div>
+
+        <!-- 7. Important Message Summary -->
+        <div class="card important-msgs">
+             <div class="card-icon-bg"><i class="fas fa-bell"></i></div>
+             <div class="content-wrapper">
+                <h2 class="card-title">重要消息汇总</h2>
+                <div class="space-y-3">
+                    <div>
+                        <span class="tag tag-priority-medium">事件</span>
+                        <p><strong class="text-gray-300">00:54 Peng:</strong> Refly客户端Google登录问题确认为Bug，承诺节后修复。</p>
+                    </div>
+                    <div>
+                        <span class="tag tag-priority-medium">通知</span>
+                        <p><strong class="text-gray-300">08:14 武汉-木子不是木子狸 (转述官方):</strong> Refly桌面端目前为本地部署，后续将支持登录云端账号并同步数据。</p>
+                    </div>
+                    <div>
+                        <span class="tag tag-priority-low">公告</span>
+                        <p><strong class="text-gray-300">14:27 武汉-木子不是木子狸:</strong> Mac Mini M4拼多多价格低至2749元。</p>
+                    </div>
+                    <div>
+                        <span class="tag tag-priority-low">通知</span>
+                        <p><strong class="text-gray-300">15:11 北京-小菜与老鸟:</strong> 日报模板更新，新增MindMap功能。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Important Links & Resources -->
+        <div class="card links-resources card-alt-bg">
+             <div class="card-icon-bg"><i class="fas fa-link"></i></div>
+             <div class="content-wrapper">
+                <h2 class="card-title">重要链接与资源</h2>
+                <div class="space-y-4">
+                    <div>
+                        <span class="tag">工具</span> <strong class="text-gray-300">AI综合平台 ai.oaiopen.cn</strong>
+                        <p class="text-xs text-gray-400">分享: 喵爸联萌 (00:25)</p>
+                        <p class="text-sm">简介: 支持多种AI API，包括Flux1.1绘图，推广模式独特。要点: API丰富, Flux1.1成本低, 中式推广。</p>
+                        <a href="https://ai.oaiopen.cn/" target="_blank">访问平台</a>
+                    </div>
+                    <div>
+                        <span class="tag">工具</span> <strong class="text-gray-300">Segmind Cloud 工作流</strong>
+                        <p class="text-xs text-gray-400">分享: 喵爸联萌 (00:44)</p>
+                        <p class="text-sm">简介: 类似ComfyUI的图像工作流画板，支持发布为API。要点: 画板设计, API发布, NSFW支持。</p>
+                        <a href="https://cloud.segmind.com/console/workflows" target="_blank">访问Segmind</a>
+                    </div>
+                    <div>
+                        <span class="tag">文章</span> <strong class="text-gray-300">AI时代思维</strong>
+                        <p class="text-xs text-gray-400">分享: 北京-小菜与老鸟 (13:12)</p>
+                        <p class="text-sm">简介: 探讨AI时代最值钱的思维方式。</p>
+                        <a href="http://mp.weixin.qq.com/s?__biz=MzAwODIyOTQ4Mw==&mid=2649443669&idx=1&sn=126951a0b2ee3b31253a2b7ba8cf2d57" target="_blank">阅读原文</a>
+                    </div>
+                    <div>
+                        <span class="tag">新闻</span> <strong class="text-gray-300">杨浦区人才新政</strong>
+                        <p class="text-xs text-gray-400">分享: Time will tell (12:35), 紫苏子 (12:35)</p>
+                        <p class="text-sm">简介: 上海杨浦区推出针对优秀UP主等人才的购房补贴政策。</p>
+                        <a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTQ3NTg1NA==&mid=2247501649&idx=1&sn=0679afa49979aae1a8cca1b85ce80964" target="_blank">了解详情</a>
+                    </div>
+                     <div>
+                        <span class="tag">工具</span> <strong class="text-gray-300">Fellou AI (Mac)</strong>
+                        <p class="text-xs text-gray-400">分享: 紫苏子 (17:44, 22:03), 阿敏 (22:13)</p>
+                        <p class="text-sm">简介: Mac端AI助手/浏览器插件，需邀请码。要点: Chrome插件体验, OpenRouter API, Mac专用。</p>
+                        <a href="https://github.com/FellouAI/eko" target="_blank">GitHub</a> | <a href="https://fellou.ai/download" target="_blank">下载地址</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. Top Talkers -->
+        <div class="card talkers-榜">
+            <div class="card-icon-bg"><i class="fas fa-comments"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">话唠榜 Top 3</h2>
+                <div class="talker-item">
+                    <p><span class="talker-rank">1.</span><span class="talker-name">Time will tell</span> - <span class="talker-details">消息数: 约 52</span></p>
+                    <span class="tag tag-alt">信息猎手</span><span class="tag tag-alt">积极提问</span><span class="tag tag-alt">截图狂魔</span>
+                    <p class="text-xs mt-1">常用词: Refly, AI, 本地, 云端, 呢</p>
+                </div>
+                <div class="talker-item">
+                    <p><span class="talker-rank">2.</span><span class="talker-name">武汉-木子不是木子狸</span> - <span class="talker-details">消息数: 约 33</span></p>
+                    <span class="tag tag-alt">技术宅</span><span class="tag tag-alt">乐于助人</span><span class="tag tag-alt">表情帝</span>
+                    <p class="text-xs mt-1">常用词: Refly, Mac, [捂脸], 云端, 知道</p>
+                </div>
+                <div class="talker-item">
+                    <p><span class="talker-rank">3.</span><span class="talker-name">Peng</span> - <span class="talker-details">消息数: 约 31</span></p>
+                    <span class="tag tag-alt">DIY达人</span><span class="tag tag-alt">硬核老爸</span><span class="tag tag-alt">实干派</span>
+                    <p class="text-xs mt-1">常用词: 儿子, 电脑, 散热, 研究, 工作流</p>
+                </div>
+                 <div class="talker-item">
+                    <p><span class="talker-rank">📢</span><span class="talker-name">北京-小菜与老鸟 (我)</span> - <span class="talker-details">消息数: 7</span></p>
+                    <span class="tag tag-alt">日报生成</span><span class="tag tag-alt">默默观察</span>
+                    <p class="text-xs mt-1">常用词: 日报, 模板, 更新, [捂脸]</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. Word Cloud -->
+        <div class="card wordcloud-card card-alt-bg">
+            <div class="card-icon-bg"><i class="fas fa-cloud"></i></div>
+            <div class="content-wrapper" style="height: 100%; display: flex; flex-direction: column;">
+                <h2 class="card-title">今日词云</h2>
+                <div style="flex-grow: 1; width: 100%; height: calc(100% - 40px);">
+                    <canvas id="wordcloud_canvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 全屏脑图容器 -->
+    <div class="mindmap-fullscreen-container" id="mindmap_fullscreen_container">
+        <button class="mindmap-fullscreen-btn" onclick="toggleMindmapFullscreen()">
+            <i class="fas fa-compress"></i> 退出全屏
+        </button>
+        <h2 class="fullscreen-title">核心内容关系图</h2>
+        <div id="mindmap_fullscreen"></div>
+    </div>
+
+    <script>
+        // 脑图初始化函数
+        function initJsMind(){
+            var mind = {
+                meta:{
+                    name: "群聊核心概念",
+                    author: "群聊日报生成器",
+                    version: "1.0"
+                },
+                format: "node_array",
+                data:[
+                    {id:"root", isroot:true, topic:"群聊精华：2025-06-02", "background-color":"#00E5FF", "foreground-color":"#000"},
+
+                    {id:"ai_tools", parentid:"root", topic:"AI工具与平台", "background-color":"#1E40AF", "foreground-color":"#FFFFFF"},
+                    {id:"ai_oaiopen", parentid:"ai_tools", topic:"ai.oaiopen.cn (API集成, Flux1.1)"},
+                    {id:"ai_segmind", parentid:"ai_tools", topic:"Segmind (图像工作流, API发布)"},
+                    {id:"ai_refly", parentid:"ai_tools", topic:"Refly (客户端讨论, Bug修复)"},
+                    {id:"ai_other", parentid:"ai_tools", topic:"其他AI工具 (Fellou, 百度知识库)"},
+
+                    {id:"hardware", parentid:"root", topic:"硬件DIY与行情", "background-color":"#1E40AF", "foreground-color":"#FFFFFF"},
+                    {id:"hw_mac", parentid:"hardware", topic:"Mac Mini M4 (拼多多2749元)"},
+                    {id:"hw_cooling", parentid:"hardware", topic:"PC散热 (猫头鹰, 硅脂, 贴膜梗)"},
+                    {id:"hw_diy", parentid:"hardware", topic:"Peng父子DIY (拆机, 淘二手)"},
+                    {id:"hw_3d", parentid:"hardware", topic:"3D打印 (巧克力, FDM讨论)"},
+
+                    {id:"refly_focus", parentid:"root", topic:"Refly产品专题", "background-color":"#1E40AF", "foreground-color":"#FFFFFF"},
+                    {id:"refly_bug", parentid:"refly_focus", topic:"Google登录Bug (节后修复)"},
+                    {id:"refly_feature", parentid:"refly_focus", topic:"AI节点提示词显示建议"},
+                    {id:"refly_sync", parentid:"refly_focus", topic:"本地与云端数据同步"},
+                    {id:"refly_plan", parentid:"refly_focus", topic:"套餐模式讨论"},
+
+                    {id:"industry", parentid:"root", topic:"行业动态与生活", "background-color":"#1E40AF", "foreground-color":"#FFFFFF"},
+                    {id:"policy", parentid:"industry", topic:"人才政策 (上海杨浦UP主补贴)"},
+                    {id:"platform", parentid:"industry", topic:"平台更新 (百度网盘, 淘宝88VIP)"},
+                    {id:"parenting", parentid:"industry", topic:"育儿科技 (Peng儿子学编程)"}
+                ]
+            };
+            
+            var options = {
+                container : 'mindmap',
+                editable : false,
+                theme : 'primary',
+                view: {
+                    engine: 'svg', 
+                    hmargin: 60,
+                    vmargin: 30,
+                    line_width: 2,
+                    line_color: '#00E5FF'
+                },
+                layout: {
+                    hspace: 50, // horizontal space between nodes
+                    vspace: 25, // vertical space between nodes
+                    pspace: 13  // space between node and subnode connection line
+                },
+                shortcut: { enable: false }
+            };
+            
+            var jm = new jsMind(options);
+            jm.show(mind);
+            
+            // 保存jm实例供全屏切换使用
+            window.jmInstance = jm;
+            window.mindData = mind;
+        }
+
+        // 初始化逻辑，确保页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (typeof jsMind !== 'undefined') {
+                    initJsMind();
+                    console.log('JsMind initialized successfully');
+                } else {
+                    console.error('JsMind library not loaded');
+                }
+            }, 500); // 延迟500ms确保DOM和脚本都已加载
+        });
+
+        // 全屏切换功能
+        let isFullscreen = false;
+        let fullscreenJm = null;
+
+        function toggleMindmapFullscreen() {
+            const fullscreenContainer = document.getElementById('mindmap_fullscreen_container');
+            
+            if (!isFullscreen) {
+                // 进入全屏
+                fullscreenContainer.classList.add('active');
+                isFullscreen = true;
+                
+                // 在全屏容器中创建新的脑图
+                setTimeout(() => {
+                    initFullscreenMindmap();
+                }, 100);
+                
+                // 禁止页面滚动
+                document.body.style.overflow = 'hidden';
+                
+            } else {
+                // 退出全屏
+                fullscreenContainer.classList.remove('active');
+                isFullscreen = false;
+                
+                // 清理全屏脑图
+                if (fullscreenJm) {
+                    const fullscreenMindmapDiv = document.getElementById('mindmap_fullscreen');
+                    fullscreenMindmapDiv.innerHTML = '';
+                    fullscreenJm = null;
+                }
+                
+                // 恢复页面滚动
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function initFullscreenMindmap() {
+            try {
+                const fullscreenContainer = document.getElementById('mindmap_fullscreen');
+                
+                // 确保容器存在且可见
+                if (!fullscreenContainer) {
+                    console.error('Full screen container not found');
+                    return;
+                }
+                
+                // 使用与主脑图相同的数据
+                var mind = {
+                    meta:{
+                        name: "群聊核心概念",
+                        author: "群聊日报生成器",
+                        version: "1.0"
+                    },
+                    format: "node_array",
+                    data:[
+                        {id:"root", isroot:true, topic:"群聊精华：2025-06-02", "background-color":"#00E5FF", "foreground-color":"#000"},
+                        {id:"ai_tools", parentid:"root", topic:"AI工具与平台", "background-color":"#1E40AF", "foreground-color":"#FFFFFF"},
+                        {id:"ai_oaiopen", parentid:"ai_tools", topic:"ai.oaiopen.cn (API集成, Flux1.1)"},
+                        {id:"ai_segmind", parentid:"ai_tools", topic:"Segmind (图像工作流, API发布)"},
+                        {id:"ai_refly", parentid:"ai_tools", topic:"Refly (客户端讨论, Bug修复)"},
+                        {id:"ai_other", parentid:"ai_tools", topic:"其他AI工具 (Fellou, 百度知识库)"},
+                        {id:"hardware", parentid:"root", topic:"硬件DIY与行情", "background-color":"#1E40AF", "foreground-color":"#FFFFFF"},
+                        {id:"hw_mac", parentid:"hardware", topic:"Mac Mini M4 (拼多多2749元)"},
+                        {id:"hw_cooling", parentid:"hardware", topic:"PC散热 (猫头鹰, 硅脂, 贴膜梗)"},
+                        {id:"hw_diy", parentid:"hardware", topic:"Peng父子DIY (拆机, 淘二手)"},
+                        {id:"hw_3d", parentid:"hardware", topic:"3D打印 (巧克力, FDM讨论)"},
+                        {id:"refly_focus", parentid:"root", topic:"Refly产品专题", "background-color":"#1E40AF", "foreground-color":"#FFFFFF"},
+                        {id:"refly_bug", parentid:"refly_focus", topic:"Google登录Bug (节后修复)"},
+                        {id:"refly_feature", parentid:"refly_focus", topic:"AI节点提示词显示建议"},
+                        {id:"refly_sync", parentid:"refly_focus", topic:"本地与云端数据同步"},
+                        {id:"refly_plan", parentid:"refly_focus", topic:"套餐模式讨论"},
+                        {id:"industry", parentid:"root", topic:"行业动态与生活", "background-color":"#1E40AF", "foreground-color":"#FFFFFF"},
+                        {id:"policy", parentid:"industry", topic:"人才政策 (上海杨浦UP主补贴)"},
+                        {id:"platform", parentid:"industry", topic:"平台更新 (百度网盘, 淘宝88VIP)"},
+                        {id:"parenting", parentid:"industry", topic:"育儿科技 (Peng儿子学编程)"}
+                    ]
+                };
+                
+                const options = {
+                    container: 'mindmap_fullscreen',
+                    editable: false,
+                    theme: 'primary',
+                    view: {
+                        engine: 'svg', 
+                        hmargin: 100,
+                        vmargin: 60,
+                        line_width: 2,
+                        line_color: '#00E5FF'
+                    },
+                    layout: {
+                        hspace: 80,
+                        vspace: 40, 
+                        pspace: 20
+                    },
+                    shortcut: { enable: false }
+                };
+                
+                fullscreenJm = new jsMind(options);
+                fullscreenJm.show(mind);
+                
+                console.log('Fullscreen mindmap initialized successfully');
+                
+                // 延迟调整大小以确保正确渲染
+                setTimeout(() => {
+                    if (fullscreenJm) {
+                        fullscreenJm.resize();
+                    }
+                }, 200);
+                
+            } catch (error) {
+                console.error('Fullscreen mindmap initialization failed:', error);
+            }
+        }
+
+        // ESC键退出全屏
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isFullscreen) {
+                toggleMindmapFullscreen();
+            }
+        });
+
+        // Word Cloud Data & Initialization
+        const wordCloudList = [
+            ["Refly", 65], ["AI", 58], ["电脑", 45], ["Mac", 40], ["儿子", 38],
+            ["问题", 35], ["散热", 32], ["分享", 30], ["提示词", 28], ["工作流", 27],
+            ["感觉", 26], ["知道", 25], ["平台", 24], ["API", 23], ["本地", 22],
+            ["云端", 21], ["价格", 20], ["节点", 19], ["登录", 18], ["PDD", 17],
+            ["Bug", 16], ["[捂脸]", 50], ["好像", 24], ["体验", 15], ["工具", 14]
+        ];
+
+        function initWordCloud() {
+            try {
+                const canvas = document.getElementById('wordcloud_canvas');
+                const container = canvas.parentElement;
+                
+                function resizeAndDrawWordCloud() {
+                    const rect = container.getBoundingClientRect();
+                    canvas.width = rect.width;
+                    canvas.height = rect.height;
+                    
+                    if (canvas.width > 0 && canvas.height > 0) {
+                        WordCloud(canvas, {
+                            list: wordCloudList,
+                            gridSize: Math.max(8, Math.round(16 * canvas.width / 1024)),
+                            weightFactor: function (size) {
+                                return Math.pow(size, 1.1) * canvas.width / 500;
+                            },
+                            fontFamily: 'Orbitron, Roboto, sans-serif',
+                            color: function (word, weight) {
+                                const colors = ['#00E5FF', '#FF00E6', '#76FF03', '#FFFFFF'];
+                                return colors[Math.floor(Math.random() * colors.length)];
+                            },
+                            backgroundColor: 'transparent',
+                            rotateRatio: 0.3,
+                            minSize: 8,
+                            drawOutOfBound: false,
+                            shrinkToFit: true
+                        });
+                    }
+                }
+                
+                setTimeout(resizeAndDrawWordCloud, 100);
+                
+                let resizeTimeout;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(resizeAndDrawWordCloud, 300);
+                });
+                
+            } catch (error) {
+                console.error('词云初始化失败:', error);
+            }
+        }
+
+        // 初始化词云
+        $(document).ready(function() {
+            setTimeout(initWordCloud, 500);
+        });
+
+        // 窗口大小变化时重新调整思维导图
+        window.addEventListener('resize', function() {
+            if (window.jmInstance && !isFullscreen) {
+                clearTimeout(window.resizeTimer);
+                window.resizeTimer = setTimeout(function() {
+                    window.jmInstance.resize();
+                }, 300);
+            }
+            
+            // 如果在全屏模式，也调整全屏脑图
+            if (fullscreenJm && isFullscreen) {
+                clearTimeout(window.fullscreenResizeTimer);
+                window.fullscreenResizeTimer = setTimeout(function() {
+                    fullscreenJm.resize();
+                }, 300);
+            }
+        });
+
+    </script>
+</body>
+</html>

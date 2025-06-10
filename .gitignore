@@ -39,9 +39,6 @@ node_modules/
 bun.lockb
 .bun/
 
-# Generated output files
-*.html
-
 # Log files
 *.log
 *.pid

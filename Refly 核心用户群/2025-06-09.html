@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refly AI 群聊日报 - 2025-06-09</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsmind@latest/js/jsmind.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsmind@latest/style/jsmind.css">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --card-bg-color: #f8f9fa;
+            --text-color: #343a40;
+            --title-color: #212529;
+            --primary-accent-color: #ff6600;
+            --subtle-text-color: #6c757d;
+            --border-color: #dee2e6;
+            --grid-gap: 16px;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Noto Sans SC', 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding: var(--grid-gap);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .bento-grid {
+            display: grid;
+            gap: var(--grid-gap);
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: minmax(100px, auto);
+        }
+
+        .card {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            padding: 24px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        
+        .content-wrapper {
+            z-index: 2;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-icon-bg {
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-size: 100px;
+            color: var(--primary-accent-color);
+            opacity: 0.08;
+            z-index: 1;
+            transform: rotate(-15deg);
+        }
+
+        .card-title {
+            font-size: 1.5rem; /* 24px */
+            font-weight: 700;
+            color: var(--title-color);
+            margin-bottom: 16px;
+        }
+
+        .main-card {
+            grid-column: 1 / -1;
+            padding: 40px;
+            text-align: center;
+        }
+        .main-card .card-title {
+            font-size: 2.5rem; /* 40px */
+            color: var(--primary-accent-color);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+        .stat-item { text-align: center; }
+        .stat-item .value { font-size: 2rem; font-weight: 700; color: var(--title-color); }
+        .stat-item .label { font-size: 0.9rem; color: var(--subtle-text-color); margin-top: 4px; }
+
+        .export-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-accent-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border: none;
+        }
+        .export-btn:hover { background-color: #e65c00; }
+        
+        .tag {
+            display: inline-block;
+            background-color: rgba(255, 102, 0, 0.1);
+            color: var(--primary-accent-color);
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .hot-topic .summary { margin: 12px 0; line-height: 1.6; }
+        
+        .dialogue-box {
+            background: var(--bg-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .dialogue-box p { margin: 0; }
+        .dialogue-box .user { font-weight: 700; color: var(--primary-accent-color); }
+        
+        .issue-card .issue-item { border-left: 3px solid var(--primary-accent-color); padding-left: 12px; margin-bottom: 16px; }
+        .issue-card .issue-type { font-weight: 700; }
+        .issue-card .issue-meta { font-size: 0.85rem; color: var(--subtle-text-color); }
+        
+        .mindmap-card {
+            grid-column: 1 / -1;
+            min-height: 450px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .mindmap-card .content-wrapper { padding: 24px; }
+        #mindmap {
+            width: 100%;
+            height: calc(100% - 40px); /* Adjust height based on title height */
+            flex-grow: 1;
+        }
+        .mindmap-fullscreen-btn {
+            position: absolute; top: 16px; right: 16px; z-index: 10;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(5px);
+            border: 1px solid var(--border-color); border-radius: 8px;
+            padding: 6px 12px; cursor: pointer;
+        }
+        
+        .mindmap-fullscreen-container {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: var(--bg-color); z-index: 9998;
+            display: none; flex-direction: column; padding: 20px;
+        }
+        .mindmap-fullscreen-container.active { display: flex; }
+        .mindmap-fullscreen-container .fullscreen-title { text-align: center; font-size: 1.5rem; margin-bottom: 10px; color: var(--title-color); }
+        #mindmap_fullscreen { width: 100%; height: 100%; flex-grow: 1; }
+        
+        .important-msg-item { display: flex; align-items: flex-start; margin-bottom: 16px; }
+        .priority { padding: 4px 8px; border-radius: 6px; color: white; margin-right: 12px; font-size: 0.8rem; }
+        .priority.high { background-color: #dc3545; }
+        .priority.medium { background-color: #ffc107; color: black;}
+        .priority.low { background-color: #17a2b8; }
+        .msg-content { flex-grow: 1; }
+        .msg-meta { font-size: 0.85rem; color: var(--subtle-text-color); }
+        
+        .resource-link {
+            display: block;
+            background: var(--bg-color);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .resource-link:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        .resource-link .title { font-weight: 700; color: var(--primary-accent-color); }
+        .resource-link .details { font-size: 0.9rem; margin-top: 8px; }
+        
+        .chatter-list .chatter-item { display: flex; align-items: center; margin-bottom: 12px; }
+        .chatter-item .rank { font-size: 1.2rem; font-weight: 700; color: var(--primary-accent-color); width: 30px; }
+        .chatter-item .nickname { font-weight: 500; flex-grow: 1; }
+        .chatter-item .msg-count { color: var(--subtle-text-color); }
+
+        .wordcloud-card { grid-column: span 2; min-height: 300px; }
+        .css-wordcloud {
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+            gap: 10px; padding: 15px; min-height: 250px; width: 100%;
+        }
+        .word-item {
+            display: inline-block; padding: 5px; font-weight: 500;
+            transition: transform 0.3s ease, color 0.3s ease;
+            color: var(--text-color); opacity: 0.9;
+        }
+        .word-item:hover { transform: scale(1.1); color: var(--primary-accent-color); opacity: 1; cursor: default; }
+
+        .qrcode-card { grid-column: span 2; }
+        .qrcode-container { display: flex; justify-content: space-around; align-items: center; height: 100%; gap: 16px; }
+        .qrcode-item { text-align: center; }
+        .qrcode-item #qrcode-yesterday, .qrcode-item #qrcode-today { display: flex; justify-content: center; align-items: center; background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .qrcode-item p { margin-top: 10px; font-size: 0.9rem; color: var(--subtle-text-color); }
+
+        jmnode {
+            background-color: var(--card-bg-color) !important;
+            color: var(--text-color) !important;
+            border: 1px solid var(--primary-accent-color) !important;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+            border-radius: 6px !important;
+            padding: 8px 14px !important;
+            font-family: 'Noto Sans SC', sans-serif !important;
+        }
+        jmnode.selected {
+            background-color: var(--primary-accent-color) !important;
+            color: #fff !important;
+        }
+        jmnode:hover {
+             box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        }
+        jmexpander {
+            border-color: var(--primary-accent-color) !important;
+        }
+
+
+        @media (max-width: 768px) {
+            body { padding: 10px; --grid-gap: 10px; }
+            .card { padding: 16px; }
+            .card-title { font-size: 1.25rem; }
+            .main-card .card-title { font-size: 2rem; }
+            .main-card { padding: 24px; }
+            .export-btn { top: 12px; right: 12px; padding: 6px 10px; font-size: 0.8rem; }
+            
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-card, .hot-topics-card, .little-theater-card, .issue-card, .mindmap-card, .important-msg-card, .resources-card, .chatter-card, .wordcloud-card, .qrcode-card {
+                grid-column: 1 / -1 !important;
+            }
+        }
+        
+        .grid-col-span-2 { grid-column: span 2; }
+        .grid-col-span-3 { grid-column: span 3; }
+        .grid-col-span-4 { grid-column: span 4; }
+        .grid-col-span-6 { grid-column: 1 / -1; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="bento-grid" id="daily-report-content">
+        
+        <!-- 群聊总结 -->
+        <div class="card main-card">
+            <button class="export-btn" onclick="exportReportImage()"><i class="fas fa-camera"></i> 导出图片</button>
+            <div class="content-wrapper">
+                <h1 class="card-title">Refly AI 群聊日报</h1>
+                <p class="text-lg text-gray-600 mt-2">今天是工具与思想碰撞的一天。从实用的提示词管理，到对 Refly 未来的畅想，再到各种新奇工具的分享，群友们的智慧与热情点燃了整个社群。</p>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="value">260+</div>
+                        <div class="label">消息数量</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="value">25</div>
+                        <div class="label">活跃人员</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="value">5</div>
+                        <div class="label">热点话题</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="value">08:29-22:30</div>
+                        <div class="label">统计时段 (06-09)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 今日热点 -->
+        <div class="card hot-topics-card grid-col-span-3">
+            <div class="card-icon-bg"><i class="fas fa-fire"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">今日热点</h2>
+                <div class="hot-topic">
+                    <div class="tag">提示词管理</div>
+                    <p class="summary">如何高效管理日渐增多的提示词成为今日焦点。从`且听`分享的飞书插件，到`Fann`的深度思考，再到 Raycast、uTools 等工具的讨论，大家一致认为一个安全、便捷、跨平台的管理方案至关重要。`gemini`生成的深度分析报告更是将讨论推向高潮。</p>
+                    <p class="text-sm text-gray-500"><strong>关键词:</strong> 提示词管理, 插件, Blinko, Raycast, 飞书</p>
+                </div>
+                <div class="hot-topic mt-4">
+                    <div class="tag">产品思考</div>
+                    <p class="summary">围绕 Refly 的未来，群友们献计献策。`logo`分享的 Boardmix AI 白板功能激发了对 Refly 交互创新的想象。Tom 惊喜现身，预告"焕新 Refly，一飞冲天"，吊足了大家的胃口。永久会员和UI优化再次成为社区热门期盼。</p>
+                    <p class="text-sm text-gray-500"><strong>关键词:</strong> Refly, 焕新, Agent, 思维导图, 永久会员</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 小剧场 -->
+        <div class="card little-theater-card grid-col-span-3">
+            <div class="card-icon-bg"><i class="fas fa-theater-masks"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">小剧场</h2>
+                <div class="dialogue-box">
+                    <p><span class="user">Peng:</span> 我儿子在用 tare，我儿子都说垃圾。</p>
+                    <p><span class="user">武汉-木子不是木子狸:</span> 还是不得不用[捂脸] 毕竟免费</p>
+                    <p><span class="user">Peng:</span> 我花了3美元买了一个月</p>
+                </div>
+                <div class="dialogue-box">
+                    <p><span class="user">Time will tell:</span> 被做局了，趁雨小往出走...还没走出1/3呢，突然就变成暴雨了。</p>
+                    <p><span class="user">Time will tell:</span> 体验了一把，冷冷的冰雨在身上胡乱的拍。</p>
+                </div>
+                <div class="mt-4">
+                    <span class="tag">经典语录 🏆</span> "我儿子都说垃圾" - Peng
+                    <br>
+                    <span class="tag">梗王 👑</span> Time will tell (生动描绘雨中囧境)
+                </div>
+            </div>
+        </div>
+        
+        <!-- 我要提 issue -->
+        <div class="card issue-card grid-col-span-6">
+            <div class="card-icon-bg"><i class="fas fa-tasks"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">我要提 Issue</h2>
+                <div class="issue-item">
+                    <span class="tag issue-type">enhancement</span>
+                    <p><strong>问题简述:</strong> 建议 Refly 增加类似 Boardmix 的 AI 思维导图交互功能，能够基于节点进行二次问答和扩展，并支持导出。</p>
+                    <p class="issue-meta">提出人: 北京-ai产品经理-logo (15:59)</p>
+                </div>
+                <div class="issue-item">
+                    <span class="tag issue-type">help wanted</span>
+                    <p><strong>问题简述:</strong> 寻求可在中国使用的美国 eSIM 号码方案，主要用于接收短信验证，需要保号。</p>
+                    <p class="issue-meta">提出人: 罗基 (15:16)</p>
+                </div>
+                 <div class="issue-item">
+                    <span class="tag issue-type">question</span>
+                    <p><strong>问题简述:</strong> 询问 Windows 上好用的免费听歌软件。</p>
+                    <p class="issue-meta">提出人: 咯咯 (15:51)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MindMap -->
+        <div class="card mindmap-card" id="mindmap_container_wrapper">
+            <div class="card-icon-bg"><i class="fas fa-project-diagram"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">核心内容关系图</h2>
+                <div id="mindmap"></div>
+            </div>
+            <button class="mindmap-fullscreen-btn" onclick="toggleMindmapFullscreen()">
+                <i class="fas fa-expand"></i> 全屏
+            </button>
+        </div>
+        
+        <!-- 重要消息汇总 -->
+        <div class="card important-msg-card grid-col-span-6">
+            <div class="card-icon-bg"><i class="fas fa-bullhorn"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">重要消息汇总</h2>
+                <div class="important-msg-item">
+                    <span class="priority high">公告</span>
+                    <div class="msg-content">
+                        <strong>Refly 官方预告重大更新</strong>
+                        <p class="msg-meta">发送者: 上海 - Refly - Tom | 时间: 21:17</p>
+                        <p class="mt-2">Tom 在群内透露，团队正在为 Refly 准备一次"能力焕新"，并用"一飞冲天"来形容这次更新，预示着将有重大功能或架构升级。Agent 功能也已提上日程，即将发布。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 重要链接与资源 -->
+        <div class="card resources-card grid-col-span-4">
+            <div class="card-icon-bg"><i class="fas fa-link"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">重要链接与资源</h2>
+                <a href="http://mp.weixin.qq.com/s?__biz=MzIyNTE1NTAzOA==&mid=2648668772&idx=1&sn=bc63f0b8871a9f258e59208e1446e69e" target="_blank" class="resource-link">
+                    <span class="tag">教程</span>
+                    <p class="title">飞书多维表格提示词管理插件</p>
+                    <p class="details">通过插件将提示词库建在自己的飞书上，安全便捷。分享者: 且听 (16:40)</p>
+                </a>
+                <a href="https://github.com/blinkospace/blinko" target="_blank" class="resource-link">
+                    <span class="tag">资源</span>
+                    <p class="title">Blinko 开源闪念笔记</p>
+                    <p class="details">一款支持自部署、全平台、集成AI和插件系统的闪念/笔记工具。分享者: Time will tell (20:17)</p>
+                </a>
+                <a href="https://github.com/lyswhut/lx-music-desktop" target="_blank" class="resource-link">
+                    <span class="tag">资源</span>
+                    <p class="title">lx-music-desktop 洛雪音乐助手</p>
+                    <p class="details">一款开源的桌面音乐软件，需自行配置音源。分享者: 北京-非技术-素人极客 (15:55)</p>
+                </a>
+            </div>
+        </div>
+        
+        <!-- 话唠榜 -->
+        <div class="card chatter-card grid-col-span-2">
+            <div class="card-icon-bg"><i class="fas fa-comments"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">话唠榜 Top 5</h2>
+                <div class="chatter-list">
+                    <div class="chatter-item"><span class="rank">1</span><span class="nickname">Time will tell</span><span class="msg-count">60+</span></div>
+                    <div class="chatter-item"><span class="rank">2</span><span class="nickname">北京-ai产品经理-logo</span><span class="msg-count">40+</span></div>
+                    <div class="chatter-item"><span class="rank">3</span><span class="nickname">武汉-木子不是木子狸</span><span class="msg-count">30+</span></div>
+                    <div class="chatter-item"><span class="rank">4</span><span class="nickname">Fann-武汉-研发</span><span class="msg-count">25+</span></div>
+                    <div class="chatter-item"><span class="rank">5</span><span class="nickname">且听</span><span class="msg-count">20+</span></div>
+                </div>
+                <div class="mt-auto pt-4">
+                    <span class="tag">工具发现家</span> <span class="tag">氛围担当</span> <span class="tag">提问达人</span> <span class="tag">深度思考</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 词云 -->
+        <div class="card wordcloud-card grid-col-span-4">
+            <div class="card-icon-bg"><i class="fas fa-cloud"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">词云</h2>
+                <div class="css-wordcloud">
+                    <span class="word-item" style="font-size: 3rem; color: var(--primary-accent-color);">Refly</span>
+                    <span class="word-item" style="font-size: 2.8rem;">提示词</span>
+                    <span class="word-item" style="font-size: 2.6rem;">工具</span>
+                    <span class="word-item" style="font-size: 2.5rem; color: var(--primary-accent-color);">管理</span>
+                    <span class="word-item" style="font-size: 2.3rem;">AI</span>
+                    <span class="word-item" style="font-size: 2.1rem;">分享</span>
+                    <span class="word-item" style="font-size: 2.0rem;">使用</span>
+                    <span class="word-item" style="font-size: 1.9rem;">插件</span>
+                    <span class="word-item" style="font-size: 1.8rem;">感觉</span>
+                    <span class="word-item" style="font-size: 1.7rem; color: var(--primary-accent-color);">会员</span>
+                    <span class="word-item" style="font-size: 1.6rem;">平台</span>
+                    <span class="word-item" style="font-size: 1.5rem;">开源</span>
+                    <span class="word-item" style="font-size: 1.5rem;">问题</span>
+                    <span class="word-item" style="font-size: 1.4rem;">永久</span>
+                    <span class="word-item" style="font-size: 1.4rem;">支持</span>
+                    <span class="word-item" style="font-size: 1.3rem;">数据</span>
+                    <span class="word-item" style="font-size: 1.3rem;">画布</span>
+                    <span class="word-item" style="font-size: 1.2rem;">垃圾</span>
+                    <span class="word-item" style="font-size: 1.2rem;">飞书</span>
+                    <span class="word-item" style="font-size: 1.1rem;">Blinko</span>
+                    <span class="word-item" style="font-size: 1.1rem;">儿子</span>
+                    <span class="word-item" style="font-size: 1.0rem;">焕新</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 二维码 -->
+        <div class="card qrcode-card grid-col-span-2">
+            <div class="card-icon-bg"><i class="fas fa-qrcode"></i></div>
+            <div class="content-wrapper">
+                <h2 class="card-title">扫码看日报</h2>
+                <div class="qrcode-container">
+                    <div class="qrcode-item">
+                        <div id="qrcode-yesterday"></div>
+                        <p>昨日日报 (2025-06-08)</p>
+                    </div>
+                    <div class="qrcode-item">
+                        <div id="qrcode-today"></div>
+                        <p>今日日报 (2025-06-09)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- 全屏脑图容器 -->
+<div class="mindmap-fullscreen-container" id="mindmap_fullscreen_container">
+    <button class="mindmap-fullscreen-btn" onclick="toggleMindmapFullscreen()">
+        <i class="fas fa-compress"></i> 退出全屏
+    </button>
+    <h2 class="fullscreen-title">核心内容关系图</h2>
+    <div id="mindmap_fullscreen"></div>
+</div>
+
+<script>
+    // 导出图片功能
+    function exportReportImage() {
+        const reportElement = document.getElementById('daily-report-content');
+        const exportButton = document.querySelector('.export-btn');
+        
+        // 检查html2canvas是否正确加载
+        if (typeof html2canvas === 'undefined') {
+            alert('html2canvas库未正确加载，请检查网络连接');
+            console.error('html2canvas is not defined');
+            return;
+        }
+        
+        // 显示加载状态
+        exportButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 正在生成...';
+        exportButton.style.opacity = '0.7';
+        
+        // 确保所有图片和资源加载完成
+        setTimeout(() => {
+            // 滚动到顶部确保正确渲染
+            window.scrollTo(0, 0);
+            
+            // 优化渲染设置
+            html2canvas(reportElement, {
+                backgroundColor: getComputedStyle(document.body).backgroundColor,
+                scale: 1.5, // 平衡质量和性能
+                useCORS: true,
+                logging: true, // 启用日志记录
+                allowTaint: true, // 允许跨域图片
+                foreignObjectRendering: false, // 避免某些浏览器的兼容性问题
+                removeContainer: true, // 清理临时元素
+                imageTimeout: 15000, // 增加图片加载超时时间
+                onclone: function(clonedDoc) {
+                    // 在克隆的文档中隐藏导出按钮
+                    const clonedButton = clonedDoc.querySelector('.export-btn');
+                    if (clonedButton) clonedButton.style.display = 'none';
+                    
+                    // 确保所有图像都已加载
+                    const images = clonedDoc.querySelectorAll('img');
+                    images.forEach(img => {
+                        if (!img.complete) {
+                            console.log('等待图像加载:', img.src);
+                        }
+                    });
+                }
+            }).then(canvas => {
+                try {
+                    // 使用较低的图像质量以减小文件大小
+                    const imgData = canvas.toDataURL('image/png', 0.8);
+                    
+                    const link = document.createElement('a');
+                    link.download = 'Refly-AI-群聊日报-2025-06-09.png';
+                    link.href = imgData;
+                    document.body.appendChild(link); // 确保链接被添加到DOM
+                    link.click();
+                    document.body.removeChild(link); // 清理
+                    console.log('图片导出成功');
+                } catch (error) {
+                    console.error('导出图片失败:', error);
+                    alert('导出图片失败: ' + error.message);
+                } finally {
+                    // 恢复按钮状态
+                    exportButton.innerHTML = '<i class="fas fa-camera"></i> 导出图片';
+                    exportButton.style.opacity = '1';
+                }
+            }).catch(err => {
+                console.error('html2canvas错误:', err);
+                alert('生成图片失败: ' + err.message);
+                exportButton.innerHTML = '<i class="fas fa-camera"></i> 导出图片';
+                exportButton.style.opacity = '1';
+            });
+        }, 800); // 给予更多时间让页面完全渲染
+    }
+
+    // 二维码生成
+    new QRCode(document.getElementById("qrcode-yesterday"), {
+        text: "https://refly.ai/share/code/cod-wtiphfl1rwqzrzbpyz714w4v",
+        width: 100,
+        height: 100,
+    });
+
+    new QRCode(document.getElementById("qrcode-today"), {
+        text: "https://refly.ai/share/code/cod-iulhskpldifopch513em04e8",
+        width: 100,
+        height: 100,
+    });
+    
+    // 思维导图
+    function initJsMind(){
+        const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-accent-color').trim();
+        const cardBgColor = getComputedStyle(document.documentElement).getPropertyValue('--card-bg-color').trim();
+        const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim();
+        const borderColor = getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim();
+
+        var mind = {
+            meta:{
+                name: "群聊核心内容关系图",
+                author: "群聊日报生成器",
+                version: "1.0"
+            },
+            format: "node_array",
+            data:[
+                {id:"root", isroot:true, topic:"群聊精华 (06-09)", "background-color": primaryColor, "foreground-color":"#fff"},
+
+                {id:"prompt_mgmt", parentid:"root", topic:"提示词管理与哲学"},
+                {id:"pm_tools", parentid:"prompt_mgmt", topic:"工具探讨", "background-color": cardBgColor, "foreground-color": textColor},
+                {id:"pm_tool_feishu", parentid:"pm_tools", topic:"飞书插件 (数据私有)"},
+                {id:"pm_tool_blinko", parentid:"pm_tools", topic:"Blinko (开源闪念)"},
+                {id:"pm_tool_raycast", parentid:"pm_tools", topic:"Raycast/uTools (快捷启动)"},
+                {id:"pm_philosophy", parentid:"prompt_mgmt", topic:"核心理念", "background-color": cardBgColor, "foreground-color": textColor},
+                {id:"pm_phil_scene", parentid:"pm_philosophy", topic:"面向场景 vs 面向模型"},
+                {id:"pm_phil_version", parentid:"pm_philosophy", topic:"版本/迭代/比对"},
+
+                {id:"refly_dev", parentid:"root", topic:"Refly产品进化论"},
+                {id:"rd_future", parentid:"refly_dev", topic:"官方预告: 能力焕新", "background-color": cardBgColor, "foreground-color": textColor},
+                {id:"rd_agent", parentid:"rd_future", topic:"Agent功能即将上线"},
+                {id:"rd_community", parentid:"refly_dev", topic:"社区声音", "background-color": cardBgColor, "foreground-color": textColor},
+                {id:"rd_comm_boardmix", parentid:"rd_community", topic:"灵感: Boardmix思维导图交互"},
+                {id:"rd_comm_member", parentid:"rd_community", topic:"诉求: 永久会员 & UI优化"},
+                
+                {id:"tool_share", parentid:"root", topic:"工具生态圈分享"},
+                {id:"ts_ai", parentid:"tool_share", topic:"AI与编程", "background-color": cardBgColor, "foreground-color": textColor},
+                {id:"ts_ai_perplexity", parentid:"ts_ai", topic:"Perplexity (三星合作)"},
+                {id:"ts_ai_cursor", parentid:"ts_ai", topic:"Cursor vs Trae (Peng父子锐评)"},
+                {id:"ts_utils", parentid:"tool_share", topic:"效率工具", "background-color": cardBgColor, "foreground-color": textColor},
+                {id:"ts_util_music", parentid:"ts_utils", topic:"听歌软件 (lx-music)"},
+                {id:"ts_util_pdf", parentid:"ts_utils", topic:"PDF转换 (xpdf.cn)"},
+                {id:"ts_util_esim", parentid:"ts_utils", topic:"eSIM保号方案"},
+            ]
+        };
+        
+        var options = {
+            container : 'mindmap',
+            editable : false,
+            theme : null,
+            view: {
+                engine: 'svg', 
+                hmargin: 60,
+                vmargin: 30,
+                line_width: 1.5,
+                line_color: primaryColor
+            },
+            layout: { hspace: 50, vspace: 25, pspace: 13 },
+            shortcut: { enable: false }
+        };
+        
+        var jm = new jsMind(options);
+        jm.show(mind);
+        
+        window.jmInstance = jm;
+        window.mindData = mind;
+    }
+
+    if (typeof jsMind !== 'undefined') {
+        initJsMind();
+    } else {
+        window.addEventListener('load', initJsMind);
+    }
+
+    let isFullscreen = false;
+    let fullscreenJm = null;
+
+    function toggleMindmapFullscreen() {
+        const fullscreenContainer = document.getElementById('mindmap_fullscreen_container');
+        if (!isFullscreen) {
+            fullscreenContainer.classList.add('active');
+            isFullscreen = true;
+            setTimeout(() => initFullscreenMindmap(), 100);
+            document.body.style.overflow = 'hidden';
+        } else {
+            fullscreenContainer.classList.remove('active');
+            isFullscreen = false;
+            if (fullscreenJm) {
+                document.getElementById('mindmap_fullscreen').innerHTML = '';
+                fullscreenJm = null;
+            }
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    function initFullscreenMindmap() {
+        if (!window.mindData) return;
+        try {
+            const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-accent-color').trim();
+            const options = {
+                container: 'mindmap_fullscreen', editable: false, theme: null,
+                view: { engine: 'svg', hmargin: 100, vmargin: 60, line_width: 2, line_color: primaryColor },
+                layout: { hspace: 80, vspace: 40, pspace: 20 },
+                shortcut: { enable: false }
+            };
+            fullscreenJm = new jsMind(options);
+            fullscreenJm.show(window.mindData);
+            setTimeout(() => { if (fullscreenJm) fullscreenJm.resize(); }, 200);
+        } catch (error) {
+            console.error('Fullscreen mindmap initialization failed:', error);
+        }
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isFullscreen) {
+            toggleMindmapFullscreen();
+        }
+    });
+
+    window.addEventListener('resize', function() {
+        if (window.jmInstance && !isFullscreen) {
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(() => window.jmInstance.resize(), 300);
+        }
+        if (fullscreenJm && isFullscreen) {
+            clearTimeout(window.fullscreenResizeTimer);
+            window.fullscreenResizeTimer = setTimeout(() => fullscreenJm.resize(), 300);
+        }
+    });
+
+</script>
+</body>
+</html>

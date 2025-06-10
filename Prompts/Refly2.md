@@ -71,10 +71,25 @@
     - 常用词（2-3个）
 - 词云
 - 昨日群聊日报和今日群聊日报的二维码
-    - 日报为昨日日报，提取群聊前日日报链接，生成前日二维码，带上日期
-    - 用户输入如果给定了昨日日报链接，则使用用户输入的链接生成昨日二维码，带上日期
+    - 日报为昨日日报，提取群聊前日日报链接，标题是前日二维码（带上日期）
+    - 用户输入如果给定了昨日日报链接，则使用用户输入的链接生成昨日二维码，标题是昨日二维码（带上日期）
 
 严格按照以上顺序生成，不要遗漏任何模块。合理分配空间，不要有大面积 Bento Grid 空白。
+
+
+### 重要说明：词云和脑图实现
+- 词云实现必须使用纯CSS和HTML，不依赖wordcloud.js库：
+  1. 使用CSS Flex布局实现词云效果，词语大小根据权重设置不同的font-size
+  2. 使用不同的颜色和字体粗细表示词语的重要性
+  3. 随机分布词语，但确保整体布局美观
+  4. 词云容器(.wordcloud-card)必须设置最小高度(min-height: 300px)
+  5. 确保使用与主题一致的颜色方案
+  6. 词云数据从聊天记录中提取，按词频排序
+
+- 脑图实现必须确保：
+  1. 使用jsmind库实现，确保正确引入相关资源
+  2. 实现全屏查看功能
+  3. 节点样式与整体主题保持一致
 
 ### 角色
 你是极具审美的前端设计大师，请为我生成一个基于 **Bento Grid** 设计风格的单页HTML网站，内嵌CSS、JS。这个页面将被截图分享，需要特别优化视觉效果和分享体验
@@ -206,56 +221,12 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script> <!-- 词云 -->
 <script src="https://cdn.jsdelivr.net/npm/jsmind@latest/js/jsmind.min.js"></script> <!-- 脑图 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> <!-- 截图 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> <!-- 二维码生成 -->
 
-<link rel="stylesheet" href="https://unpkg.com/jsmind@0.7.0/style/jsmind.css"> <!-- 脑图样式 -->
-<script src="https://unpkg.com/jsmind@0.7.0/es6/jsmind.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsmind@latest/style/jsmind.css"> <!-- 脑图样式 -->
 ```
-
-## MindMap
-
-```html
-<div class="card mindmap-card" id="mindmap_container_wrapper">
-    <div class="card-icon-bg"><i class="fas fa-project-diagram"></i></div>
-    <button class="mindmap-fullscreen-btn" onclick="toggleMindmapFullscreen()">
-        <i class="fas fa-expand"></i> 全屏
-    </button>
-            <div class="content-wrapper" style="height:100%;">
-                <h2 class="card-title">核心内容关系图</h2>
-                <div id="mindmap"></div>
-            </div>
-        </div>
-```
-
-## Word Cloud
-
-```html
-<div class="card wordcloud-card card-alt-bg">
-    <div class="card-icon-bg"><i class="fas fa-cloud"></i></div>
-    <div class="content-wrapper" style="height: 100%; display: flex; flex-direction: column;">
-        <h2 class="card-title">今日词云</h2>
-        <div style="flex-grow: 1; width: 100%; height: calc(100% - 40px);">
-            <canvas id="wordcloud_canvas"></canvas>
-        </div>
-    </div>
-</div>
-
-```
-
-## 全屏脑图容器
-
-```html
-<div class="mindmap-fullscreen-container" id="mindmap_fullscreen_container">
-    <button class="mindmap-fullscreen-btn" onclick="toggleMindmapFullscreen()">
-        <i class="fas fa-compress"></i> 退出全屏
-    </button>
-    <h2 class="fullscreen-title">核心内容关系图</h2>
-    <div id="mindmap_fullscreen"></div>
-</div>
-``` 
 
 ## 关键脚本
 
@@ -426,64 +397,6 @@
             }
         });
 
-        // 词云数据
-        const wordCloudList = [
-            ["Refly", 65], ["AI", 58], ["电脑", 45], ["Mac", 40], ["儿子", 38],
-            ["问题", 35], ["散热", 32], ["分享", 30], ["提示词", 28], ["工作流", 27],
-            ["感觉", 26], ["知道", 25], ["平台", 24], ["API", 23], ["本地", 22],
-            ["云端", 21], ["价格", 20], ["节点", 19], ["登录", 18], ["PDD", 17],
-            ["Bug", 16], ["[捂脸]", 50], ["好像", 24], ["体验", 15], ["工具", 14]
-        ];
-
-        function initWordCloud() {
-            try {
-                const canvas = document.getElementById('wordcloud_canvas');
-                const container = canvas.parentElement;
-                
-                function resizeAndDrawWordCloud() {
-                    const rect = container.getBoundingClientRect();
-                    canvas.width = rect.width;
-                    canvas.height = rect.height;
-                    
-                    if (canvas.width > 0 && canvas.height > 0) {
-                        WordCloud(canvas, {
-                            list: wordCloudList,
-                            gridSize: Math.max(8, Math.round(16 * canvas.width / 1024)),
-                            weightFactor: function (size) {
-                                return Math.pow(size, 1.1) * canvas.width / 500;
-                            },
-                            fontFamily: 'Orbitron, Roboto, sans-serif',
-                            color: function (word, weight) {
-                                const colors = ['#00E5FF', '#FF00E6', '#76FF03', '#FFFFFF'];
-                                return colors[Math.floor(Math.random() * colors.length)];
-                            },
-                            backgroundColor: 'transparent',
-                            rotateRatio: 0.3,
-                            minSize: 8,
-                            drawOutOfBound: false,
-                            shrinkToFit: true
-                        });
-                    }
-                }
-                
-                setTimeout(resizeAndDrawWordCloud, 100);
-                
-                let resizeTimeout;
-                window.addEventListener('resize', function() {
-                    clearTimeout(resizeTimeout);
-                    resizeTimeout = setTimeout(resizeAndDrawWordCloud, 300);
-                });
-                
-            } catch (error) {
-                console.error('词云初始化失败:', error);
-            }
-        }
-
-        // 初始化词云
-        $(document).ready(function() {
-            setTimeout(initWordCloud, 500);
-        });
-
         // 窗口大小变化时重新调整思维导图
         window.addEventListener('resize', function() {
             if (window.jmInstance && !isFullscreen) {
@@ -504,3 +417,112 @@
 
     </script>
 ```
+
+## MindMap
+
+```html
+<div class="card mindmap-card" id="mindmap_container_wrapper">
+    <div class="card-icon-bg"><i class="fas fa-project-diagram"></i></div>
+    <button class="mindmap-fullscreen-btn" onclick="toggleMindmapFullscreen()">
+        <i class="fas fa-expand"></i> 全屏
+    </button>
+            <div class="content-wrapper" style="height:100%;">
+                <h2 class="card-title">核心内容关系图</h2>
+                <div id="mindmap"></div>
+            </div>
+        </div>
+```
+
+## Word Cloud
+
+```html
+<div class="card wordcloud-card">
+    <div class="card-icon-bg"><i class="fas fa-cloud"></i></div>
+    <div class="content-wrapper">
+        <h2 class="card-title">词云</h2>
+        <div class="css-wordcloud">
+            <!-- 词云内容将根据词频动态生成 -->
+            <span class="word-item" style="font-size: 2.8rem; color: var(--primary-accent-color);">Refly</span>
+            <span class="word-item" style="font-size: 2.5rem; color: var(--primary-accent-color);">提示词</span>
+            <span class="word-item" style="font-size: 2.3rem;">工具</span>
+            <span class="word-item" style="font-size: 2.2rem;">AI</span>
+            <span class="word-item" style="font-size: 2.0rem;">感觉</span>
+            <span class="word-item" style="font-size: 1.9rem;">管理</span>
+            <span class="word-item" style="font-size: 1.8rem;">分享</span>
+            <span class="word-item" style="font-size: 1.7rem;">平台</span>
+            <span class="word-item" style="font-size: 1.6rem;">使用</span>
+            <span class="word-item" style="font-size: 1.6rem;">问题</span>
+            <span class="word-item" style="font-size: 1.5rem;">会员</span>
+            <span class="word-item" style="font-size: 1.5rem;">永久</span>
+            <span class="word-item" style="font-size: 1.4rem;">儿子</span>
+            <span class="word-item" style="font-size: 1.4rem;">开源</span>
+            <span class="word-item" style="font-size: 1.3rem;">飞书</span>
+            <span class="word-item" style="font-size: 1.3rem;">本地</span>
+            <span class="word-item" style="font-size: 1.2rem;">数据</span>
+            <span class="word-item" style="font-size: 1.2rem;">插件</span>
+            <span class="word-item" style="font-size: 1.1rem;">版本</span>
+            <span class="word-item" style="font-size: 1.1rem;">需求</span>
+            <span class="word-item" style="font-size: 1.0rem;">看看</span>
+            <span class="word-item" style="font-size: 1.0rem;">垃圾</span>
+        </div>
+    </div>
+</div>
+```
+
+添加以下CSS样式：
+
+```css
+/* 词云样式 */
+.css-wordcloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    min-height: 250px;
+    width: 100%;
+}
+
+.word-item {
+    display: inline-block;
+    padding: 5px;
+    font-weight: 500;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: var(--text-color);
+    opacity: 0.9;
+    transform: rotate(calc(var(--rotate) * 1deg));
+    --rotate: 0;
+}
+
+.word-item:nth-child(odd) {
+    --rotate: -3;
+}
+
+.word-item:nth-child(even) {
+    --rotate: 3;
+}
+
+.word-item:nth-child(3n) {
+    --rotate: 0;
+}
+
+.word-item:hover {
+    transform: scale(1.1) rotate(0deg);
+    color: var(--primary-accent-color);
+    opacity: 1;
+    cursor: pointer;
+}
+```
+
+## 全屏脑图容器
+
+```html
+<div class="mindmap-fullscreen-container" id="mindmap_fullscreen_container">
+    <button class="mindmap-fullscreen-btn" onclick="toggleMindmapFullscreen()">
+        <i class="fas fa-compress"></i> 退出全屏
+    </button>
+    <h2 class="fullscreen-title">核心内容关系图</h2>
+    <div id="mindmap_fullscreen"></div>
+</div>
+``` 

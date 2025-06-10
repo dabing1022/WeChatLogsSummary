@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信群聊日报</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jsmind@latest/js/jsmind.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsmind@latest/style/jsmind.css">
+    <style>
+        :root {
+            --bg-primary: #0D1117; /* 深邃太空黑 */
+            --bg-card: #161B22; /* 卡片背景 - 近黑 */
+            --bg-card-alt: #21262D; /* 卡片背景 - 稍亮 */
+            --text-primary: #C9D1D9; /* 主要文字 - 亮灰 */
+            --text-secondary: #8B949E; /* 次要文字 - 中灰 */
+            --accent-primary: #58A6FF; /* 主强调色 - 科技蓝 */
+            --accent-secondary: #3FB950; /* 次强调色 - 活力绿 */
+            --accent-tertiary: #A371F7; /* 第三强调色 - 神秘紫 */
+            --border-color: #30363D; /* 边框颜色 */
+
+            --font-title: 'Orbitron', 'Noto Sans SC', sans-serif;
+            --font-body: 'Roboto', 'Noto Sans SC', sans-serif;
+
+            --card-padding: 1.25rem; /* 20px */
+            --grid-gap: 1rem; /* 16px */
+            --border-radius: 0.5rem; /* 8px */
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            padding: var(--grid-gap);
+            max-width: 1000px;
+            margin: auto;
+            font-size: 16px; /* Base font size */
+        }
+
+        .grid-container {
+            display: grid;
+            gap: var(--grid-gap);
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: minmax(150px, auto); /* Ensure rows have a minimum height */
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: var(--card-padding);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden; /* For decorative icons */
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .card .card-icon-bg {
+            position: absolute;
+            font-size: 6rem; /* 96px */
+            color: rgba(255, 255, 255, 0.03); /* Very subtle */
+            z-index: 0;
+            transition: transform 0.3s ease-out;
+        }
+
+        .card:hover .card-icon-bg {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .card > * {
+            position: relative; /* Ensure content is above decorative icon */
+            z-index: 1;
+        }
+
+        .card-title {
+            font-family: var(--font-title);
+            font-size: 1.5rem; /* 24px */
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.75rem; /* 12px */
+            word-break: break-all;
+        }
+        
+        .card-title-sm {
+            font-family: var(--font-title);
+            font-size: 1.25rem; /* 20px */
+            font-weight: 700;
+            color: var(--accent-secondary);
+            margin-bottom: 0.5rem; /* 8px */
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .card ul li {
+            margin-bottom: 0.5rem; /* 8px */
+            font-size: 0.9375rem; /* 15px */
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+        }
+        .card ul li::before {
+            content: "\f105"; /* Font Awesome angle-right */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--accent-primary);
+            margin-right: 0.5em;
+            font-size: 0.8em;
+            line-height: 1.6;
+        }
+        
+        .card p, .card .text-content {
+            font-size: 0.9375rem; /* 15px */
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--accent-primary);
+            text-decoration: underline;
+        }
+
+        .main-summary {
+            grid-column: 1 / -1; /* Span all columns */
+            grid-row: span 2;
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--accent-tertiary-dark) 100%); /* Darker purple variant */
+             --accent-tertiary-dark: #2a1d3e; /* Example darker purple */
+            padding: 2rem; /* 32px */
+            min-height: 300px; /* Minimum height for main card */
+        }
+        .main-summary .card-title {
+            font-size: 2.5rem; /* 40px */
+            color: #E6EDF3; /* Brighter for main title */
+            text-shadow: 0 0 10px var(--accent-primary);
+        }
+        .main-summary .card-icon-bg {
+            top: 1rem; right: 1rem; font-size: 8rem; /* 128px */
+        }
+        
+        .podcast-card { grid-column: span 6; grid-row: span 1; background-color: var(--bg-card-alt);}
+        .podcast-card .card-icon-bg { top: 0.5rem; right: 0.5rem; font-size: 4rem; }
+        .hot-topics { grid-column: span 3; grid-row: span 2; }
+        .hot-topics .card-icon-bg { bottom: 0.5rem; right: 0.5rem; }
+        .little-theater { grid-column: span 3; grid-row: span 2; }
+        .little-theater .card-icon-bg { top: 0.5rem; left: 0.5rem; transform: rotate(15deg); }
+        .issues { grid-column: span 2; grid-row: span 2; background-color: var(--bg-card-alt); }
+        .issues .card-icon-bg { bottom: -0.5rem; left: -0.5rem; font-size: 5rem;}
+        .mindmap { grid-column: span 4; grid-row: span 3; }
+        .mindmap .card-icon-bg { top: 1rem; right: 1rem; font-size: 5rem; }
+        #jsmind_container { width: 100%; height: 300px; background-color: var(--bg-card); border-radius: var(--border-radius); }
+        .quotes { grid-column: span 3; grid-row: span 2; }
+        .quotes .card-icon-bg { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-10deg); font-size: 8rem;}
+        .links-resources { grid-column: span 3; grid-row: span 2; background-color: var(--bg-card-alt); }
+        .links-resources .card-icon-bg { bottom: 0.5rem; right: 0.5rem; transform: rotate(5deg); }
+        .active-stars { grid-column: span 3; grid-row: span 2; }
+        .active-stars .card-icon-bg { top: 0.5rem; left: 0.5rem; font-size: 5rem;}
+        .word-cloud { grid-column: span 3; grid-row: span 2; background-color: var(--bg-card-alt); }
+        .word-cloud .card-icon-bg { bottom: 0.5rem; left: 0.5rem; }
+        .word-cloud-content { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: center; }
+        .word-cloud-content span { padding: 0.25rem 0.5rem; border-radius: 0.25rem; background-color: var(--bg-primary); transition: transform 0.2s; }
+        .word-cloud-content span:hover { transform: scale(1.1); }
+
+
+        .tag {
+            display: inline-block;
+            background-color: var(--accent-tertiary);
+            color: white;
+            padding: 0.2em 0.6em;
+            border-radius: 0.25rem; /* 4px */
+            font-size: 0.75rem; /* 12px */
+            margin-right: 0.3rem;
+            margin-bottom: 0.3rem;
+        }
+        .issue-item {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .issue-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(1, 1fr); /* Single column on mobile */
+            }
+            /* All cards span full width on mobile */
+            .main-summary, .podcast-card, .hot-topics, .little-theater, .issues, .mindmap, .quotes, .links-resources, .active-stars, .word-cloud {
+                grid-column: span 1;
+                grid-row: auto; /* Let rows adjust height automatically */
+            }
+            .main-summary { min-height: 250px; }
+            #jsmind_container { height: 250px; }
+            .card-title { font-size: 1.375rem; } /* 22px */
+            .main-summary .card-title { font-size: 2rem; } /* 32px */
+            body { font-size: 15px; }
+        }
+        
+        .dialogue { margin-bottom: 0.5rem; }
+        .dialogue strong { color: var(--accent-primary); }
+
+        audio {
+            width: 100%;
+            margin-top: 10px;
+            filter: invert(1) hue-rotate(180deg); /* Simple dark mode for audio player */
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="card main-summary">
+            <i class="fas fa-satellite-dish card-icon-bg"></i>
+            <h1 id="group-name" class="card-title">微信群聊日报 - Refly 用户交流群</h1>
+            <p class="text-lg mb-1">日期: <span id="report-date">2025-05-30</span></p>
+            <p class="text-sm text-gray-400 mb-4">统计时段: <span id="time-range">00:00:28 - 23:30:10</span></p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mb-6">
+                <div>
+                    <p class="text-2xl font-bold text-accent-secondary" id="msg-count">195</p>
+                    <p class="text-xs uppercase text-gray-400">消息总数</p>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-accent-secondary" id="active-users-count">28</p>
+                    <p class="text-xs uppercase text-gray-400">活跃人数</p>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-accent-secondary" id="hot-topics-count">5</p>
+                    <p class="text-xs uppercase text-gray-400">热点话题</p>
+                </div>
+                 <div>
+                    <p class="text-2xl font-bold text-accent-secondary" id="links-count">8</p>
+                    <p class="text-xs uppercase text-gray-400">分享链接</p>
+                </div>
+            </div>
+            <h2 class="text-xl font-semibold mb-2 text-accent-primary">内容概要</h2>
+            <p class="text-content leading-relaxed">
+                今日群内讨论热烈，核心围绕 **Refly 桌面客户端的发布**展开，大家对 Mac 版本的测试和 Bug 反馈十分积极，并期待 Windows 版本的上线。
+                同时，**DeepSeek R1 模型更新**也引发关注，讨论了其在 Refly 中的表现及与其他模型的对比。
+                此外，群友们还分享了各自购买 **Mac Mini、iPad 及相关配件**的经验和计划，特别是 618 购物节的优惠信息。
+                其他 AI 工具如 **Flowith、NotebookLM、Stitch** 以及 **AI IDE（如通义灵码）** 也有所提及和讨论。
+                整体氛围积极向上，充满了对 AI 技术和生产力工具的探索热情。
+            </p>
+        </div>
+
+        <div class="card podcast-card">
+            <i class="fas fa-headphones-alt card-icon-bg"></i>
+            <h2 class="card-title">群聊播客</h2>
+            <p class="text-content">收听今日群聊精华：</p>
+            <audio controls src="https://media.xyzcdn.net/6828289ec3c821dab74dd3e7/lsm3bNsLknuVbVhTJUQm8WUtKxHR.m4a"></audio>
+        </div>
+
+        <div class="card hot-topics">
+            <i class="fas fa-fire card-icon-bg"></i>
+            <h2 class="card-title">今日热点</h2>
+            <ul>
+                <li><strong>Refly 桌面客户端发布:</strong> Mac ARM 版率先发布，引发下载测试热潮，讨论集中在安装、白屏 Bug、功能（Local First）、后续云同步计划及 Windows 版本期待。提及次数: ~50+</li>
+                <li><strong>DeepSeek R1 模型讨论:</strong> 更新后的 DeepSeek R1 表现受关注，讨论其语言风格（克制、长难句）、与 Gemini 的对比，以及在 Refly 中的集成情况。提及次数: ~15+</li>
+                <li><strong>硬件剁手与配置讨论:</strong> Mac Mini M2/M4、iPad (随航作副屏)、2K 显示器、学习机（FlipGo）等硬件购买与配置成为热门话题，尤其结合 618 优惠。提及次数: ~20+</li>
+                <li><strong>AI 工具与应用分享:</strong> Flowith 定价与体验、NotebookLM 生成播客、Stitch 中文支持、通义灵码 IDE、豆包客户端功能。提及次数: ~10+</li>
+                <li><strong>群聊日报与 AI 生成内容:</strong> 北京-小菜与老鸟 制作的群聊日报及其 AI 生成播客受到好评，讨论了其排版和内容。提及次数: ~8+</li>
+            </ul>
+        </div>
+
+        <div class="card little-theater">
+             <i class="fas fa-theater-masks card-icon-bg"></i>
+            <h2 class="card-title">小剧场</h2>
+            <h3 class="card-title-sm">“糊”是艺术的最高境界</h3>
+            <div class="text-content">
+                <p class="dialogue"><strong>Time will tell:</strong> (发了一张 Refly 知乎头像截图) 头像太糊了，不是原图，差评!</p>
+                <p class="dialogue"><strong>上海 - Refly - Tom:</strong> 哈哈哈 自动发布的</p>
+                <p class="dialogue"><strong>紫苏子:</strong> 那也得高清[奸笑]</p>
+                <p class="dialogue"><strong>拒绝奶茶101次:</strong> 为嘛我觉得这有一种我的世界的美，可以更糊一点</p>
+                <p class="dialogue"><strong>紫苏子:</strong> 更lowpoly一点[旺柴]</p>
+                <p class="dialogue"><strong>Time will tell:</strong> 作者用马赛克画质致敬开放式游戏我的世界，体现了相同的自由创造理念... 作者以像素风画面致敬沙盒游戏《我的世界》，在视觉风格与无限创造的理念上实现了精神传承。</p>
+            </div>
+            <h3 class="card-title-sm mt-4">经典语录</h3>
+            <ul>
+                <li>"平板唯一的作用就是买了之后以后再也不会想买平板了 [旺柴]" - iMax</li>
+                <li>"我发现国内时间过得好快" - 武汉-木子不是木子狸</li>
+                <li>"狗命要紧" - RAM (劝开发者早点休息)</li>
+            </ul>
+            <h3 class="card-title-sm mt-4">梗王</h3>
+            <p class="text-content">@Time will tell (对糊头像的艺术升华解读)</p>
+        </div>
+
+        <div class="card issues">
+            <i class="fas fa-bug card-icon-bg"></i>
+            <h2 class="card-title">我要提 Issue</h2>
+            <div class="text-content overflow-y-auto max-h-80">
+                <div class="issue-item">
+                    <span class="tag">bug</span> <span class="font-semibold">Kyle 齐华:</span> Refly 线上版模型使用提示出错，后确认为输入内容含特殊 token `<|endoftext|>` 导致。
+                </div>
+                <div class="issue-item">
+                    <span class="tag">enhancement</span> <span class="font-semibold">福州DavidChen:</span> Refly 桌面端对 3:2 屏幕比例适配问题，底部信息可能显示不全。
+                </div>
+                <div class="issue-item">
+                    <span class="tag">bug</span> <span class="font-semibold">罗基:</span> Refly.ai 网页版删除 canvas 时偶现报错。
+                </div>
+                <div class="issue-item">
+                    <span class="tag">bug</span> <span class="font-semibold">Marbu, 艾迪蓝波:</span> Refly Mac 客户端 (ARM) 初始版本出现白屏无法加载问题 (后官方修复更新)。
+                </div>
+                 <div class="issue-item">
+                    <span class="tag">bug</span> <span class="font-semibold">北京-产品-Yoan:</span> 群聊日报排版问题 (后由 北京-小菜与老鸟 调整解决)。
+                </div>
+                <div class="issue-item">
+                    <span class="tag">bug</span> <span class="font-semibold">沉默:</span> Refly Mac 客户端引导界面在黑暗模式下显示有 Bug。
+                </div>
+                 <div class="issue-item">
+                    <span class="tag">question</span> <span class="font-semibold">北京-小菜与老鸟:</span> Refly 桌面端 Local First 数据同步机制疑问。
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mindmap">
+            <i class="fas fa-project-diagram card-icon-bg"></i>
+            <h2 class="card-title">核心概念关系图</h2>
+            <div id="jsmind_container"></div>
+        </div>
+
+        <div class="card quotes">
+            <i class="fas fa-quote-left card-icon-bg"></i>
+            <h2 class="card-title">精彩引用</h2>
+            <ul class="text-content">
+                <li>"Refly 的 deepseek 是 openrouter 供应商吧 应该自动就是 0528 最新版了" - @北京-小菜与老鸟</li>
+                <li>"这个版本是完全 local first 的，所有数据都不出本地，后续会打通 cloud 版本的订阅套餐，支持数据云同步" - @上海-Refly-Marc (解释 Refly 桌面版)</li>
+                <li>"DeepSeek 总是在假期前偷偷给我们惊喜，Tom 也是如此。我有预感今天能给咱们一个 surprise" - @RAM (精准预言家)</li>
+                <li>"智源大会是顶级学术技术会议，不是偏应用的" - @社恐患者杨老师</li>
+                <li>"我突然想起来是不是可以做小明剑魔那种风格的" - @沉默 (对 AI 视频的畅想)</li>
+            </ul>
+        </div>
+
+        <div class="card links-resources">
+            <i class="fas fa-link card-icon-bg"></i>
+            <h2 class="card-title">重要链接与资源</h2>
+            <ul class="text-content overflow-y-auto max-h-80">
+                <li><a href="https://refly.ai/share/code/cod-mndplsmkfqj0sumu9r8y7u8x" target="_blank">Refly 分享 (Gemini 2.5 Pro 示例)</a></li>
+                <li><a href="http://mp.weixin.qq.com/s?__biz=MzU0MDk3NTUxMA==&mid=2247489624&idx=1&sn=ddd9d2e2a9a453f6c26634701e0a9ea7" target="_blank">四大顶尖模型对决 (Deepseek R1测评)</a></li>
+                <li><a href="https://www.xiaohongshu.com/discovery/item/68384de000000000210048c1" target="_blank">DeepSeek-R1 更新 (小红书)</a></li>
+                <li><a href="http://wxapp.tc.qq.com/251/20302/stodownload?encfilekey=Cvvj5Ix3eewK0tHtibORqcsqchXNh0Gf3sJcaYqC2rQD4GWq4SC1ItD2biaia8Olm196rrhosty1X1q9LDibtKDRfRaw12dfr9vtBBfDD8Ujd6L1M8jhXIHEkCOfTOU4bMN7" target="_blank">Flowith Agent Neo 开放 (视频号)</a></li>
+                <li><a href="https://refly.ai/share/code/cod-wj46t6ui3gdkszmr1i6atejg" target="_blank">昨日群聊日报 (05-29)</a></li>
+                <li><a href="https://www.xiaohongshu.com/discovery/item/682dae570000000023013926" target="_blank">MacBook+FlipGo三屏协作 (小红书)</a></li>
+                <li><a href="https://2025.baai.ac.cn/" target="_blank">智源大会 (BAAI Conference)</a></li>
+                <li><a href="https://stitch.withgoogle.com/" target="_blank">Stitch with Google</a></li>
+                 <li><a href="https://powerformer.feishu.cn/docx/A78EdyARjo3wNxxk6PYc9ODYnRe" target="_blank">Refly 桌面端下载链接与 Bug 修复记录</a></li>
+                <li><a href="https://mp.weixin.qq.com/s/WWdb2UACBC2gLXCYQV_iHQ" target="_blank">阿里通义灵码IDE发布</a></li>
+            </ul>
+        </div>
+
+        <div class="card active-stars">
+            <i class="fas fa-star card-icon-bg"></i>
+            <h2 class="card-title">活跃之星</h2>
+            <ul class="text-content">
+                <li>@Time will tell (53)</li>
+                <li>@武汉-木子不是木子狸 (48)</li>
+                <li>@沉默 (32)</li>
+                <li>@北京-小菜与老鸟 (22)</li>
+                <li>@Peng (21)</li>
+                <li>@紫苏子 (19)</li>
+                <li>@上海-Refly-Marc (17)</li>
+                <li>@且听 (16)</li>
+                <li>@永杰 (11)</li>
+                <li>@上海 - Refly - Tom (11)</li>
+            </ul>
+            <p class="text-xs text-gray-500 mt-2">注: @北京-小菜与老鸟 为日报制作者，部分发言为指令或引用。</p>
+        </div>
+
+        <div class="card word-cloud">
+            <i class="fas fa-cloud card-icon-bg"></i>
+            <h2 class="card-title">词云</h2>
+            <div class="word-cloud-content text-content">
+                <span style="font-size: 2em; opacity: 1;">Refly</span>
+                <span style="font-size: 1.8em; opacity: 0.9;">客户端</span>
+                <span style="font-size: 1.7em; opacity: 0.85;">DeepSeek</span>
+                <span style="font-size: 1.6em; opacity: 0.8;">Mac</span>
+                <span style="font-size: 1.5em; opacity: 0.75;">模型</span>
+                <span style="font-size: 1.4em; opacity: 0.7;">版本</span>
+                <span style="font-size: 1.4em; opacity: 0.7;">Tom</span>
+                <span style="font-size: 1.3em; opacity: 0.65;">Bug</span>
+                <span style="font-size: 1.3em; opacity: 0.65;">Windows</span>
+                <span style="font-size: 1.2em; opacity: 0.6;">体验</span>
+                <span style="font-size: 1.2em; opacity: 0.6;">分享</span>
+                <span style="font-size: 1.1em; opacity: 0.55;">日报</span>
+                <span style="font-size: 1.1em; opacity: 0.55;">链接</span>
+                <span style="font-size: 1em; opacity: 0.5;">下载</span>
+                <span style="font-size: 1em; opacity: 0.5;">问题</span>
+                <span style="font-size: 1em; opacity: 0.5;">Mini</span>
+                <span style="font-size: 0.9em; opacity: 0.45;">测试</span>
+                <span style="font-size: 0.9em; opacity: 0.45;">AI</span>
+                <span style="font-size: 0.9em; opacity: 0.45;">视频</span>
+                <span style="font-size: 0.8em; opacity: 0.4;">更新</span>
+                <span style="font-size: 0.8em; opacity: 0.4;">支持</span>
+                <span style="font-size: 0.8em; opacity: 0.4;">数据</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JSMind
+        function load_jsmind(){
+            var mind = {
+                meta:{
+                    name: '群聊核心概念',
+                    author: 'AI Report Generator',
+                    version: '0.2'
+                },
+                format: 'node_tree',
+                data: {
+                    id: 'root', topic: '今日群聊核心', direction:'right', expanded:true,
+                    children:[
+                        {id: 'refly', topic: 'Refly 产品', direction:'right', expanded:true,
+                         children:[
+                             {id: 'refly-client', topic: '桌面客户端发布 (Mac)', expanded:false, children:[
+                                 {id: 'client-bug', topic: 'Bug反馈 (白屏等)'},
+                                 {id: 'client-feature', topic: 'Local First & 云同步'},
+                                 {id: 'client-win', topic: 'Windows版期待'},
+                             ]},
+                             {id: 'refly-model', topic: '集成模型 (DeepSeek, Gemini)'},
+                             {id: 'refly-community', topic: '社区互动 (日报, Issue)'}
+                         ]},
+                        {id: 'ai-models', topic: 'AI 大模型', direction:'right', expanded:true,
+                         children:[
+                             {id: 'deepseek', topic: 'DeepSeek R1 (更新, 表现)'},
+                             {id: 'gemini', topic: 'Gemini (对比提及)'},
+                             {id: 'other-models', topic: '通义千问 (Lingma IDE)'}
+                         ]},
+                        {id: 'hardware', topic: '硬件与设备', direction:'right', expanded:false,
+                         children:[
+                             {id: 'mac-mini', topic: 'Mac Mini (M2/M4)'},
+                             {id: 'ipad', topic: 'iPad (随航副屏)'},
+                             {id: 'accessories', topic: '显示器, FlipGo学习机'}
+                         ]},
+                        {id: 'ai-tools', topic: '其他AI工具', direction:'left', expanded:false,
+                         children:[
+                             {id: 'flowith', topic: 'Flowith (画布, 定价)'},
+                             {id: 'notebooklm', topic: 'NotebookLM (播客生成)'},
+                             {id: 'stitch', topic: 'Stitch (Google)'},
+                             {id: 'ai-ide', topic: 'AI IDE (通义灵码)'}
+                         ]},
+                        {id: 'community', topic: '社群动态', direction:'left', expanded:true,
+                         children:[
+                             {id: 'daily-report', topic: '群聊日报 (AI生成)'},
+                             {id: 'link-sharing', topic: '链接与资源分享'},
+                             {id: '618-shopping', topic: '618购物讨论'}
+                         ]}
+                    ]
+                }
+            };
+            var options = {
+                container: 'jsmind_container',
+                editable: false,
+                theme: 'primary', // Use a built-in theme, or customize further. 'primary' is often blue-ish.
+                 view:{
+                    engine: 'canvas',   // 思维导图各节点之间线条的绘制引擎
+                    hmargin:100,        // 思维导图距容器外框的最小水平距离
+                    vmargin:50,         // 思维导图距容器外框的最小垂直距离
+                    line_width:2,       // 思维导图线条的粗细
+                    line_color:'#58A6FF' // 思维导图线条的颜色
+                },
+                layout:{
+                    hspace:60,          // 节点之间的水平距离
+                    vspace:30,          // 节点之间的垂直距离
+                    pspace:13           // 节点与连接线之间的水平距离（用于容纳节点收缩/展开控制器）
+                },
+            }
+            var jm = new jsMind(options);
+            jm.show(mind);
+            
+            // Custom styles for jsmind nodes to match the page theme
+            const jmnodes = document.querySelectorAll('#jsmind_container jmnode');
+            jmnodes.forEach(node => {
+                node.style.backgroundColor = 'var(--bg-card-alt)';
+                node.style.color = 'var(--text-primary)';
+                node.style.borderColor = 'var(--accent-primary)';
+                node.style.boxShadow = '2px 2px 5px rgba(0,0,0,0.3)';
+                node.style.borderRadius = 'var(--border-radius)';
+            });
+        }
+
+        // Run on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Placeholder: In a real scenario, this data would be dynamically populated
+            // from the parsed chat log. For this example, I've hardcoded summary values.
+            // document.getElementById('group-name').textContent = "微信群聊日报 - Refly 用户交流群";
+            // document.getElementById('report-date').textContent = "2025-05-30";
+            // document.getElementById('time-range').textContent = "00:00:28 - 23:30:10";
+            // document.getElementById('msg-count').textContent = "195"; // Example
+            // document.getElementById('active-users-count').textContent = "28"; // Example
+            // document.getElementById('hot-topics-count').textContent = "5"; // Example
+            // document.getElementById('links-count').textContent = "8"; // Example
+
+            try {
+                load_jsmind();
+            } catch(e) {
+                console.error("JSMind loading error:", e);
+                document.getElementById('jsmind_container').innerHTML = "<p style='color:red;'>思维导图加载失败。</p>";
+            }
+        });
+
+    </script>
+</body>
+</html>

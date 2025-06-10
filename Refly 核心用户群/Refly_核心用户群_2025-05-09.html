@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refly Enthusiasts Group日报 - 2024-05-09</title>
+    <style>
+        /* 严格定义的CSS样式，确保风格一致性 */
+        :root {
+            --bg-primary: #0f0e17;
+            --bg-secondary: #1a1925;
+            --bg-tertiary: #252336;
+            --text-primary: #fffffe;
+            --text-secondary: #a7a9be;
+            --accent-primary: #ff8906;
+            --accent-secondary: #f25f4c; /* Bug */
+            --accent-tertiary: #e53170; /* Wontfix */
+            --accent-blue: #3da9fc;     /* Question, Help Wanted */
+            --accent-purple: #7209b7;   /* Deployment */
+            --accent-cyan: #00b4d8;     /* Documentation */
+            --accent-green: #2ecc71;    /* Enhancement */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background-color: var(--bg-secondary);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 10px;
+        }
+
+        .date {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .meta-info span {
+            background-color: var(--bg-tertiary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        section {
+            background-color: var(--bg-secondary);
+            margin-bottom: 30px;
+            padding: 25px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin: 15px 0 10px 0;
+        }
+
+        h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-secondary);
+            margin: 12px 0 8px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 回顾区 */
+        .recap {
+            background-color: var(--bg-tertiary);
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent-cyan);
+        }
+        .recap p {
+            margin: 0;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+        .recap a {
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* 卡片容器样式 */
+        .topics-container, .tutorials-container, .issues-container, .messages-container,
+        .dialogues-container, .qa-container, .participants-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        /* 卡片样式 */
+        .topic-card, .tutorial-card, .issue-card, .message-card,
+        .dialogue-card, .qa-card, .participant-item, .night-owl-item {
+            background-color: var(--bg-tertiary);
+            padding: 20px;
+        }
+
+        /* 话题卡片 */
+        .topic-category {
+            display: inline-block;
+            background-color: var(--accent-blue);
+            color: var(--text-primary);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .topic-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .keyword {
+            background-color: rgba(61, 169, 252, 0.2);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .topic-mentions {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        /* 教程卡片 */
+        .tutorial-type {
+            display: inline-block;
+            background-color: var(--accent-secondary);
+            color: var(--text-primary);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .tutorial-meta {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .tutorial-category {
+            margin-top: 10px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* --- 新增：Issue 卡片样式 --- */
+        .issue-card h3 { /* 调整 Issue 卡片内标题样式 */
+             margin-top: 5px; /* 减少标签和标题之间的间距 */
+             margin-bottom: 15px;
+             font-size: 20px; /* 稍微减小字体 */
+             color: var(--text-primary); /* 使用主文本颜色 */
+        }
+
+        .issue-label {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary); /* 默认白色文字 */
+        }
+        /* 为每个标签定义背景色 */
+        .label-bug { background-color: var(--accent-secondary); } /* Red */
+        .label-deployment { background-color: var(--accent-purple); } /* Purple */
+        .label-documentation { background-color: var(--accent-cyan); } /* Cyan */
+        .label-enhancement { background-color: var(--accent-green); } /* Green */
+        .label-help-wanted { background-color: var(--accent-blue); color: var(--bg-primary); } /* Blue, dark text */
+        .label-question { background-color: var(--accent-blue); color: var(--bg-primary); } /* Blue, dark text */
+        .label-wontfix { background-color: var(--accent-tertiary); } /* Pink/Red */
+
+        .issue-meta {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .issue-meta span {
+            margin-right: 15px;
+        }
+        .issue-description {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        /* --- Issue 卡片样式结束 --- */
+
+        /* 消息卡片 */
+        .message-meta {
+            margin-bottom: 10px;
+        }
+
+        .message-meta span {
+            margin-right: 15px;
+            font-size: 14px;
+        }
+
+        .message-type {
+            background-color: var(--accent-tertiary);
+            color: var(--text-primary);
+            padding: 3px 10px;
+            border-radius: 15px;
+        }
+
+        .priority {
+            padding: 3px 10px;
+            border-radius: 15px;
+        }
+
+        .priority-high {
+            background-color: var(--accent-secondary);
+        }
+
+        .priority-medium {
+            background-color: var(--accent-primary);
+        }
+
+        .priority-low {
+            background-color: var(--accent-blue);
+        }
+
+        /* 对话卡片 */
+        .dialogue-type {
+            display: inline-block;
+            background-color: var(--accent-purple);
+            color: var(--text-primary);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .dialogue-content {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .dialogue-highlight {
+            font-style: italic;
+            color: var(--accent-primary);
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        /* 问答卡片 */
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .question-meta, .answer-meta {
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .question-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background-color: rgba(114, 9, 183, 0.2);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .answer {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .accepted-badge {
+            background-color: var(--accent-primary);
+            color: var(--text-primary);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+
+        /* 热度图 */
+        .heatmap-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .heat-topic {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .heat-percentage {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+
+        .heat-bar {
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 5px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .heat-fill {
+            height: 100%;
+            border-radius: 10px;
+        }
+         .heat-count {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+
+        /* 话唠榜 */
+        .participant-rank {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-right: 15px;
+            float: left;
+        }
+
+        .participant-name {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .participant-count {
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+
+        .participant-characteristics, .participant-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .characteristic {
+            background-color: rgba(242, 95, 76, 0.2);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .word {
+            background-color: rgba(229, 49, 112, 0.2);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        /* 熬夜冠军 */
+        .night-owls-container {
+            display: grid;
+            grid-template-columns: 1fr; /* Ensure it's single column by default */
+            gap: 20px;
+        }
+        .night-owl-item {
+            background: linear-gradient(135deg, #0f0e17 0%, #192064 100%);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .owl-crown {
+            font-size: 40px;
+            margin-right: 20px;
+        }
+
+        .owl-name {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .owl-title {
+            color: var(--accent-primary);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .owl-time, .owl-messages, .owl-last-message {
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+        .owl-last-message {word-break: break-all;}
+
+
+        .owl-note {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* 词云 - 云朵样式 */
+        .cloud-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .cloud-wordcloud {
+            position: relative;
+            width: 100%;
+            padding-top: 66.67%;
+            height: 0;
+            margin: 0 auto;
+            background-color: var(--bg-tertiary);
+            border-radius: 50%;
+            box-shadow:
+                40px 40px 0 -5px var(--bg-tertiary),
+                80px 10px 0 -10px var(--bg-tertiary),
+                110px 35px 0 -5px var(--bg-tertiary),
+                -40px 50px 0 -8px var(--bg-tertiary),
+                -70px 20px 0 -10px var(--bg-tertiary);
+            overflow: visible;
+        }
+
+        .cloud-word {
+            position: absolute;
+            transform-origin: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cloud-word:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .cloud-legend {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        /* 底部 */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .disclaimer {
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* --- 响应式设计 --- */
+
+        /* 平板电脑 (例如 <= 992px) */
+        @media (max-width: 992px) {
+            body {
+                padding: 15px;
+                font-size: 15px;
+            }
+            h1 { font-size: 32px; }
+            h2 { font-size: 26px; }
+            h3 { font-size: 20px; }
+            h4 { font-size: 17px; }
+
+            section {
+                padding: 20px;
+            }
+
+            /* 调整词云大小 */
+            .cloud-wordcloud {
+                box-shadow:
+                    30px 30px 0 -4px var(--bg-tertiary),
+                    60px 8px 0 -8px var(--bg-tertiary),
+                    90px 25px 0 -4px var(--bg-tertiary),
+                    -30px 40px 0 -6px var(--bg-tertiary),
+                    -55px 15px 0 -8px var(--bg-tertiary);
+            }
+            .cloud-legend {
+                 margin-top: 40px; /* 减少间距 */
+                 gap: 20px;
+            }
+            .legend-label { font-size: 14px; }
+
+            /* 调整 Issue 卡片标题 */
+            .issue-card h3 { font-size: 19px; }
+        }
+
+        /* 手机 (例如 <= 768px) */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 14px;
+            }
+            header { padding: 20px 0; margin-bottom: 20px;}
+            h1 { font-size: 28px; }
+            h2 { font-size: 22px; margin-bottom: 15px; padding-bottom: 8px; }
+            h3 { font-size: 18px; margin: 12px 0 8px 0; }
+            h4 { font-size: 16px; }
+
+            section {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .meta-info {
+                flex-direction: column; /* 垂直堆叠 */
+                gap: 10px;
+                align-items: center;
+            }
+            .meta-info span { padding: 4px 12px; font-size: 13px;}
+
+            /* 卡片容器调整为单列 */
+            .topics-container, .tutorials-container, .issues-container, .messages-container,
+            .dialogues-container, .qa-container, .participants-container,
+            .heatmap-container {
+                gap: 15px;
+            }
+
+            /* 卡片内边距 */
+            .topic-card, .tutorial-card, .issue-card, .message-card,
+            .dialogue-card, .qa-card, .participant-item, .night-owl-item {
+                padding: 15px;
+            }
+
+            /* 消息元信息换行 */
+            .message-meta span, .issue-meta span { /* 应用到 Issue Meta */
+                display: block; /* 每个信息项占一行 */
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            .message-meta span:last-child, .issue-meta span:last-child { margin-bottom: 0; }
+
+            /* 调整 Issue 卡片标题 */
+            .issue-card h3 { font-size: 17px; margin-bottom: 10px; }
+            .issue-label { font-size: 13px; padding: 3px 10px; }
+            .issue-description { padding: 8px 12px; }
+
+            /* 调整话唠榜排名样式 */
+            .participant-rank {
+                 float: none; /* 取消浮动 */
+                 margin-right: 0;
+                 margin-bottom: 10px; /* 增加下方间距 */
+                 text-align: center; /* 居中显示 */
+                 display: block; /* 确保占满宽度 */
+                 font-size: 24px;
+            }
+            .participant-info {
+                /* 可能需要调整participant-info的样式以适应无浮动 */
+                overflow: hidden; /* 清除内部浮动影响（虽然rank已取消浮动，以防万一） */
+                text-align: center; /* 居中内容 */
+            }
+            .participant-characteristics, .participant-words {
+                 justify-content: center; /* 居中标签 */
+            }
+
+            /* 调整熬夜冠军布局 */
+             .night-owl-item {
+                flex-direction: column; /* 垂直堆叠 */
+                text-align: center;
+            }
+            .owl-crown {
+                margin-right: 0;
+                margin-bottom: 15px; /* 在图标和文字间添加间距 */
+                font-size: 36px;
+            }
+             .owl-info {
+                width: 100%; /* 确保信息部分占满宽度 */
+            }
+            .owl-note { font-size: 12px; }
+
+            /* 词云调整 */
+            .cloud-wordcloud {
+                border-radius: 40%; /* 稍微不那么圆 */
+                 box-shadow:
+                    20px 20px 0 -3px var(--bg-tertiary),
+                    40px 5px 0 -6px var(--bg-tertiary),
+                    60px 15px 0 -3px var(--bg-tertiary),
+                    -20px 30px 0 -4px var(--bg-tertiary),
+                    -40px 10px 0 -6px var(--bg-tertiary);
+            }
+             /* 简化词云词语显示 - 隐藏较小的词 */
+            /* 注意：这需要配合JS或后端逻辑来给不同大小的词添加class */
+            /* .cloud-word.small { display: none; } */
+
+            .cloud-legend {
+                 flex-direction: column; /* 垂直堆叠图例 */
+                 align-items: center;
+                 gap: 10px;
+                 margin-top: 30px;
+            }
+             .legend-item { gap: 8px;}
+             .legend-color { width: 15px; height: 15px; }
+             .legend-label { font-size: 13px; }
+
+            /* 底部调整 */
+            footer {
+                padding: 15px 0;
+                margin-top: 30px;
+                font-size: 12px;
+            }
+        }
+
+        /* 超小屏幕 (例如 <= 480px) - 可选，进一步微调 */
+        @media (max-width: 480px) {
+            h1 { font-size: 24px; }
+            h2 { font-size: 20px; }
+            h3 { font-size: 17px; }
+            h4 { font-size: 15px; }
+
+            .meta-info span { padding: 3px 10px; font-size: 12px;}
+
+             /* 进一步减小卡片内边距 */
+            .topic-card, .tutorial-card, .issue-card, .message-card,
+            .dialogue-card, .qa-card, .participant-item, .night-owl-item {
+                padding: 12px;
+            }
+
+            /* 标签/关键词字体 */
+            .keyword, .tag, .characteristic, .word, .issue-label { /* 应用到 Issue Label */
+                font-size: 12px;
+                padding: 2px 8px;
+            }
+            .issue-card h3 { font-size: 16px; }
+            .issue-meta { font-size: 12px; }
+            .issue-meta span { margin-bottom: 3px; }
+            .issue-description { font-size: 13px; padding: 6px 10px; }
+
+
+             /* 词云字体可能需要进一步缩小，但这通常由生成词云的库或逻辑控制 */
+             .cloud-word {
+                /* font-size: calc(10px + 1vw); 示例：使用视口单位 */
+             }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Refly Enthusiasts Group日报</h1>
+        <p class="date">2024-05-09</p>
+        <div class="meta-info">
+            <span>总消息数：395</span>
+            <span>活跃用户：27</span>
+            <span>时间范围：00:12 - 23:46</span>
+        </div>
+    </header>
+
+    <!-- 昨日回顾 -->
+    <div class="recap">
+        <p>📅 昨日（2024-05-08）群聊日报回顾：<a href="https://refly.ai/share/code/cod-eppxrhvku02rncwuhwdn1hsn" target="_blank" rel="noopener noreferrer">点击查看</a></p>
+    </div>
+
+    <!-- 1. 今日讨论热点 -->
+    <section class="hot-topics">
+        <h2>今日讨论热点</h2>
+        <div class="topics-container">
+            <div class="topic-card">
+                <h3>Refly 产品功能与未来展望</h3>
+                <div class="topic-category">产品讨论</div>
+                <p class="topic-summary">今日群内围绕Refly的各项功能展开热烈讨论，包括模型切换（Claude不稳定，转向Gemini 2.5 Pro）、UI改版（暗黑模式即将上线）、新首页灰度测试、组件命名、MCP配置、音视频及各类文件上传支持等。大家对Refly的未来发展充满期待，特别是量化付费的生图生视频套餐、以及桌面端的STDIO功能。</p>
+                <div class="topic-keywords">
+                    <span class="keyword">Refly</span>
+                    <span class="keyword">模型供应商</span>
+                    <span class="keyword">UI改版</span>
+                    <span class="keyword">暗黑模式</span>
+                    <span class="keyword">首页</span>
+                    <span class="keyword">MCP</span>
+                    <span class="keyword">STDIO</span>
+                    <span class="keyword">PDF上传</span>
+                    <span class="keyword">组件命名</span>
+                </div>
+                <div class="topic-mentions">提及次数：80+</div>
+            </div>
+            <div class="topic-card">
+                <h3>木子开发 "Prompt Sidebar" 浏览器插件</h3>
+                <div class="topic-category">技术分享</div>
+                <p class="topic-summary">群友“武汉-木子不是木子狸”分享并持续更新其开发的浏览器插件 "Prompt Sidebar"。该插件支持文件夹、标签管理、批量删除、AI自动生成标题和tag等功能。群友积极试用并提出反馈，讨论了CRX文件安装、UI设计（参考Ant Design）、功能需求以及未来集成到Refly桌面端的可能性。木子也分享了最新版CRX文件和安装教程。</p>
+                <div class="topic-keywords">
+                    <span class="keyword">Prompt Sidebar</span>
+                    <span class="keyword">浏览器插件</span>
+                    <span class="keyword">CRX</span>
+                    <span class="keyword">文件夹</span>
+                    <span class="keyword">标签</span>
+                    <span class="keyword">UI设计</span>
+                    <span class="keyword">开源</span>
+                    <span class="keyword">推广</span>
+                </div>
+                <div class="topic-mentions">提及次数：60+</div>
+            </div>
+            <div class="topic-card">
+                <h3>AI在教育领域的应用与探讨</h3>
+                <div class="topic-category">行业观察</div>
+                <p class="topic-summary">群友们广泛讨论了AI在教育领域的应用，从老师使用AI制作PPT、口诀视频，到学生AI课程的普及（甚至五年级小学生）。分享了多个相关新闻链接和视频号内容，探讨了AI辅导作业、AI绘本、AI编程等场景。同时也涉及到对孩子使用电子产品、游戏成瘾等问题的思考和育儿经验交流。</p>
+                <div class="topic-keywords">
+                    <span class="keyword">AI教育</span>
+                    <span class="keyword">小学生</span>
+                    <span class="keyword">PPT制作</span>
+                    <span class="keyword">视频生成</span>
+                    <span class="keyword">AI课程</span>
+                    <span class="keyword">育儿</span>
+                    <span class="keyword">流量密码</span>
+                </div>
+                <div class="topic-mentions">提及次数：70+</div>
+            </div>
+            <div class="topic-card">
+                <h3>单机游戏与PC掌机文化</h3>
+                <div class="topic-category">兴趣交流</div>
+                <p class="topic-summary">下午时段，群内掀起了一股关于单机游戏和PC掌机的讨论热潮。多位群友分享了自己喜欢的游戏类型（如故事性RPG、策略游戏）、推荐了具体作品（如《去月球》、《赛博朋克2077》、《荒野大镖客》），并交流了PC掌机（如GPD、Ayaneo）的使用体验，包括在通勤路上玩3A大作、模拟器等。气氛轻松愉快，找到了不少同好。</p>
+                <div class="topic-keywords">
+                    <span class="keyword">单机游戏</span>
+                    <span class="keyword">PC掌机</span>
+                    <span class="keyword">3A大作</span>
+                    <span class="keyword">赛博朋克2077</span>
+                    <span class="keyword">去月球</span>
+                    <span class="keyword">GPD</span>
+                    <span class="keyword">Ayaneo</span>
+                    <span class="keyword">模拟器</span>
+                </div>
+                <div class="topic-mentions">提及次数：50+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 实用教程与资源分享 -->
+    <section class="tutorials">
+        <h2>实用教程与资源分享</h2>
+        <div class="tutorials-container">
+            <div class="tutorial-card">
+                <div class="tutorial-type">RESOURCE</div>
+                <h3>Bolt.new - 开源开发环境工具</h3>
+                <div class="tutorial-meta">
+                    <span class="shared-by">紫苏子</span>
+                    <span class="share-time">08:09</span>
+                </div>
+                <p class="tutorial-summary">紫苏子分享了一个名为 Bolt.new 的工具，并提供了官网和GitHub开源地址。这是一个与
+                    StackBlitz相关的项目，可能用于快速创建和共享开发环境。</p>
+                <div class="key-points">
+                    <h4>要点：</h4>
+                    <ul>
+                        <li>官网: bolt.new</li>
+                        <li>开源地址: https://github.com/stackblitz/bolt.new</li>
+                        <li>类型：开发工具/环境</li>
+                    </ul>
+                </div>
+                <div class="tutorial-link">
+                    <a href="https://bolt.new/" class="link valid">查看官网: bolt.new</a>
+                </div>
+                <div class="tutorial-category">分类：开发工具</div>
+            </div>
+            <div class="tutorial-card">
+                <div class="tutorial-type">RESOURCE</div>
+                <h3>ACI.dev - 开源MCP平台</h3>
+                <div class="tutorial-meta">
+                    <span class="shared-by">紫苏子</span>
+                    <span class="share-time">08:14</span>
+                </div>
+                <p class="tutorial-summary">分享了一篇介绍 ACI.dev 平台的文章。ACI.dev 是一个开源的多模型协作平台（MCP），能一站直连600+工具，旨在增强智能体的能力。</p>
+                <div class="key-points">
+                    <h4>要点：</h4>
+                    <ul>
+                        <li>平台名称: ACI.dev</li>
+                        <li>功能: 开源MCP，连接600+工具</li>
+                        <li>目标: 提升智能体能力</li>
+                    </ul>
+                </div>
+                <div class="tutorial-link">
+                    <a href="http://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650967481&idx=1&sn=53b4d0d742d2fd7a6c912f4c081016f2" class="link valid">查看原文: mp.weixin.qq.com</a>
+                </div>
+                <div class="tutorial-category">分类：AI平台</div>
+            </div>
+             <div class="tutorial-card">
+                <div class="tutorial-type">RESOURCE</div>
+                <h3>Prompt Sidebar 浏览器插件 (CRX)</h3>
+                <div class="tutorial-meta">
+                    <span class="shared-by">武汉-木子不是木子狸</span>
+                    <span class="share-time">09:42 / 11:47</span>
+                </div>
+                <p class="tutorial-summary">武汉-木子不是木子狸分享了他开发的 "Prompt Sidebar" 浏览器插件的最新版CRX文件，并提供了夸克网盘链接。该插件用于管理和使用Prompt，新版加入了文件夹和批量删除功能，后续还会增加AI自动生成标题tag等。</p>
+                <div class="key-points">
+                    <h4>要点：</h4>
+                    <ul>
+                        <li>工具名称: Prompt Sidebar</li>
+                        <li>类型: 浏览器插件 (CRX)</li>
+                        <li>功能: Prompt管理, 文件夹, 标签, AI辅助</li>
+                        <li>分享者: 武汉-木子不是木子狸</li>
+                    </ul>
+                </div>
+                <div class="tutorial-link">
+                    <a href="https://pan.quark.cn/s/edd5b19597c0" class="link valid">查看网盘链接: pan.quark.cn</a>
+                </div>
+                <div class="tutorial-category">分类：AI工具/插件</div>
+            </div>
+            <div class="tutorial-card">
+                <div class="tutorial-type">TUTORIAL</div>
+                <h3>CRX插件离线安装教程</h3>
+                <div class="tutorial-meta">
+                    <span class="shared-by">武汉-木子不是木子狸</span>
+                    <span class="share-time">10:17 / 11:34</span>
+                </div>
+                <p class="tutorial-summary">针对群友安装CRX插件遇到的问题，木子分享了一个CSDN博客链接，提供了详细的谷歌浏览器（Chrome）离线安装CRX后缀的插件的方法。</p>
+                <div class="key-points">
+                    <h4>要点：</h4>
+                    <ul>
+                        <li>内容: Chrome浏览器离线安装CRX插件</li>
+                        <li>平台: CSDN博客</li>
+                        <li>适用场景: 手动安装未上架或特定版本的浏览器插件</li>
+                    </ul>
+                </div>
+                <div class="tutorial-link">
+                    <a href="https://blog.csdn.net/NXY666/article/details/121490881" class="link valid">查看教程: blog.csdn.net</a>
+                </div>
+                <div class="tutorial-category">分类：软件技巧</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 我要提 issue -->
+    <section class="issues-raised">
+        <h2>我要提 issue</h2>
+        <div class="issues-container">
+            <div class="issue-card">
+                <span class="issue-label label-bug">bug</span>
+                <h3>Refly代码预览下载PDF按钮无反应</h3>
+                <div class="issue-meta">
+                    <span class="proposer">福州DavidChen</span>
+                    <span class="issue-time">10:55</span>
+                </div>
+                <p class="issue-description">代码预览原来可以实现点击按钮下载pdf的，但现在点击按钮没反应了，是不是出bug了？（Tom回应：代码预览一直不支持，只有文档有）</p>
+            </div>
+            <div class="issue-card">
+                <span class="issue-label label-enhancement">enhancement</span>
+                <h3>Refly增加量付生图、视频套餐</h3>
+                <div class="issue-meta">
+                    <span class="proposer">Time will tell</span>
+                    <span class="issue-time">09:12</span>
+                </div>
+                <p class="issue-description">询问Refly何时推出按量付费的图像和视频生成套餐，并表示对Refly甄选的信任。（Tom回应：快了快了）</p>
+            </div>
+            <div class="issue-card">
+                <span class="issue-label label-bug">bug</span>
+                <h3>Refly画板列表底部显示i18n变量名</h3>
+                <div class="issue-meta">
+                    <span class="proposer">喵爸联萌</span>
+                    <span class="issue-time">12:12</span>
+                </div>
+                <p class="issue-description">画板列表结尾处，显示了类似 "i18n_canvas_list_no_more_data" 的文本常量，而不是“下面没有了”的实际文本。（Tom回应：应该是改漏了）</p>
+            </div>
+             <div class="issue-card">
+                <span class="issue-label label-question">question</span>
+                <h3>Refly备忘录字数限制或显示问题</h3>
+                <div class="issue-meta">
+                    <span class="proposer">北京-小菜与老鸟</span>
+                    <span class="issue-time">12:10</span>
+                </div>
+                <p class="issue-description">询问Refly备忘录能放多少字，有时弄一个长点的提示词显示不完整。</p>
+            </div>
+            <div class="issue-card">
+                <span class="issue-label label-enhancement">enhancement</span>
+                <h3>Refly组件自动或自定义命名</h3>
+                <div class="issue-meta">
+                    <span class="proposer">喵爸联萌 / 紫苏子</span>
+                    <span class="issue-time">20:50 / 20:59</span>
+                </div>
+                <p class="issue-description">建议Refly能像给文档生成标题那样，给小组件（如代码组件）自动生成标题或允许用户自定义命名、加版本号，避免画布上全是“代码组件”不易区分。（Tom回应：这个确实要改，已记录）</p>
+            </div>
+            <div class="issue-card">
+                <span class="issue-label label-bug">bug</span>
+                <h3>Refly首页输入问题后跳转画布节点丢失</h3>
+                <div class="issue-meta">
+                    <span class="proposer">北京-小菜与老鸟</span>
+                    <span class="issue-time">19:52</span>
+                </div>
+                <p class="issue-description">从Refly新首页输入内容并发送后，跳转到具体画布时，发送的内容没有形成节点，如果右边提问框关闭，则找不到刚才的问题。（Marc回应：已复现，尽快修复）</p>
+            </div>
+            <div class="issue-card">
+                <span class="issue-label label-bug">bug</span>
+                <h3>Refly "问问AI" 输入框内容易丢失</h3>
+                <div class="issue-meta">
+                    <span class="proposer">喵爸联萌</span>
+                    <span class="issue-time">21:56</span>
+                </div>
+                <p class="issue-description">在“问问AI”的聊天框里写提示时，如果未钉图钉就点开别的提问框，会导致当前输入框被替换，已写的上百字提示丢失。建议优化，如打字后自动钉住或关闭前提醒。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 重要消息汇总 -->
+    <section class="important-messages">
+        <h2>重要消息汇总</h2>
+        <div class="messages-container">
+            <div class="message-card">
+                <div class="message-meta">
+                    <span class="time">09:33</span>
+                    <span class="sender">上海 - Refly - Tom</span>
+                    <span class="message-type">ANNOUNCEMENT</span>
+                    <span class="priority priority-high">优先级：高</span>
+                </div>
+                <p class="message-content">Refly正在切换模型供应商，因OpenRouter的Claude不太稳定，建议大家先用Gemini 2.5 Pro。</p>
+                <div class="message-full-content">
+                    <p>原文：“我们最近在切模型供应商了，OpenRouter 的 Claude 不太稳定。哈哈用 Gemini 2.5 Pro 先。”</p>
+                </div>
+            </div>
+            <div class="message-card">
+                <div class="message-meta">
+                    <span class="time">09:54</span>
+                    <span class="sender">上海 - Refly - Tom</span>
+                    <span class="message-type">ANNOUNCEMENT</span>
+                    <span class="priority priority-medium">优先级：中</span>
+                </div>
+                <p class="message-content">Refly即将上线由社区同学Siri Ray参与开发的暗黑模式，预计本周搞定。</p>
+                <div class="message-full-content">
+                    <p>原文：“马上上个暗黑，社区同学参与开发的[旺柴] @Siri Ray 大佬。” Siri Ray回应：“[愉快][愉快]正在做，大概这周能搞定”</p>
+                </div>
+            </div>
+            <div class="message-card">
+                <div class="message-meta">
+                    <span class="time">19:49</span>
+                    <span class="sender">上海 - Refly - Tom</span>
+                    <span class="message-type">ANNOUNCEMENT</span>
+                    <span class="priority priority-high">优先级：高</span>
+                </div>
+                <p class="message-content">Refly新首页已灰度上线，打开后不再是空白页，并加强了新手指引。</p>
+                <div class="message-full-content">
+                    <p>原文：“灰度上线了 Refly 首页，打开之后不再是空白页。加大了新手指引和提出 First question 的门槛问题。”</p>
+                </div>
+            </div>
+            <div class="message-card">
+                <div class="message-meta">
+                    <span class="time">21:24</span>
+                    <span class="sender">上海 - Refly - Tom</span>
+                    <span class="message-type">TEASER</span>
+                    <span class="priority priority-medium">优先级：中</span>
+                </div>
+                <p class="message-content">Refly在MCP Agent配置中出现STDIO选项，暗示与未来桌面端联动，可执行本地命令。</p>
+                <div class="message-full-content">
+                    <p>Tom分享截图显示MCP Agent中包含STDIO执行器，并提示“跟着桌面端（”。群友讨论STDIO主要用于本地，SSE和HTTP为远程。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 有趣对话或金句 -->
+    <section class="interesting-dialogues">
+        <h2>有趣对话或金句</h2>
+        <div class="dialogues-container">
+            <div class="dialogue-card">
+                <div class="dialogue-type">QUOTE</div>
+                <div class="dialogue-content">
+                    <div class="message">
+                        <div class="message-meta">
+                            <span class="speaker">紫苏子</span>
+                            <span class="time">08:11</span>
+                        </div>
+                        <p class="message-content">估计跟剪映一个🐦性，一边用，一边骂骂咧咧的[翻白眼]</p>
+                    </div>
+                     <div class="message">
+                        <div class="message-meta">
+                            <span class="speaker">武汉-木子不是木子狸</span>
+                            <span class="time">10:26</span>
+                        </div>
+                        <p class="message-content">+1 (回复紫苏子关于百度产品“一边用，一边骂骂咧咧”)</p>
+                    </div>
+                </div>
+                <div class="dialogue-highlight">"一边用，一边骂骂咧咧" -- 成为用户对某些产品复杂情感的经典概括。</div>
+                <div class="dialogue-topic">相关话题：Trae/剪映/百度产品用户体验</div>
+            </div>
+            <div class="dialogue-card">
+                <div class="dialogue-type">DIALOGUE</div>
+                <div class="dialogue-content">
+                    <div class="message">
+                        <div class="message-meta">
+                            <span class="speaker">Time will tell</span>
+                            <span class="time">15:52</span>
+                        </div>
+                        <p class="message-content">你以为 有钱就快乐吗</p>
+                    </div>
+                    <div class="message">
+                        <div class="message-meta">
+                            <span class="speaker">Time will tell</span>
+                            <span class="time">15:52</span>
+                        </div>
+                        <p class="message-content">有钱的快乐 你根本想象不到</p>
+                    </div>
+                    <div class="message">
+                        <div class="message-meta">
+                            <span class="speaker">iMax</span>
+                            <span class="time">15:55</span>
+                        </div>
+                        <p class="message-content">> Time will tell(wxid_lvo2ovo1aaie22) 05-09 15:52:54<br>> 有钱的快乐 你根本想象不到<br>我们只是网友 你过界了</p>
+                    </div>
+                </div>
+                <div class="dialogue-highlight">"有钱的快乐 你根本想象不到" + "我们只是网友 你过界了" -- 经典梗的幽默互动。</div>
+                <div class="dialogue-topic">相关话题：育儿与财富观闲聊</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 问题与解答 -->
+    <section class="questions-answers">
+        <h2>问题与解答</h2>
+        <div class="qa-container">
+            <div class="qa-card">
+                <div class="question">
+                    <div class="question-meta">
+                        <span class="asker">Time will tell</span>
+                        <span class="time">08:17</span>
+                    </div>
+                    <p class="question-content">这个(截图内容为Refly模型设置相关)你们怎么设置？感觉这个小细节挺好的。</p>
+                    <div class="question-tags">
+                        <span class="tag">Refly</span>
+                        <span class="tag">模型设置</span>
+                    </div>
+                </div>
+                <div class="answers">
+                    <div class="answer">
+                        <div class="answer-meta">
+                            <span class="responder">上海 - Refly - Tom</span>
+                            <span class="time">08:22</span>
+                            <span class="accepted-badge">官方解答</span>
+                        </div>
+                        <p class="answer-content">普通模型差不多够用了。高级模型可能生成的好一点。问题分析，与上下文处理用思考模型也行，就是会很慢，分析完再喂给下一个模型。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="qa-card">
+                <div class="question">
+                    <div class="question-meta">
+                        <span class="asker">北京-小菜与老鸟</span>
+                        <span class="time">09:54</span>
+                    </div>
+                    <p class="question-content">Refly有UI改版计划吗？</p>
+                    <div class="question-tags">
+                        <span class="tag">Refly</span>
+                        <span class="tag">UI</span>
+                        <span class="tag">产品规划</span>
+                    </div>
+                </div>
+                <div class="answers">
+                    <div class="answer">
+                        <div class="answer-meta">
+                            <span class="responder">上海 - Refly - Tom</span>
+                            <span class="time">09:54</span>
+                            <span class="accepted-badge">官方解答</span>
+                        </div>
+                        <p class="answer-content">马上上个暗黑（模式），社区同学参与开发的[旺柴] @Siri Ray 大佬。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="qa-card">
+                <div class="question">
+                    <div class="question-meta">
+                        <span class="asker">张三</span>
+                        <span class="time">09:56</span>
+                    </div>
+                    <p class="question-content">现在 Refly 支持音频上传吗？</p>
+                    <div class="question-tags">
+                        <span class="tag">Refly</span>
+                        <span class="tag">功能咨询</span>
+                        <span class="tag">文件上传</span>
+                    </div>
+                </div>
+                <div class="answers">
+                    <div class="answer">
+                        <div class="answer-meta">
+                            <span class="responder">武汉-木子不是木子狸</span>
+                            <span class="time">09:56</span>
+                        </div>
+                        <p class="answer-content">还没。</p>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-meta">
+                            <span class="responder">紫苏子</span>
+                            <span class="time">09:58</span>
+                        </div>
+                        <p class="answer-content">支持音频和视频，这个空间服务费蹭蹭往上涨了[吃瓜] (Tom在后续确认目前只有Gemini能读视频，PDF可传)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 群内数据可视化 -->
+    <section class="analytics">
+        <h2>群内数据可视化</h2>
+
+        <h3>话题热度</h3>
+        <div class="heatmap-container">
+            <div class="heat-item">
+                <div class="heat-topic">Refly 产品讨论</div>
+                <div class="heat-percentage">35%</div>
+                <div class="heat-bar">
+                    <div class="heat-fill" style="width: 35%; background-color: #3da9fc;"></div>
+                </div>
+                <div class="heat-count">约85条消息</div>
+            </div>
+            <div class="heat-item">
+                <div class="heat-topic">AI教育与育儿</div>
+                <div class="heat-percentage">30%</div>
+                <div class="heat-bar">
+                    <div class="heat-fill" style="width: 30%; background-color: #f25f4c;"></div>
+                </div>
+                <div class="heat-count">约72条消息</div>
+            </div>
+            <div class="heat-item">
+                <div class="heat-topic">Prompt Sidebar插件开发</div>
+                <div class="heat-percentage">25%</div>
+                <div class="heat-bar">
+                    <div class="heat-fill" style="width: 25%; background-color: #7209b7;"></div>
+                </div>
+                <div class="heat-count">约60条消息</div>
+            </div>
+            <div class="heat-item">
+                <div class="heat-topic">单机游戏与PC掌机</div>
+                <div class="heat-percentage">20%</div>
+                <div class="heat-bar">
+                    <div class="heat-fill" style="width: 20%; background-color: #e53170;"></div>
+                </div>
+                <div class="heat-count">约50条消息</div>
+            </div>
+        </div>
+
+        <h3>话唠榜</h3>
+        <div class="participants-container">
+            <div class="participant-item">
+                <div class="participant-rank">1</div>
+                <div class="participant-info">
+                    <div class="participant-name">紫苏子</div>
+                    <div class="participant-count">65条消息</div>
+                    <div class="participant-characteristics">
+                        <span class="characteristic">资源分享家</span>
+                        <span class="characteristic">积极提问</span>
+                        <span class="characteristic">观点输出</span>
+                    </div>
+                    <div class="participant-words">
+                        <span class="word">AI</span>
+                        <span class="word">教育</span>
+                        <span class="word">插件</span>
+                        <span class="word">链接</span>
+                    </div>
+                </div>
+            </div>
+            <div class="participant-item">
+                <div class="participant-rank">2</div>
+                <div class="participant-info">
+                    <div class="participant-name">北京-产品-Yoan</div>
+                    <div class="participant-count">60条消息</div>
+                    <div class="participant-characteristics">
+                        <span class="characteristic">行业洞察</span>
+                        <span class="characteristic">育儿达人</span>
+                        <span class="characteristic">游戏迷</span>
+                    </div>
+                    <div class="participant-words">
+                        <span class="word">老师</span>
+                        <span class="word">孩子</span>
+                        <span class="word">游戏</span>
+                        <span class="word">Refly</span>
+                    </div>
+                </div>
+            </div>
+            <div class="participant-item">
+                <div class="participant-rank">3</div>
+                <div class="participant-info">
+                    <div class="participant-name">Time will tell</div>
+                    <div class="participant-count">48条消息</div>
+                    <div class="participant-characteristics">
+                        <span class="characteristic">表情包大户</span>
+                        <span class="characteristic">Refly体验官</span>
+                        <span class="characteristic">金句频出</span>
+                    </div>
+                    <div class="participant-words">
+                        <span class="word">Refly</span>
+                        <span class="word">模型</span>
+                        <span class="word">图片</span>
+                        <span class="word">让我看看</span>
+                    </div>
+                </div>
+            </div>
+             <div class="participant-item">
+                <div class="participant-rank">4</div>
+                <div class="participant-info">
+                    <div class="participant-name">武汉-木子不是木子狸</div>
+                    <div class="participant-count">45条消息</div>
+                    <div class="participant-characteristics">
+                        <span class="characteristic">插件开发者</span>
+                        <span class="characteristic">技术担当</span>
+                        <span class="characteristic">乐于助人</span>
+                    </div>
+                    <div class="participant-words">
+                        <span class="word">插件</span>
+                        <span class="word">crx</span>
+                        <span class="word">代码</span>
+                        <span class="word">商店</span>
+                    </div>
+                </div>
+            </div>
+             <div class="participant-item">
+                <div class="participant-rank">5</div>
+                <div class="participant-info">
+                    <div class="participant-name">上海 - Refly - Tom</div>
+                    <div class="participant-count">32条消息</div>
+                    <div class="participant-characteristics">
+                        <span class="characteristic">官方答疑</span>
+                        <span class="characteristic">产品发布</span>
+                        <span class="characteristic">加班达人</span>
+                    </div>
+                    <div class="participant-words">
+                        <span class="word">Refly</span>
+                        <span class="word">bug</span>
+                        <span class="word">功能</span>
+                        <span class="word">机智</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>熬夜冠军</h3>
+        <div class="night-owls-container">
+            <div class="night-owl-item">
+                <div class="owl-crown" title="熬夜冠军">👑</div>
+                <div class="owl-info">
+                    <div class="owl-name">武汉-木子不是木子狸</div>
+                    <div class="owl-title">午夜精灵</div>
+                    <div class="owl-time">最晚活跃时间：00:13:55</div>
+                    <div class="owl-messages">深夜消息数：1</div>
+                    <div class="owl-last-message">是这样</div>
+                    <div class="owl-note">注：熬夜时段定义为23:00-06:00，已考虑不同时区</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. 词云 -->
+    <section class="word-cloud">
+        <h2>热门词云</h2>
+        <div class="cloud-container">
+            <div class="cloud-wordcloud" id="word-cloud">
+                <span class="cloud-word" style="left: 45%; top: 30%; font-size: 42px; color: #ff8906; transform: rotate(-5deg); font-weight: bold;">Refly</span>
+                <span class="cloud-word" style="left: 30%; top: 50%; font-size: 38px; color: #00b4d8; transform: rotate(10deg); font-weight: bold;">AI</span>
+                <span class="cloud-word" style="left: 60%; top: 45%; font-size: 35px; color: #f25f4c; transform: rotate(-15deg);">孩子</span>
+                <span class="cloud-word" style="left: 40%; top: 65%; font-size: 32px; color: #e53170; transform: rotate(5deg);">插件</span>
+                <span class="cloud-word" style="left: 55%; top: 15%; font-size: 30px; color: #3da9fc; transform: rotate(8deg);">模型</span>
+                <span class="cloud-word" style="left: 20%; top: 35%; font-size: 28px; color: #7209b7; transform: rotate(-12deg);">老师</span>
+                <span class="cloud-word" style="left: 65%; top: 60%; font-size: 26px; color: #4cc9f0; transform: rotate(15deg);">PPT</span>
+                <span class="cloud-word" style="left: 50%; top: 75%; font-size: 24px; color: #2ecc71; transform: rotate(-8deg);">功能</span>
+                <span class="cloud-word" style="left: 35%; top: 20%; font-size: 22px; color: #ff8906; transform: rotate(3deg);">讨论</span>
+                <span class="cloud-word" style="left: 70%; top: 30%; font-size: 20px; color: #00b4d8; transform: rotate(-2deg);">代码</span>
+                <span class="cloud-word" style="left: 25%; top: 70%; font-size: 19px; color: #f25f4c; transform: rotate(12deg);">视频</span>
+                <span class="cloud-word" style="left: 60%; top: 80%; font-size: 18px; color: #e53170; transform: rotate(-20deg);">游戏</span>
+                <span class="cloud-word" style="left: 15%; top: 55%; font-size: 21px; color: #3da9fc; transform: rotate(2deg);">木子</span>
+                <span class="cloud-word" style="left: 75%; top: 5%; font-size: 17px; color: #7209b7; transform: rotate(25deg);">开源</span>
+                <span class="cloud-word" style="left: 48%; top: 5%; font-size: 19px; color: #4cc9f0; transform: rotate(-10deg); font-weight: bold;">Tom</span>
+                <span class="cloud-word" style="left: 80%; top: 70%; font-size: 16px; color: #2ecc71; transform: rotate(0deg);">分享</span>
+                <span class="cloud-word" style="left: 10%; top: 20%; font-size: 15px; color: #ff8906; transform: rotate(18deg);">需求</span>
+                 <span class="cloud-word" style="left: 20%; top: 8%; font-size: 20px; color: #00b4d8; transform: rotate(-8deg);">体验</span>
+                <span class="cloud-word" style="left: 65%; top: 90%; font-size: 18px; color: #f25f4c; transform: rotate(6deg);">问题</span>
+                <span class="cloud-word" style="left: 30%; top: 85%; font-size: 17px; color: #e53170; transform: rotate(-16deg);">教育</span>
+            </div>
+
+            <div class="cloud-legend">
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #ff8906;"></span>
+                    <span class="legend-label">Refly产品 相关</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #00b4d8;"></span>
+                    <span class="legend-label">AI与技术研讨</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #f25f4c;"></span>
+                    <span class="legend-label">教育与生活</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. 页面底部 -->
+    <footer>
+        <p>数据来源：Refly Enthusiasts Group聊天记录</p>
+        <p>生成时间：<span class="generation-time">2024-05-09 23:59:59</span></p>
+        <p>统计周期：2024-05-09 00:12 - 23:46</p>
+        <p class="disclaimer">免责声明：本报告内容基于群聊公开讨论，如有不当内容或侵权问题请联系管理员处理。</p>
+    </footer>
+</body>
+</html>
